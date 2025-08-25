@@ -76,11 +76,12 @@ From the `mcp-for-splunk` folder:
 ./scripts/check-prerequisites.sh --detailed
 ```
 
-When all checks pass, continue to the next step in the main guide:
+## All checks pass ✅
 
-- Return to: [Main Guide](../../set-up-your-mcp-server-for-splunk.md#2-prepare-your-environment)
+- ***Return to: [Main Guide](../../set-up-your-mcp-server-for-splunk.md#2-prepare-your-environment)***
 
-## Troubleshooting (Linux prerequisites)
+
+## Troubleshooting ⚠️
 
 - If `uv` not found: ensure `~/.cargo/bin` is in your PATH
 - If Docker requires sudo: add your user to `docker` group and re-login

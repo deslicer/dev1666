@@ -26,7 +26,11 @@ Before running the MCP for Splunk, ensure you have the following prerequisites i
 For this guide, "Beginner" means you don’t have Git or a code editor installed and you’re not comfortable using the terminal/PowerShell yet.
 
 - ***If you're a beginner: go to [Beginners Setup](docs/mcp/BEGINNERS_SETUP.md)***
-- ***If you need to install prerequisites on your OS: go to [Windows](docs/mcp/WINDOWS_GUIDE.md), [macOS](docs/mcp/MACOS_GUIDE.md), or [Linux](docs/mcp/LINUX_GUIDE.md)***
+- ***If you need to install prerequisites on your OS:***
+  - [Windows Users](docs/mcp/WINDOWS_GUIDE.md)
+  - [macOS Users](docs/mcp/MACOS_GUIDE.md)
+  - [Linux Users](docs/mcp/LINUX_GUIDE.md)
+
 - ***If you already have all prerequisites installed: jump to [Clone GitHub Repository](#clone-repo)***
 
 <a id="clone-repo"></a>

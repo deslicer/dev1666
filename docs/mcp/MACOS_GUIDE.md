@@ -49,11 +49,12 @@ From the `mcp-for-splunk` folder:
 ./scripts/check-prerequisites.sh --detailed
 ```
 
-When all checks pass, continue to the next step in the main guide:
+## All checks pass ✅
 
-- Return to: [Main Guide](../../set-up-your-mcp-server-for-splunk.md#2-prepare-your-environment)
+- ***Return to: [Main Guide](../../set-up-your-mcp-server-for-splunk.md#2-prepare-your-environment)***
 
-## Troubleshooting (macOS prerequisites)
+
+## Troubleshooting ⚠️
 
 - If `uv` not found: `brew install uv`
 - If Docker commands fail: ensure Docker Desktop is running
