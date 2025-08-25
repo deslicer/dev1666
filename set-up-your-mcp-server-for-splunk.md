@@ -21,13 +21,13 @@ Before running the MCP for Splunk, ensure you have the following prerequisites i
 | **Docker** (Optional) | 20+ | Latest | For full containerized stack |
 | **Git** | 2.0+ | Latest | For cloning repository |
 
-***Choose your path***
+### Choose your path
 
 For this guide, "Beginner" means you don’t have Git or a code editor installed and you’re not comfortable using the terminal/PowerShell yet.
 
-- If you're a beginner: go to [Beginners Setup](docs/mcp/BEGINNERS_SETUP.md)
-- If you need to install prerequisites on your OS: go to [Windows](docs/mcp/WINDOWS_GUIDE.md), [macOS](docs/mcp/MACOS_GUIDE.md), or [Linux](docs/mcp/LINUX_GUIDE.md)
-- If you already have all prerequisites installed: jump to [Clone GitHub Repository](#clone-repo)
+- ***If you're a beginner: go to [Beginners Setup](docs/mcp/BEGINNERS_SETUP.md)***
+- ***If you need to install prerequisites on your OS: go to [Windows](docs/mcp/WINDOWS_GUIDE.md), [macOS](docs/mcp/MACOS_GUIDE.md), or [Linux](docs/mcp/LINUX_GUIDE.md)***
+- ***If you already have all prerequisites installed: jump to [Clone GitHub Repository](#clone-repo)***
 
 <a id="clone-repo"></a>
 ### Clone GitHub Repository
