@@ -13,7 +13,7 @@ git checkout dev1666
 
 All setup scripts are in this repository under `scripts/`.
 
-## 2) Install prerequisites {#install-prereqs}
+## 2) Install prerequisites
 
 ### Ubuntu/Debian
 
@@ -78,7 +78,7 @@ From the `mcp-for-splunk` folder:
 
 When all checks pass, continue to the next step in the main guide:
 
-- Return to: [Main Guide](../../set-up-your-mcp-server-for-splunk.md#prepare-env)
+- Return to: [Main Guide](../../set-up-your-mcp-server-for-splunk.md#2-prepare-your-environment)
 
 ## Troubleshooting (Linux prerequisites)
 

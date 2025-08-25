@@ -60,8 +60,8 @@ If you prefer, you can use your system terminal instead of VS Code's terminal.
 
 Follow the guide for your operating system and jump directly to the install section:
 
-- Windows: [WINDOWS_GUIDE.md#install-prereqs](WINDOWS_GUIDE.md#install-prereqs)
-- macOS: [MACOS_GUIDE.md#install-prereqs](MACOS_GUIDE.md#install-prereqs)
-- Linux: [LINUX_GUIDE.md#install-prereqs](LINUX_GUIDE.md#install-prereqs)
+- Windows: [WINDOWS_GUIDE.md#install-prereqs](WINDOWS_GUIDE.md#2-install-prerequisites)
+- macOS: [MACOS_GUIDE.md#install-prereqs](MACOS_GUIDE.md#2-install-prerequisites)
+- Linux: [LINUX_GUIDE.md#install-prereqs](LINUX_GUIDE.md#2-install-prerequisites)
 
 These guides cover installing Python, the "uv" package manager, optional Node.js, and Docker.

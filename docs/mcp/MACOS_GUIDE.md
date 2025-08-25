@@ -13,7 +13,7 @@ git checkout dev1666
 
 All setup scripts are in this repository under `scripts/`.
 
-## 2) Install prerequisites {#install-prereqs}
+## 2) Install prerequisites
 
 Install Homebrew (if you don't have it):
 
@@ -49,9 +49,9 @@ From the `mcp-for-splunk` folder:
 ./scripts/check-prerequisites.sh --detailed
 ```
 
-When all checks pass, continue to the next step in the master guide:
+When all checks pass, continue to the next step in the main guide:
 
-- Return to: `../../set-up-your-mcp-server-for-splunk.md#prepare-env`
+- Return to: [Main Guide](../../set-up-your-mcp-server-for-splunk.md#2-prepare-your-environment)
 
 ## Troubleshooting (macOS prerequisites)
 

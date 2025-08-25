@@ -5,7 +5,7 @@ Install prerequisites, prepare your environment, and run the MCP server.
 
 ## 1. Install prerequisites
 
-This guide provides comprehensive installation instructions for all prerequisites needed to run the MCP Server for Splunk on Windows, macOS, and Linux systems.
+This guide provides comprehensive installation instructions for all prerequisites needed to run the MCP for Splunk on Windows, macOS, and Linux systems.
 
 ### 📋 Overview
 
@@ -21,16 +21,15 @@ Before running the MCP for Splunk, ensure you have the following prerequisites i
 | **Docker** (Optional) | 20+ | Latest | For full containerized stack |
 | **Git** | 2.0+ | Latest | For cloning repository |
 
-***Don't have all of the above requirements installed?***
-follow either the Beginners Setup or your OS‑specific guide first:
+***Choose your path***
 
 For this guide, "Beginner" means you don’t have Git or a code editor installed and you’re not comfortable using the terminal/PowerShell yet.
 
-> - Beginners path: [Beginners Setup](docs/mcp/BEGINNERS_SETUP.md) — for users without Git/VS Code or terminal experience
-> - OS guides: [Windows](docs/mcp/WINDOWS_GUIDE.md) · [macOS](docs/mcp/MACOS_GUIDE.md) · [Linux](docs/mcp/LINUX_GUIDE.md) — for users comfortable installing tools via their OS package manager
+- If you're a beginner: go to [Beginners Setup](docs/mcp/BEGINNERS_SETUP.md)
+- If you need to install prerequisites on your OS: go to [Windows](docs/mcp/WINDOWS_GUIDE.md), [macOS](docs/mcp/MACOS_GUIDE.md), or [Linux](docs/mcp/LINUX_GUIDE.md)
+- If you already have all prerequisites installed: jump to [Clone GitHub Repository](#clone-repo)
 
-If you do meet all the prereqs, please continue.
-
+<a id="clone-repo"></a>
 ### Clone GitHub Repository
 
 ```bash
