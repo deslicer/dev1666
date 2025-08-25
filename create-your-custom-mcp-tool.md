@@ -83,6 +83,6 @@ For Splunk tools, verify your `.env` connection settings. If you see connection 
 
 ---
 
-### Teaser: Part 3 — Extend and test your tool
+### Teaser: Part 3 — Create and run a workflow
 
-If you have extra time, explore advanced features: parameters with validation, richer responses, and tests. The upstream lab sequence continues after Part 2. See the upstream lab for broader context: [Hands-on Lab (Part 2 reference)](https://github.com/deslicer/mcp-for-splunk/blob/main/docs/labs/hands-on-lab.md).
+If you have extra time, try Part 3: build and execute a workflow using the workflow tools. You can discover available workflows and run them with parameters, then review results in MCP Inspector. See: [Hands-on Lab — Part 3 (Create and run a workflow)](https://github.com/deslicer/mcp-for-splunk/blob/main/docs/labs/hands-on-lab.md#part-3--extra-create-and-run-a-workflow-).
