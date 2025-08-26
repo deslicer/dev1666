@@ -169,4 +169,4 @@ If you're still experiencing issues:
 
 ---
 
-***Return to: [Main AI Sidekick Guide](../../3-setup-your-personal-ai-sidekick.md)***
+***Return to: [Main AI Sidekick Guide](../../setup-your-personal-ai-sidekick.md)***

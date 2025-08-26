@@ -487,11 +487,11 @@ tail -f /var/log/syslog  # older systems
 🎉 **Congratulations!** You've successfully set up your AI Sidekick for Splunk on Linux!
 
 ### Continue Your Journey:
-- **🔗 Return to Main Guide:** [Continue with Step 3: Configure Environment Variables](../../3-setup-your-personal-ai-sidekick.md#step-3-configure-environment-variables)
-- **🔗 Proceed to Lab 4:** [Create Your AI Agent](../../4-create-your-ai-agent.md)
+- **🔗 Return to Main Guide:** [Continue with Step 3: Configure Environment Variables](../../setup-your-personal-ai-sidekick.md#step-3-configure-environment-variables)
+- **🔗 Proceed to Lab 4:** [Create Your AI Agent](../../create-your-ai-agent.md)
 - **🌟 Explore:** Try the example conversations in the main guide
 - **🚀 Customize:** Modify agent configurations for your use case
 
 ---
 
-***Return to: [Main AI Sidekick Guide](../../3-setup-your-personal-ai-sidekick.md)***
+***Return to: [Main AI Sidekick Guide](../../setup-your-personal-ai-sidekick.md)***

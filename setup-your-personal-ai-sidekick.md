@@ -304,7 +304,7 @@ For platform-specific issues, also refer to:
 - ✅ Explored advanced search and analysis capabilities
 
 ### Continue Your Journey:
-- **🔗 Proceed to Lab 4:** [Create Your AI Agent](./4-create-your-ai-agent.md)
+- **🔗 Proceed to Lab 4:** [Create Your AI Agent](./create-your-ai-agent.md)
 - **🌟 Contribute:** Add your own agents to the framework
 - **🚀 Deploy:** Set up for production use in your organization
 
