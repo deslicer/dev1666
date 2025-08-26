@@ -56,7 +56,7 @@ You will be receiving instructions from Splunk about Splunk Show environment det
 In this lab you will set up your own MCP (Model Context Protocol) server for Splunk, which serves as the bridge between AI agents and your Splunk environment.
 
 **Steps:**
-Follow the instructions provided in [set-up-your-mcp-server-for-splunk.md](./set-up-your-mcp-server-for-splunk.md)
+Follow the instructions provided in [1-set-up-your-mcp-server-for-splunk.md](./1-set-up-your-mcp-server-for-splunk.md)
 
 ---
 
@@ -66,7 +66,7 @@ Follow the instructions provided in [set-up-your-mcp-server-for-splunk.md](./set
 In this lab you will create your own custom MCP tool, deploy it in your local environment, and test it using MCP Inspector to ensure proper functionality.
 
 **Steps:**
-Follow the detailed lab instructions provided in [create-your-custom-mcp-tool.md](./create-your-custom-mcp-tool.md)
+Follow the detailed lab instructions provided in [1-create-your-custom-mcp-tool.md](./1-create-your-custom-mcp-tool.md)
 
 ---
 
