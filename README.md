@@ -1,5 +1,8 @@
-# DEV1666 - AI Sidekick for Splunk Lab Exercises
+<div align="center">
+  <img src="./media/deslicer_white.svg" alt="Deslicer" width="200"/>
+</div>
 
+# DEV1666 - AI Sidekick for Splunk Lab Exercises
 
 ## Table of Contents
 
