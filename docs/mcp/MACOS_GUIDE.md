@@ -51,7 +51,7 @@ From the `mcp-for-splunk` folder:
 
 ## All checks pass ✅
 
-- ***Return to: [Main Guide](../../1-set-up-your-mcp-server-for-splunk.md#2-prepare-your-environment)***
+- ***Return to: [Main Guide](../../set-up-your-mcp-server-for-splunk.md#2-prepare-your-environment)***
 
 
 ## Troubleshooting ⚠️
