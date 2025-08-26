@@ -110,7 +110,7 @@ uv run python scripts/test_setup.py
 Expected output:
 
 ```text
-🔍 Testing MCP Server at http://localhost:8001/mcp/
+🔍 Testing MCP Server at http://localhost:8003/mcp/
 --------------------------------------------------
 ✓ Connected to MCP Server
 

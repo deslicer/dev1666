@@ -1,4 +1,4 @@
-# Lab 2b: Create Your AI Agent
+# Lab 4: Create Your AI Agent
 
 **Build your own specialized AI agent for Splunk index analysis!**
 
@@ -13,7 +13,7 @@ You'll create a fully functional Splunk index analysis agent using a systematic 
 
 ## Prerequisites
 
-- Completed Lab 1: Setup Your Personal AI Sidekick
+- Completed Lab 3: Setup Your Personal AI Sidekick
 - Basic Python knowledge
 - Familiarity with Splunk indexes and SPL
 

@@ -1,4 +1,4 @@
-# Lab 2a: Setup Your Personal AI Sidekick
+# Lab 3: Setup Your Personal AI Sidekick
 
 Welcome to the AI Sidekick for Splunk hands-on lab! In this lab, you'll set up and run your own personal AI Sidekick for Splunk - a powerful, modular agent framework that integrates seamlessly with your Splunk environment.
 
@@ -31,7 +31,20 @@ cd ai-sidekick-for-splunk
 
 ---
 
-## Step 2: Configure Environment Variables
+## Step 2: Install Prerequisites and Dependencies
+
+**Choose the setup guide for your operating system:**
+
+- **🚀 Quick Start (All Platforms):** [Beginners Setup Guide](./docs/ai_sidekick/BEGINNERS_SETUP.md)
+- **🪟 Windows Users:** [Windows Setup Guide](./docs/ai_sidekick/WINDOWS_GUIDE.md)
+- **🍎 macOS Users:** [macOS Setup Guide](./docs/ai_sidekick/MACOS_GUIDE.md)
+- **🐧 Linux Users:** [Linux Setup Guide](./docs/ai_sidekick/LINUX_GUIDE.md)
+
+**After completing your platform-specific setup, return here to continue with [Step 3: Configure Environment Variables](#step-3-configure-environment-variables).**
+
+---
+
+## Step 3: Configure Environment Variables
 
 **🚀 Quick Setup (Recommended):**
 
@@ -42,10 +55,10 @@ Use the interactive setup script for easy configuration:
 ```
 
 This script will:
-- ✅ Prompt for your Google API key
 - ✅ Configure MCP server URL (local or Docker)
 - ✅ Set optimal model defaults
 - ✅ Create your `.env` file automatically
+- ✅ Set up pre-configured Google API key for workshop
 
 **📋 Manual Setup (Alternative):**
 
@@ -69,7 +82,7 @@ If you prefer manual configuration:
    GOOGLE_API_KEY=your-google-ai-studio-api-key
 
    # MCP Server Configuration (Required)
-   SPLUNK_MCP_SERVER_URL=http://localhost:8001/mcp/
+   SPLUNK_MCP_SERVER_URL=http://localhost:8003/mcp/
 
    # Splunk Connection (Required for MCP server)
    SPLUNK_HOST=dev1666-i-035e95d7e4ea1c310.splunk.show
@@ -86,72 +99,15 @@ If you prefer manual configuration:
    PORT=8087
    ```
 
-   **Get your Google API key:**
-   1. Go to [Google AI Studio](https://aistudio.google.com/)
-   2. Click "Get API Key" → "Create API Key"
-   3. Copy the key and replace `your-google-ai-studio-api-key`
-
    **MCP Server Information:**
-   - The workshop assumes you have the `mcp-server-for-splunk` running on port 8001
+   - The workshop assumes you have the `mcp-for-splunk` running on port 8003
    - Or use a provided workshop MCP server URL
 
 4. **Save the file**
 
 ---
 
-## Step 3: Install Prerequisites and Dependencies
-
-Run the prerequisites script to check and install required packages:
-
-#### For macOS/Linux/Unix:
-```bash
-chmod +x scripts/lab/check-prerequisites.sh
-./scripts/lab/check-prerequisites.sh
-```
-
-#### For Windows:
-```powershell
-.\scripts\lab\check-prerequisites.ps1
-```
-
-This script will:
-- ✅ Check for Python 3.11+
-- ✅ Install `uv` (fast Python package manager)
-- ✅ Create virtual environment with `uv`
-- ✅ Install Google ADK and required dependencies
-- ✅ Test Google API key connection
-- ✅ Test MCP server connectivity
-
----
-
-## Step 4: Configure Lab Mode (Optional)
-
-For workshops, you may want to use the simplified lab mode that focuses on IndexAnalyzer:
-
-#### For macOS/Linux/Unix:
-```bash
-# Switch to lab mode (removes DataExplorer to avoid confusion)
-./scripts/lab/switch-orchestrator-mode.sh lab
-
-# Check current mode
-./scripts/lab/switch-orchestrator-mode.sh status
-```
-
-#### For Windows:
-```powershell
-# Switch to lab mode (removes DataExplorer to avoid confusion)
-.\scripts\lab\switch-orchestrator-mode.ps1 lab
-
-# Check current mode
-.\scripts\lab\switch-orchestrator-mode.ps1 status
-```
-
-**Lab Mode Benefits:**
-- ✅ **Simplified agent selection** - Only IndexAnalyzer for systematic analysis
-- ✅ **Eliminates confusion** - No overlap between DataExplorer and IndexAnalyzer
-- ✅ **Workshop-focused** - Perfect for learning IndexAnalyzer workflow
-
-## Step 5: Start the AI Sidekick
+## Step 4: Start the AI Sidekick
 
 #### For macOS/Linux/Unix:
 ```bash
@@ -200,7 +156,7 @@ Your AI Sidekick uses a **modular multi-agent architecture** with these speciali
 
 ---
 
-## Step 5: Example Conversations
+## Step 6: Example Conversations
 
 Let's explore what your AI Sidekick can do! Try these example conversations:
 
@@ -260,21 +216,18 @@ Let's explore what your AI Sidekick can do! Try these example conversations:
 **Data Explorer (Comprehensive Analysis):**
 ```
 "Use data explorer to analyze index=_internal"
-"Analyze index=pas with data explorer"
 "Data explorer analyze index=_audit"
 ```
 
 **Search Guru (SPL Optimization & Strategy):**
 ```
 "Help me create a search to find errors in index=_internal"
-"Optimize this query: index=pas | stats count by user"
 "What's the best SPL approach for analyzing failed logins?"
 "Create an efficient search for monitoring system performance"
 ```
 
 **Splunk MCP (Direct Operations):**
 ```
-"Check my Splunk health and list indexes"
 "Run this search: index=_internal | head 10 | table _time, component"
 "Show me events from index=pas | head 20"
 "List all available indexes"
@@ -284,13 +237,11 @@ Let's explore what your AI Sidekick can do! Try these example conversations:
 ```
 "What are the latest Splunk best practices for search optimization?"
 "Research current security threats for Windows authentication"
-"Find the latest Splunk security advisories"
-"What's new in Splunk Enterprise 9.4?"
+"What's new in Splunk Enterprise 10.0?"
 ```
 
 **Multi-Agent Workflows:**
 ```
-"Analyze index=pas and optimize the searches"
 "Help me investigate security patterns in my data"
 "Create a complete monitoring strategy for index=_internal"
 ```
@@ -329,184 +280,16 @@ Your conversations are automatically saved. To start fresh:
 - **Conversation Management** - Advanced dialog state handling
 - **Tool Orchestration** - Seamless tool-to-agent integration
 
----
+## Need Help?
 
-## Troubleshooting
+If you encounter any issues during setup or while using the AI Sidekick, check our comprehensive troubleshooting guide:
 
-### Common Issues and Solutions
+**📖 [AI Sidekick Troubleshooting Guide](./docs/ai_sidekick/TROUBLESHOOTING.md)**
 
-**🔴 "Connection to Splunk failed"**
-- Verify Splunk is running and accessible
-- Check firewall settings allow port 8089
-- Confirm username/password are correct
-- Try disabling SSL verification for self-signed certificates
-
-**🔴 "MCP Server not responding"**
-The setup script will automatically check if the MCP server is running and provide clear instructions if it's not. If you see this error:
-
-1. **🚨 IMPORTANT: Start the MCP server first!**
-
-   The AI Sidekick requires the MCP (Model Context Protocol) server to communicate with Splunk.
-
-   **📋 Easy Setup - Use the build script:**
-   ```bash
-   # Navigate to MCP server directory
-   cd ../mcp-server-for-splunk
-
-   # Run the automated build and run script
-   ./scripts/build_and_run.sh
-   ```
-
-   **📖 For detailed MCP server setup, refer to the lab guide in the MCP project.**
-
-   **🔧 Manual Setup (if build script fails):**
-
-   #### For macOS/Linux/Unix:
-   ```bash
-   cd ../mcp-server-for-splunk
-   uv run fastmcp run src/server.py --transport http --port 8001
-   ```
-
-   #### For Windows:
-   ```powershell
-   cd ..\mcp-server-for-splunk
-   uv run fastmcp run src/server.py --transport http --port 8001
-   ```
-
-   **🐳 Docker Alternative (Recommended if remote Splunk fails):**
-
-   If you're having issues with remote Splunk connections, refer to the **MCP server lab guide** for detailed Docker setup instructions with local Splunk instance.
-
-2. **✅ Verify MCP server is running:**
-   - **Local setup:** You should see: `INFO: Uvicorn running on http://0.0.0.0:8001`
-   - **Docker setup:** Check containers: `docker-compose ps`
-   - Test connection: `curl http://localhost:8001/health`
-
-3. **🔍 Test MCP server tools (Optional but recommended):**
-
-   Use MCP Inspector to verify your MCP server tools are working:
-
-   ```bash
-   # In a new terminal, navigate to MCP server directory
-   cd ../mcp-server-for-splunk
-
-   # Run MCP Inspector
-   npx @modelcontextprotocol/inspector http://localhost:8001/mcp/
-   ```
-
-   This opens a web interface where you can:
-   - ✅ See all available MCP tools
-   - ✅ Test tool execution with sample queries
-   - ✅ Verify Splunk connectivity
-   - ✅ Debug any connection issues
-
-4. **Then re-run the AI Sidekick setup script**
-5. **Verify no other services are using port 8001**
-
-**🔴 "Web interface won't load"**
-- Confirm port 8087 is not blocked or in use
-- Try accessing `http://127.0.0.1:8087` instead
-- Check browser console for JavaScript errors
-- Run ADK web interface manually:
-
-  #### For macOS/Linux/Unix:
-  ```bash
-  cd ai-sidekick-for-splunk
-  source .venv/bin/activate
-  cd src
-  adk web --port 8087
-  ```
-
-  #### For Windows:
-  ```powershell
-  cd ai-sidekick-for-splunk
-  .venv\Scripts\Activate.ps1
-  cd src
-  adk web --port 8087
-  ```
-
-**🔴 "Python virtual environment issues"**
-- Ensure Python 3.11+ is installed
-- Delete `.venv` folder and re-run setup script
-- On Windows, try running PowerShell as Administrator
-
-**🔴 "Agent responses are slow"**
-- Check your internet connection (for Google Search features)
-- Verify Splunk server performance
-- Consider using local Splunk instance for faster responses
-
-**🔴 "API key errors"**
-- Ensure you have a valid Google API key configured
-- Check that the key has appropriate permissions
-- Verify environment variables are set correctly
-
-### Getting Help
-
-1. **Check the logs:**
-   ```bash
-   # View recent logs
-   tail -f logs/ai-sidekick.log
-   ```
-
-2. **Restart services:**
-
-   #### For macOS/Linux/Unix:
-   ```bash
-   # Stop services
-   ./scripts/lab/stop-lab-setup.sh
-   # Restart everything
-   ./scripts/lab/start-lab-setup.sh
-   ```
-
-   #### For Windows:
-   ```powershell
-   # Stop services
-   .\scripts\lab\stop-lab-setup.ps1
-   # Restart everything
-   .\scripts\lab\start-lab-setup.ps1
-   ```
-
-3. **Reset configuration:**
-
-   #### For macOS/Linux/Unix:
-   ```bash
-   # Remove existing configuration and restart
-   rm -f .env
-   ./scripts/lab/start-lab-setup.sh
-   ```
-
-   #### For Windows:
-   ```powershell
-   # Remove existing configuration and restart
-   Remove-Item .env -ErrorAction SilentlyContinue
-   .\scripts\lab\start-lab-setup.ps1
-   ```
-
-4. **Switch orchestrator modes:**
-
-   #### For macOS/Linux/Unix:
-   ```bash
-   # Switch to production mode (all agents including DataExplorer)
-   ./scripts/lab/switch-orchestrator-mode.sh production
-
-   # Switch to lab mode (IndexAnalyzer focus, no DataExplorer)
-   ./scripts/lab/switch-orchestrator-mode.sh lab
-
-   # Check current mode
-   ./scripts/lab/switch-orchestrator-mode.sh status
-   ```
-
-   #### For Windows:
-   ```powershell
-   # Switch to production mode (all agents including DataExplorer)
-   .\scripts\lab\switch-orchestrator-mode.ps1 production
-
-   # Switch to lab mode (IndexAnalyzer focus, no DataExplorer)
-   .\scripts\lab\switch-orchestrator-mode.ps1 lab
-
-   # Check current mode
-   .\scripts\lab\switch-orchestrator-mode.ps1 status
-   ```
+For platform-specific issues, also refer to:
+- **🪟 [Windows Troubleshooting](./docs/ai_sidekick/WINDOWS_GUIDE.md#troubleshooting)**
+- **🍎 [macOS Troubleshooting](./docs/ai_sidekick/MACOS_GUIDE.md#troubleshooting)**
+- **🐧 [Linux Troubleshooting](./docs/ai_sidekick/LINUX_GUIDE.md#troubleshooting)**
 
 ---
 
@@ -521,15 +304,13 @@ The setup script will automatically check if the MCP server is running and provi
 - ✅ Explored advanced search and analysis capabilities
 
 ### Continue Your Journey:
-- **🔗 Proceed to Lab 2:** [Create Your AI Agent](./create-your-ai-agent.md)
+- **🔗 Proceed to Lab 4:** [Create Your AI Agent](./4-create-your-ai-agent.md)
 - **🌟 Contribute:** Add your own agents to the framework
 - **🚀 Deploy:** Set up for production use in your organization
-- **🤝 Connect:** Join our community for support and collaboration
 
 ### Resources:
 - **GitHub Repository:** https://github.com/desclier/ai-sidekick-for-splunk
 - **Documentation:** https://docs.ai-sidekick-for-splunk.com
-- **Community:** https://community.ai-sidekick-for-splunk.com
 - **Issues/Support:** https://github.com/desclier/ai-sidekick-for-splunk/issues
 
 ---
@@ -541,7 +322,7 @@ Your feedback helps us improve! Please share:
 - What was confusing or could be clearer?
 - What additional features would you like to see?
 
-**Share feedback:** https://forms.ai-sidekick-for-splunk.com/lab-feedback
+**Share feedback:** opensource@deslicer.com
 
 ---
 
