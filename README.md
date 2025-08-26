@@ -82,7 +82,7 @@ Choose the setup guide that matches your operating system:
 - **🪟 Windows Users:** [Windows Setup Guide](./docs/ai_sidekick/WINDOWS_GUIDE.md)
 - **🍎 macOS Users:** [macOS Setup Guide](./docs/ai_sidekick/MACOS_GUIDE.md)
 - **🐧 Linux Users:** [Linux Setup Guide](./docs/ai_sidekick/LINUX_GUIDE.md)
-- **📖 Detailed Guide:** [Complete Setup Instructions](./3-setup-your-personal-ai-sidekick.md)
+- **📖 Detailed Guide:** [Complete Setup Instructions](./setup-your-personal-ai-sidekick.md)
 
 ---
 
@@ -92,7 +92,7 @@ Choose the setup guide that matches your operating system:
 In this lab, you will create your own custom AI agent from scratch, learning the fundamentals of agent development and integration with the AI Sidekick framework.
 
 **Steps:**
-Follow the detailed instructions provided in [4-create-your-ai-agent.md](./4-create-your-ai-agent.md)
+Follow the detailed instructions provided in [create-your-ai-agent.md](./create-your-ai-agent.md)
 
 ---
 

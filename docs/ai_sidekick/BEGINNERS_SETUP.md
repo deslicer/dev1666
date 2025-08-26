@@ -101,12 +101,12 @@ If you encounter any issues:
    - The AI Sidekick requires the MCP server to communicate with Splunk
 
 3. **Try the detailed setup guides:**
-   - Return to the [main AI Sidekick guide](../../3-setup-your-personal-ai-sidekick.md) for step-by-step instructions
+   - Return to the [main AI Sidekick guide](../../setup-your-personal-ai-sidekick.md) for step-by-step instructions
 
 ## What's Next?
 
 Once your AI Sidekick is running:
-- **🔗 Return to Main Guide:** [Continue with Step 3: Configure Environment Variables](../../3-setup-your-personal-ai-sidekick.md#step-3-configure-environment-variables)
-- **🔗 Proceed to Lab 4:** [Create Your AI Agent](../../4-create-your-ai-agent.md)
+- **🔗 Return to Main Guide:** [Continue with Step 3: Configure Environment Variables](../../setup-your-personal-ai-sidekick.md#step-3-configure-environment-variables)
+- **🔗 Proceed to Lab 4:** [Create Your AI Agent](../../create-your-ai-agent.md)
 - **🌟 Explore:** Try different agent types and capabilities
 - **🚀 Customize:** Modify configurations for your specific use case
