@@ -153,7 +153,7 @@ Updates the orchestrator prompt to document your agent:
 
 **Option A: Direct Python Test**
 ```bash
-cd src && python -c "
+cd src && uv run python -c "
 from splunk_ai_sidekick.contrib.agents.index_analyzer import index_analyzer_agent
 result = index_analyzer_agent.execute('analyze index=pas')
 print('Agent Response:', result['message'])
