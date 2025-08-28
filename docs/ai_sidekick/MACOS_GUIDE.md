@@ -281,10 +281,13 @@ If you see "MCP Server not responding":
 
 3. **Verify MCP server is running:**
    ```bash
-   # Test connection
+   # Test local connection
    curl http://localhost:8003/health
    ```
-
+   ```bash
+   # Test docker connection
+   curl http://localhost:8003/mcp/health
+   ```
 ### macOS-Specific Issues
 
 #### Xcode Command Line Tools
