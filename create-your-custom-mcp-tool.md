@@ -8,7 +8,7 @@ Build your first tool with the generator, validate it, and run it in MCP Inspect
 
 ```bash
 # Interactive generator (recommended)
-uv run python ./contrib/scripts/generate_tool.py
+uv run generate-tool
 ```
 
 ### 1.1 Answer the prompts
