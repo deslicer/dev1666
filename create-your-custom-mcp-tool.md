@@ -68,7 +68,7 @@ class HelloWorldTool(BaseTool):
 
 </details>
 
-## 3. Validate the generated tool (🔎)
+## 2. Validate the generated tool (🔎)
 
 ```bash
 uv run validate-tools
@@ -76,7 +76,7 @@ uv run validate-tools
 
 Expected output includes a success message or specific actionable validation errors to fix.
 
-## 4. Run the tool in MCP Inspector (🖥️)
+## 3. Run the tool in MCP Inspector (🖥️)
 
 Restart the mcp server, to verify that changes take affect.
 
@@ -94,7 +94,7 @@ For Splunk tools, verify your `.env` connection settings. If you see connection 
 
 ***Lab Completed*** You have now created an new mcp tool, and run the tool towards your Splunk environment. Your tool is now ready to use by any AI agent. ✅
 
-## 5. Troubleshooting your tool
+### Troubleshooting your tool
 
 - Missing tool in Inspector: ensure the file is under `contrib/tools/<category>/` and the class inherits `BaseTool`
 - Validation errors: re-run the validator for precise hints
