@@ -13,11 +13,19 @@ uv run python ./contrib/scripts/generate_tool.py
 
 ### 1.1 Answer the prompts
 
-- Select the template: 2. (***Splunk Search***) template
-- Choose a category: ***lab***
+- Select the template: ***2*** (Splunk Search) 
+- Choose a category: ***1*** (examples)
 - Provide a tool name: ***dev1666***
 - Add a tool description: 
     > Tool description should define what the tool does and how it should be used.
+-  Splunk Search Configuration: ***2*** (single-line input)
+- Provide SPL, query description and default search params (-1h, now), max returned results: 100
+- Add custom search parameters?: ***2*** (No, not for this lab)
+- Additional tags: just press enter
+- Create tool: ***1*** (yes)
+- Create Tests: ***2*** (no)
+
+ 
 
 The generator creates files under `contrib/tools/<category>/` and includes boilerplate with `BaseTool`, `ToolMetadata`, and an `execute` method. It may also add starter tests under `tests/contrib/` depending on the template.
 
