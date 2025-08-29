@@ -25,14 +25,14 @@ Before running the MCP for Splunk, ensure you have the following prerequisites i
 
 Pick the option that matches your starting point:
 
-- **New to this?** Start with the Getting Started guide:
-  - [Getting Started](docs/mcp/BEGINNERS_SETUP.md)
+- 🐣 **If you don't have git?** Install git and a IDE with the Getting Started guide:
+  - [Getting Started with GIT and Coding](docs/mcp/BEGINNERS_SETUP.md)
 
-- **Need to install prerequisites?**
+- 🧑‍💼 **Need to install prerequisites?**
   - [Windows Guide](docs/mcp/WINDOWS_GUIDE.md)
   - [Unix (macOS/Linux) Guide](docs/mcp/NIX_GUIDE.md)
 
-- **All set already?** Jump to [Clone GitHub Repository](#clone-repo)
+- 🥷 **All set already?** Jump to [Clone GitHub Repository](#clone-repo)
 
 <a id="clone-repo"></a>
 ### 1.2 Clone GitHub Repository
