@@ -10,30 +10,34 @@ Build your first tool with the generator, validate it, and run it in MCP Inspect
 # Interactive generator (recommended)
 uv run generate-tool
 ```
+Follow the instructions in the script output. or follow the simple search tool steps.
+<details>
+<summary>Simple search tool</summary>
 
-### 1.1 Answer the prompts
-
-- Select the template: ***2*** (Splunk Search) 
+- Select the template: ***2*** (Splunk Search)
 - Choose a category: ***1*** (examples)
 - Provide a tool name: ***dev1666***
-- Add a tool description: 
+- Add a tool description:
     > Tool description should define what the tool does and how it should be used.
--  Splunk Search Configuration: ***2*** (single-line input)
+- Splunk Search Configuration: ***2*** (single-line input)
 - Provide SPL, query description and default search params (-1h, now), max returned results: 100
 - Add custom search parameters?: ***2*** (No, not for this lab)
 - Additional tags: just press enter
 - Create tool: ***1*** (yes)
 - Create Tests: ***2*** (no)
+</details>
 
- 
 
 The generator creates files under `contrib/tools/<category>/` and includes boilerplate with `BaseTool`, `ToolMetadata`, and an `execute` method. It may also add starter tests under `tests/contrib/` depending on the template.
 
-Helpful reference:
+<details>
+<summary>Tool Reference </summary>
+
+Helpful reference docs:
 - Contributor guide: `contrib/README.md`
 - Tool Development Guide: `docs/contrib/tool_development.md`
 
-## 2. Understand the tool structure (quick tour)
+Understand the tool structure
 
 - Your class inherits from `BaseTool`
 - Metadata lives in `METADATA = ToolMetadata(...)`
@@ -62,22 +66,23 @@ class HelloWorldTool(BaseTool):
 
 - For Splunk-backed tools, set `requires_connection=True` and use `await self.get_splunk_service(ctx)` inside `execute`.
 
-## 3. Validate the tool (🔎)
+</details>
+
+## 3. Validate the generated tool (🔎)
 
 ```bash
-# Validate your tool for structure and metadata
-CLARIFY
-uv run python ./contrib/scripts/validate_tools.py contrib/tools/<category>/<your_tool>.py
-
-# Optional: run contrib tests
-uv run python ./contrib/scripts/test_contrib.py
+uv run validate-tools
 ```
 
 Expected output includes a success message or specific actionable validation errors to fix.
 
 ## 4. Run the tool in MCP Inspector (🖥️)
 
-With the server running (`docker compose up -d` or `./scripts/build_and_run.sh`):
+With the server running (`mcp-server --stop` and `mcp-server --local -d`):
+
+```bash
+uv run mcp-server --stop && uv run mcp-server --local -d
+```
 
 - Open MCP Inspector at `http://localhost:6274`
 - Select your tool by its `METADATA.name` (for example `hello_world`)
@@ -85,6 +90,9 @@ With the server running (`docker compose up -d` or `./scripts/build_and_run.sh`)
 - Click Run and review the formatted result
 
 For Splunk tools, verify your `.env` connection settings. If you see connection errors, confirm `MCP_SPLUNK_HOST`, `MCP_SPLUNK_USERNAME`, and `MCP_SPLUNK_PASSWORD` are set and the Splunk instance is reachable.
+
+
+***Lab Completed*** You have now created an new mcp tool, and run the tool towards your Splunk environment. Your tool is now ready to use by any AI agent. ✅
 
 ## 5. Troubleshooting your tool
 
@@ -94,6 +102,6 @@ For Splunk tools, verify your `.env` connection settings. If you see connection 
 
 ---
 
-### Teaser: Part 3 — Create and run a workflow
+### Extra: Part 3 — Create and run a workflow
 
 If you have extra time, try Part 3: build and execute a workflow using the workflow tools. You can discover available workflows and run them with parameters, then review results in MCP Inspector. See: [Hands-on Lab — Part 3 (Create and run a workflow)](https://github.com/deslicer/mcp-for-splunk/blob/main/docs/labs/hands-on-lab.md#part-3--extra-create-and-run-a-workflow-).
