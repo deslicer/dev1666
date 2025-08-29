@@ -34,8 +34,8 @@ The generator creates files under `contrib/tools/<category>/` and includes boile
 <summary>Tool Reference </summary>
 
 Helpful reference docs:
-- Contributor guide: `contrib/README.md`
-- Tool Development Guide: `docs/contrib/tool_development.md`
+- [Contributor guide](https://github.com/deslicer/mcp-for-splunk/blob/main/contrib/README.md)
+- [Tool Development Guide](https://github.com/deslicer/mcp-for-splunk/blob/main/docs/contrib/tool_development.md) 
 
 Understand the tool structure
 
