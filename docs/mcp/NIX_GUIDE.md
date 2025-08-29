@@ -27,6 +27,7 @@ Review what would be installed, then run the installer to apply changes:
 
 ```bash
 ./scripts/smart-install.sh            # base: Python, uv, Git, Node.js
+# ./scripts/smart-install.sh --all    # base + docker and docker compose
 ```
 
 ### 2.3 Run the checker to confirm
