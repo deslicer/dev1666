@@ -27,7 +27,7 @@ All setup scripts are in this repository under `scripts/`.
 
 | Software | Purpose | Installation |
 |----------|---------|--------------|
-| **Docker Desktop** | Full-stack deployment | [docker.com](https://docker.com/products/docker-desktop) |
+| **Node.js** | MCP Inspector testing | [nodejs.org](https://nodejs.org/) |
 | **Node.js** | MCP Inspector testing | [nodejs.org](https://nodejs.org/) |
 | **Windows Terminal** | Better terminal experience | [Microsoft Store](https://aka.ms/terminal) |
 
@@ -71,11 +71,11 @@ uv --version
 ### Install All Prerequisites (one-liner)
 
 ```powershell
-# Installs Python, uv, Node.js, Docker Desktop, and Git
-winget install Python.Python.3.12 astral-sh.uv OpenJS.NodeJS Docker.DockerDesktop Git.Git
+# Installs Python, uv, Node.js, and Git
+winget install Python.Python.3.12 astral-sh.uv OpenJS.NodeJS Git.Git
 
 # Verify installations
-python --version; uv --version; node --version; docker --version; git --version
+python --version; uv --version; node --version; git --version
 ```
 
 ### Verify installations
@@ -84,8 +84,7 @@ python --version; uv --version; node --version; docker --version; git --version
 python --version
 uv --version
 git --version
-node --version   # if installed
-docker --version # if installed
+node --version
 ```
 
 ### Prerequisites Verification
@@ -145,10 +144,7 @@ pip install uv
 # OR download from https://astral.sh/uv/
 ```
 
-#### Docker Desktop Issues
-- Ensure WSL2 is enabled: `wsl --install`
-- Restart Docker Desktop after installation
-- Check Docker settings: Enable "Expose daemon on tcp://localhost:2375"
+ 
 
 
 #### Node.js/NPM Issues
@@ -167,15 +163,11 @@ winget install OpenJS.NodeJS
 # Check all prerequisites
 python --version
 uv --version
-docker --version
 node --version
 git --version
 
 # Check PowerShell version
 $PSVersionTable.PSVersion
-
-# Test Docker connectivity
-docker run hello-world
 
 # View detailed script help
 .\scripts\build_and_run.ps1 -Help

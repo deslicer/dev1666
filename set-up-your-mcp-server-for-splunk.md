@@ -23,15 +23,16 @@ Before running the MCP for Splunk, ensure you have the following prerequisites i
 
 ### 1.1 Choose your path
 
-For this guide, "Beginner" means you don’t have Git or a code editor installed and you’re not comfortable using the terminal/PowerShell yet.
+Pick the option that matches your starting point:
 
-- ***If you're a beginner: go to [Beginners Setup](docs/mcp/BEGINNERS_SETUP.md)***
-- ***If you need to install prerequisites on your OS:***
-  - [Windows Users](docs/mcp/WINDOWS_GUIDE.md)
-  - [macOS Users](docs/mcp/MACOS_GUIDE.md)
-  - [Linux Users](docs/mcp/LINUX_GUIDE.md)
+- **New to this?** Start with the Getting Started guide:
+  - [Getting Started](docs/mcp/BEGINNERS_SETUP.md)
 
-- ***If you already have all prerequisites installed: jump to [Clone GitHub Repository](#clone-repo)***
+- **Need to install prerequisites?**
+  - [Windows Guide](docs/mcp/WINDOWS_GUIDE.md)
+  - [Unix (macOS/Linux) Guide](docs/mcp/NIX_GUIDE.md)
+
+- **All set already?** Jump to [Clone GitHub Repository](#clone-repo)
 
 <a id="clone-repo"></a>
 ### 1.2 Clone GitHub Repository
@@ -46,10 +47,6 @@ git checkout dev1666
 <a id="prepare-env"></a>
 ## 2. Prepare your environment
 
-### Prerequisites
-
-- Python 3.10+ and UV package manager
-- Splunk test instance will be provided to you by email, let the instructor know if you haven't received an email.
 
 ### 2.1 Sync project dependencies
 
@@ -64,7 +61,7 @@ uv sync
 Run this to start the MCP server locally in the background (detached), auto‑starting the MCP Inspector when available:
 
 ```bash
-mcp-server --local --detached
+uv run mcp-server --local --detached
 ```
 
 This launches the server on the first free port from `MCP_SERVER_PORT` (default 8003), writes logs to `logs/`, and opens the MCP Inspector on port 6274 if Node 22+ is available.
@@ -75,30 +72,30 @@ This launches the server on the first free port from `MCP_SERVER_PORT` (default 
 - Stream logs in the current terminal (foreground):
 
 ```bash
-mcp-server --local
+uv run mcp-server --local
 ```
 
 - Start without MCP Inspector (skip auto‑start):
 
 ```bash
-mcp-server --local --no-inspector
+uv run mcp-server --local --no-inspector
 ```
 
 - Detached without Inspector combined:
 
 ```bash
-mcp-server --local --detached --no-inspector
+uv run mcp-server --local --detached --no-inspector
 ```
 
 - Stop all running local/Docker services started by these helpers:
 
 ```bash
-mcp-server --stop
+uv run mcp-server --stop
 ```
 
 - Access points after start (defaults):
-  - MCP Server (HTTP): `http://localhost:<port>`
-  - MCP Server API: `http://localhost:<port>/mcp/`
+  - MCP Server (HTTP): `http://localhost:8003`
+  - MCP Server API: `http://localhost:8003/mcp/`
   - MCP Inspector (if started): `http://localhost:6274`
 
 - Logs:
@@ -110,75 +107,72 @@ mcp-server --stop
 
 ### 2.3 Verify the MCP server
 
-You can verify in one of two ways:
-
-- Using MCP Inspector: follow the sections below:
-  - Part 1 - Verification - Local Service
-  - Verification - Docker Solution (for Docker)
-- Run the automated test script:
-
-#### 1. Automated test script
 ```bash
-uv run python scripts/test_setup.py
+uv run test-mcp-server
 ```
 
-Expected output:
+<details>
+<summary>View sample successful output</summary>
 
-```text
-🔍 Testing MCP Server at http://localhost:8003/mcp/
---------------------------------------------------
-✓ Connected to MCP Server
+```bash
+== MCP Server Check ==
+URL: http://0.0.0.0:8003/mcp/
+• MCP Server: OK ✅
+• Tools: 39 | Resources: 17
 
-📋 Available Tools:
-  1. run_oneshot_search
-     Run a Splunk search and return results immediately...
-  2. get_splunk_health
-     Get Splunk server health information...
-  ... and 27 more tools
-
-📚 Available Resources:
-  1. info://server
-     Server Information
-  ... and 8 more resources
-
-✅ MCP Server is running and responding correctly!
+-- Splunk Health --
+• Status: Connected ✅
+• Server: sh-i-0b8d6e25a.deslicer.splunkcloud.com
+• Version: 9.3.2411.113
+• Source: server_config
 ```
+</details>
 
-***If you see ✅ MCP Server is running and responding correctly! in the output you have complete this Lab ✅ ***
+**Lab complete:** If the script returns MCP Server: OK ✅ and Splunk Health  Status: Connected ✅ you have successfully completed the set up lab.
 
-#### 2. MCP Inspector
+If Splunk shows "Not connected ❌":
 
-- Open `http://localhost:6274`
-- Click Connect to browse and run tools
+- Verify your `.env` file contains correct values for `SPLUNK_HOST`, `SPLUNK_PORT`, `SPLUNK_USERNAME`, `SPLUNK_PASSWORD`, `SPLUNK_SCHEME`, `SPLUNK_VERIFY_SSL`.
+- Restart the server:
+  ```bash
+  uv run mcp-server --stop
+  uv run mcp-server --local
+  ```
 
-<p align="center">
-  <img src="media/mcp_server_connect.png" alt="MCP Inspector connected to local server" />
-  
-</p>
+<details>
+<summary>Additional verification methods</summary>
 
-#### Part 1 - Verification - Local Service
+Using MCP Inspector
 
-1. Connect and list `server_info` resource.
-2. After you have connected to the MCP server, click the
-`server_info` in the **Resources** column.
-3. To the right, the response message from `server_info` is displayed.
+- Verify MCP status
+  - Open `http://localhost:6274`
+  - Click Connect
 
-4. Click on the green text in text: value field.
-
-***If you see ```"status":"running"``` in the text you have complete this Lab ✅***
+***Running in Docker***
 
 <p align="center">
   <img src="media/mcp_server_connect_docker.png" alt="MCP Inspector connected to Docker server" />
-  
 </p>
 
-#### Verification - Docker Solution
+Connect to browse tools, resources and prompts
 
-1. Connect and list `server_info` resource.
-2. After you have connected to the MCP server, click the
-`server_info` in the **Resources** column.
-3. To the right, the response message from `server_info` is displayed.
+***Running on localhost***
 
-4. Click on the green text in text: value field.
+<p align="center">
+  <img src="media/mcp_server_connect.png" alt="MCP Inspector connected to local server" />
+</p>
 
-***If you see ```"status":"running"``` in the text you have complete this Lab ✅***
+Connect to browse tools, resources and prompts
+
+- Verify Splunk connectivity
+  - Click "list_resources" to load available resources
+  - Click the 'Splunk_Health_Status' resource
+  - Confirm the response contains `status: "healthy"` in the `text` object
+
+
+**Lab complete:** If you see ```"status":"healthy"``` in the text object your MCP server is set up and connected to Splunk ✅
+
+Using Health Dashboard
+- Navigate to `http://localhost:8003`
+- Verify that Service Status is <span style="color: green; font-weight: 600;">Running</span> and Splunk Connection is <span style="color: green; font-weight: 600;">Connected</span>
+</details>

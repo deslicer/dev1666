@@ -13,41 +13,28 @@ git checkout dev1666
 
 All setup scripts are in this repository under `scripts/`.
 
-## 2) Install prerequisites
+## 2) Check and install prerequisites (smart)
 
-Install Homebrew (if you don't have it):
-
-```bash
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-```
-
-Install required tools:
+### 2.2 Check install (dry-run)
 
 ```bash
-brew install python@3.11 uv git
-# Optional (for MCP Inspector)
-brew install node
-# Optional (Docker mode)
-brew install --cask docker
+./scripts/smart-install.sh --dry-run
 ```
 
-Verify installations:
+Review what would be installed, then run the installer to apply changes:
+
+### 2.3 Install missing prerequisites
 
 ```bash
-python3 --version
-uv --version
-git --version
-node --version  # if installed
-docker --version  # if installed
+./scripts/smart-install.sh
 ```
 
-## 3) Validate prerequisites
-
-From the `mcp-for-splunk` folder:
+### 2.4 Run the checker to confirm
 
 ```bash
-./scripts/check-prerequisites.sh --detailed
+./scripts/check-prerequisites.sh
 ```
+
 
 ## All checks pass ✅
 
