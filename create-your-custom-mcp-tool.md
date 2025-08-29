@@ -78,10 +78,10 @@ Expected output includes a success message or specific actionable validation err
 
 ## 4. Run the tool in MCP Inspector (🖥️)
 
-With the server running (`mcp-server --stop` and `mcp-server --local -d`):
+Restart the mcp server, to verify that changes take affect.
 
 ```bash
-uv run mcp-server --stop && uv run mcp-server --local -d
+uv run mcp-server --restart
 ```
 
 - Open MCP Inspector at `http://localhost:6274`
