@@ -13,8 +13,8 @@ uv run python ./contrib/scripts/generate_tool.py
 
 ### 1.1 Answer the prompts
 
-- Select the template: choose either the simple example or the Splunk Search template
-- Choose a category: for example `devops` or `examples`
+- Select the template: 2. (***Splunk Search***) template
+- Choose a category: ***lab***
 - Provide a tool name: for example `hello_world` or `basic_health_search`
 
 The generator creates files under `contrib/tools/<category>/` and includes boilerplate with `BaseTool`, `ToolMetadata`, and an `execute` method. It may also add starter tests under `tests/contrib/` depending on the template.
@@ -56,6 +56,7 @@ class HelloWorldTool(BaseTool):
 
 ```bash
 # Validate your tool for structure and metadata
+CLARIFY
 uv run python ./contrib/scripts/validate_tools.py contrib/tools/<category>/<your_tool>.py
 
 # Optional: run contrib tests
