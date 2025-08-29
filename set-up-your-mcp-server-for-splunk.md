@@ -61,37 +61,52 @@ uv sync
 
 ### 2.2 Run the MCP server
 
-#### Option 1 - Local Service - Recommended
+Run this to start the MCP server locally in the background (detached), auto‑starting the MCP Inspector when available:
 
 ```bash
-# Start the uv application using command line
-# Linux/MacOS
-./scripts/build_and_run.sh --local
-
-# Windows PowerShell
-.\scripts\build_and_run.ps1 --local
-
-# Windows (CMD)
-.\scripts\build_and_run.bat --local
+mcp-server --local --detached
 ```
 
-#### Option 2 - Docker Solution - Optional
+This launches the server on the first free port from `MCP_SERVER_PORT` (default 8003), writes logs to `logs/`, and opens the MCP Inspector on port 6274 if Node 22+ is available.
+
+<details>
+<summary>Advanced and alternative commands</summary>
+
+- Stream logs in the current terminal (foreground):
 
 ```bash
-# Ensure that Docker Desktop is started on your laptop
-docker ps
-# Download and build the MCP server using Docker
-# Linux/MacOS
-./scripts/build_and_run.sh --docker
-# To stop the containers
-./scripts/build_and_run.sh --stop
-
-# Windows PowerShell
-.\scripts\build_and_run.ps1 --docker
-
-# Windows (CMD)
-.\scripts\build_and_run.bat --docker
+mcp-server --local
 ```
+
+- Start without MCP Inspector (skip auto‑start):
+
+```bash
+mcp-server --local --no-inspector
+```
+
+- Detached without Inspector combined:
+
+```bash
+mcp-server --local --detached --no-inspector
+```
+
+- Stop all running local/Docker services started by these helpers:
+
+```bash
+mcp-server --stop
+```
+
+- Access points after start (defaults):
+  - MCP Server (HTTP): `http://localhost:<port>`
+  - MCP Server API: `http://localhost:<port>/mcp/`
+  - MCP Inspector (if started): `http://localhost:6274`
+
+- Logs:
+  - Server process: `logs/mcp_server.log`
+  - MCP Inspector: `logs/inspector.log`
+  - In‑app server log: `logs/mcp_splunk_server.log`
+
+</details>
 
 ### 2.3 Verify the MCP server
 
