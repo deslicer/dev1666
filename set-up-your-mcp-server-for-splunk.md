@@ -135,8 +135,7 @@ If Splunk shows "Not connected ❌":
 - Verify your `.env` file contains correct values for `SPLUNK_HOST`, `SPLUNK_PORT`, `SPLUNK_USERNAME`, `SPLUNK_PASSWORD`, `SPLUNK_SCHEME`, `SPLUNK_VERIFY_SSL`.
 - Restart the server:
   ```bash
-  uv run mcp-server --stop
-  uv run mcp-server --local
+  uv run mcp-server --restart
   ```
 
 <details>
