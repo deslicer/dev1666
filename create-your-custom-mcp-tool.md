@@ -37,7 +37,7 @@ Helpful reference:
 
 - Your class inherits from `BaseTool`
 - Metadata lives in `METADATA = ToolMetadata(...)`
-- Main logic goes in `async def execute(self, ctx: Context, **kwargs)`
+- Main logic goes in `async def execute(self, ctx: Context)`
 
 ```python
 from typing import Any, Dict
@@ -48,11 +48,11 @@ class HelloWorldTool(BaseTool):
     """A simple example tool that returns a greeting."""
 
     METADATA = ToolMetadata(
-        name="hello_world",
-        description="Say hello to someone",
+        name="hello_world", # tool name
+        description="Say hello to someone", # Tool Description
         category="examples",
         tags=["example", "tutorial"],
-        requires_connection=False
+        requires_connection=False # requires splunk connection
     )
 
     async def execute(self, ctx: Context, name: str = "World") -> Dict[str, Any]:
