@@ -2,9 +2,9 @@
 
 Build your first tool with the generator, validate it, and run it in MCP Inspector.
 
-> This lab is Part 2 only. If you haven’t completed Part 1 (server setup), finish that first so your environment and MCP server are ready.
+> This lab is Part 2. If you haven’t completed Part 1 (mcp setup), finish that first so your environment and MCP server are ready.
 
-## 1. Generate a tool with the helper script (🚀)
+## 1. Generate a Splunk Search tool with the helper script (🚀)
 
 ```bash
 # Interactive generator (recommended)
@@ -15,7 +15,9 @@ uv run python ./contrib/scripts/generate_tool.py
 
 - Select the template: 2. (***Splunk Search***) template
 - Choose a category: ***lab***
-- Provide a tool name: for example `hello_world` or `basic_health_search`
+- Provide a tool name: ***dev1666***
+- Add a tool description: 
+    > Tool description should define what the tool does and how it should be used.
 
 The generator creates files under `contrib/tools/<category>/` and includes boilerplate with `BaseTool`, `ToolMetadata`, and an `execute` method. It may also add starter tests under `tests/contrib/` depending on the template.
 
