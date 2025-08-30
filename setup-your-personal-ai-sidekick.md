@@ -7,7 +7,7 @@ Welcome to the AI Sidekick for Splunk hands-on lab! In this lab, you'll set up a
 By the end of this lab, you'll have:
 - ✅ A fully functional AI Sidekick running on your machine
 - ✅ Real-time connection to your Splunk environment via MCP
-- ✅ Access to specialized AI agents for search, research, and administration
+- ✅ Access to specialized AI agents including FlowPilot workflows
 - ✅ A web interface to interact with your AI Sidekick
 - ✅ Understanding of the modular agent architecture
 
@@ -20,104 +20,116 @@ By the end of this lab, you'll have:
 
 ---
 
-## Step 1: Clone the Repository
+## Step 1: Clone and Setup Repository
 
-First, let's get the AI Sidekick project:
+First, let's get the AI Sidekick project and switch to the workshop branch:
 
 ```bash
 git clone https://github.com/deslicer/ai-sidekick-for-splunk.git
 cd ai-sidekick-for-splunk
+git checkout dev1666
 ```
+
+> **💡 Important:** The `dev1666` branch has pre-configured `.env` file with all required environment variables for the workshop.
 
 ---
 
 ## Step 2: Install Prerequisites and Dependencies
 
-**Choose the setup guide for your operating system:**
+Choose your operating system and run the appropriate prerequisite script:
 
-- **🚀 Quick Start (All Platforms):** [Beginners Setup Guide](./docs/ai_sidekick/BEGINNERS_SETUP.md)
-- **🪟 Windows Users:** [Windows Setup Guide](./docs/ai_sidekick/WINDOWS_GUIDE.md)
-- **🍎 macOS Users:** [macOS Setup Guide](./docs/ai_sidekick/MACOS_GUIDE.md)
-- **🐧 Linux Users:** [Linux Setup Guide](./docs/ai_sidekick/LINUX_GUIDE.md)
-
-**After completing your platform-specific setup, return here to continue with [Step 3: Configure Environment Variables](#step-3-configure-environment-variables).**
-
----
-
-## Step 3: Configure Environment Variables
-
-**🚀 Quick Setup (Recommended):**
-
-Use the interactive setup script for easy configuration:
-
-```bash
-./scripts/lab/setup-env.sh
-```
-
-This script will:
-- ✅ Configure MCP server URL (local or Docker)
-- ✅ Set optimal model defaults
-- ✅ Create your `.env` file automatically
-- ✅ Set up pre-configured Google API key for workshop
-
-**📋 Manual Setup (Alternative):**
-
-If you prefer manual configuration:
-
-1. **Copy the workshop template:**
-   ```bash
-   cp .env_lab .env
-   ```
-
-2. **Edit the `.env` file with your values:**
-   ```bash
-   # Edit with your preferred editor
-   nano .env  # or code .env
-   ```
-
-3. **Required settings for the workshop:**
-   ```env
-   # Google ADK Configuration (Required)
-   GOOGLE_GENAI_USE_VERTEXAI=False
-   GOOGLE_API_KEY=your-google-ai-studio-api-key
-
-   # MCP Server Configuration (Required)
-   SPLUNK_MCP_SERVER_URL=http://localhost:8003/mcp/
-
-   # Splunk Connection (Required for MCP server)
-   SPLUNK_HOST=dev1666-i-035e95d7e4ea1c310.splunk.show
-   SPLUNK_PORT=8089
-   SPLUNK_SCHEME=https
-   SPLUNK_USERNAME=admin
-   SPLUNK_PASSWORD=workshop-password-provided-during-session
-
-   # Model Configuration
-   BASE_MODEL=gemini-2.0-flash-exp
-
-   # Server Configuration
-   HOST=0.0.0.0
-   PORT=8087
-   ```
-
-   **MCP Server Information:**
-   - The workshop assumes you have the `mcp-for-splunk` running on port 8003
-   - Or use a provided workshop MCP server URL
-
-4. **Save the file**
-
----
-
-## Step 4: Start the AI Sidekick
-
-#### For macOS/Linux/Unix:
-```bash
-chmod +x scripts/lab/start-lab-setup.sh
-./scripts/lab/start-lab-setup.sh
-```
-
-#### For Windows:
+### 🪟 Windows
 ```powershell
-.\scripts\lab\start-lab-setup.ps1
+.\scripts\lab\check-prerequisites.ps1
+```
+
+### 🍎 macOS
+```bash
+./scripts/lab/check-prerequisites.sh
+```
+
+### 🐧 Linux
+```bash
+./scripts/lab/check-prerequisites.sh
+```
+
+### 🐍 Cross-Platform (Python)
+If you already have Python 3.11+ installed:
+```bash
+python scripts/check-prerequisites.py
+```
+
+<details>
+<summary>📋 What the prerequisite scripts do</summary>
+
+The scripts will:
+- ✅ Check for Python 3.11+ and install if needed
+- ✅ Install `uv` (fast Python package manager)
+- ✅ Create Python virtual environment using `uv`
+- ✅ Install all project dependencies
+- ✅ Verify Git installation
+- ✅ Prepare your system for AI Sidekick
+
+**Expected output:**
+```
+[SUCCESS] ✅ Python 3.11+ is installed
+[SUCCESS] ✅ uv is installed and ready
+[SUCCESS] ✅ Git is installed
+[SUCCESS] ✅ Virtual environment created successfully
+[SUCCESS] ✅ Dependencies installed successfully
+
+Next Steps:
+1. Activate Python environment: source .venv/bin/activate (macOS/Linux) or .venv\Scripts\activate (Windows)
+2. Start AI Sidekick: uv run ai-sidekick --start
+```
+</details>
+
+<details>
+<summary>🛠️ Manual Installation (Fallback)</summary>
+
+If the prerequisite scripts don't work for your system:
+
+**Install Python 3.11+:**
+- **Windows:** Download from [python.org](https://python.org)
+- **macOS:** `brew install python@3.11` or download from [python.org](https://python.org)
+- **Linux:** `sudo apt install python3.11` (Ubuntu/Debian) or `sudo yum install python3.11` (RHEL/CentOS)
+
+**Install uv:**
+```bash
+# macOS/Linux
+curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# Windows (PowerShell)
+powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
+```
+
+**Create virtual environment and install dependencies:**
+```bash
+uv venv
+uv sync
+```
+</details>
+
+---
+
+## Step 3: Activate Environment and Start AI Sidekick
+
+### Activate the Python environment:
+
+**Windows:**
+```powershell
+.venv\Scripts\activate
+```
+
+**macOS/Linux:**
+```bash
+source .venv/bin/activate
+```
+
+### Start the AI Sidekick:
+```bash
+uv sync
+uv run ai-sidekick --start
 ```
 
 You should see output like:
@@ -136,7 +148,7 @@ Opening web interface in your browser...
 
 ---
 
-## Step 5: Meet Your AI Sidekick
+## Step 4: Meet Your AI Sidekick
 
 ### Understanding the Agent Architecture
 
@@ -147,6 +159,7 @@ Your AI Sidekick uses a **modular multi-agent architecture** with these speciali
 3. **🔬 Data Explorer** - Comprehensive data analysis with 5-phase workflow
 4. **🧠 Researcher** - Google Search integration for current information
 5. **🔧 Splunk MCP** - Direct Splunk environment access and execution
+6. **⚡ FlowPilot Workflows** - Template-driven specialized workflows
 
 ### Agent Selection
 
@@ -156,173 +169,154 @@ Your AI Sidekick uses a **modular multi-agent architecture** with these speciali
 
 ---
 
-## Step 6: Example Conversations
+## Step 5: Try Your AI Sidekick
 
-Let's explore what your AI Sidekick can do! Try these example conversations:
+Let's test your AI Sidekick with three essential workflows:
 
-### Example 1: Basic Splunk Health Check
+### Example 1: System Health Check 🏥
 
-**You:** "Check my Splunk health and show me available indexes"
+**You:** "Run a system health check"
 
-**Expected Response:** The AI Sidekick will:
-- Automatically delegate to the Splunk MCP agent
-- Check Splunk connectivity
-- List available indexes with data volume information
-- Provide health recommendations
+<details>
+<summary>Expected Response</summary>
 
-### Example 2: Search Query Optimization
+The AI Sidekick will:
+- Automatically delegate to the **System Health Check Flow** (FlowPilot workflow)
+- Check Splunk connectivity and version
+- Verify data ingestion (last 24 hours)
+- Assess basic system performance
+- Provide health recommendations and educational insights
 
-**You:** "Help me optimize this SPL query: `index=pas | stats count by user | sort -count`"
-
-**Expected Response:** The Search Guru will:
-- Analyze your query for performance improvements
-- Suggest optimizations (time range, field filtering, etc.)
-- Provide best practices explanation
-- Offer alternative approaches
-
-### Example 3: Data Explorer Workflow
-
-**You:** "Use data explorer to analyze index=pas"
-
-**Expected Response:** The Data Explorer will execute a comprehensive 5-phase workflow:
-1. **Phase 1: Data Collection** - Gather basic index information and samples
-2. **Phase 2: Field Analysis** - Analyze field patterns and distributions
-3. **Phase 3: Pattern Recognition** - Identify trends and anomalies
-4. **Phase 4: Insight Generation** - Generate 5 actionable business insights
-5. **Phase 5: Quality Assessment** - Validate findings and provide recommendations
-
-### Example 4: Current Information Research
-
-**You:** "What are the latest Splunk security advisories for version 9.4?"
-
-**Expected Response:** The Researcher will:
-- Use Google Search to find current security information
-- Provide links to official Splunk security advisories
-- Summarize key findings and recommendations
-- Suggest next steps for security updates
-
-### Example 5: Multi-Agent Collaboration
-
-**You:** "Help me analyze file operations patterns in index=pas and create optimized searches"
-
-**Expected Response:** Multiple agents will collaborate:
-- **Data Explorer** performs comprehensive 5-phase analysis of file operations data
-- **Search Guru** optimizes the SPL queries generated by Data Explorer
-- **Splunk MCP** executes all searches and returns formatted results
-- **Root Agent** coordinates the workflow and presents unified results
-
-### 🎯 More Example Questions to Try
-
-**Data Explorer (Comprehensive Analysis):**
+**Sample Output:**
 ```
-"Use data explorer to analyze index=_internal"
-"Data explorer analyze index=_audit"
-```
+✅ System Health Check Complete
 
-**Search Guru (SPL Optimization & Strategy):**
-```
-"Help me create a search to find errors in index=_internal"
-"What's the best SPL approach for analyzing failed logins?"
-"Create an efficient search for monitoring system performance"
-```
+📊 System Overview:
+- Splunk Version: 9.4.0 (Build: abc123)
+- System Status: Healthy
+- Data Flow: Active (1.2M events/24h)
 
-**Splunk MCP (Direct Operations):**
-```
-"Run this search: index=_internal | head 10 | table _time, component"
-"Show me events from index=pas | head 20"
-"List all available indexes"
-```
+🎯 Health Assessment:
+- ✅ Splunk services running normally
+- ✅ Data ingestion active
+- ⚠️  Consider index optimization for better performance
 
-**Researcher (Current Information):**
+📚 Educational Insights:
+This health check verified your Splunk environment is ready for workshop activities.
 ```
-"What are the latest Splunk best practices for search optimization?"
-"Research current security threats for Windows authentication"
-"What's new in Splunk Enterprise 10.0?"
-```
+</details>
 
-**Multi-Agent Workflows:**
+### Example 2: List Available Indexes 📋
+
+**You:** "List all available indexes"
+
+<details>
+<summary>Expected Response</summary>
+
+The Splunk MCP agent will:
+- Connect to your Splunk environment
+- Retrieve all available indexes
+- Show data volume and last update information
+- Provide index usage recommendations
+
+**Sample Output:**
 ```
-"Help me investigate security patterns in my data"
-"Create a complete monitoring strategy for index=_internal"
+📋 Available Splunk Indexes:
+
+🔍 Core Indexes:
+- main (2.1GB, last event: 2 minutes ago)
+- _internal (890MB, last event: 30 seconds ago)
+- _audit (45MB, last event: 1 minute ago)
+
+🏢 Workshop Indexes:
+- pas (1.5GB, last event: 5 minutes ago)
+- security (780MB, last event: 3 minutes ago)
+
+💡 Recommendation: Use 'pas' index for analysis exercises - it has rich sample data perfect for learning.
 ```
+</details>
+
+### Example 3: Index Analysis Flow 🔬
+
+**You:** "Use index analysis flow to analyze index=s4c_www and provide actionable insights"
+
+<details>
+<summary>Expected Response</summary>
+
+The **Index Analysis Flow** (FlowPilot workflow) will execute a comprehensive analysis:
+
+**Phase 1: Data Collection** - Gather basic index information and samples
+**Phase 2: Field Analysis** - Analyze field patterns and distributions  
+**Phase 3: Pattern Recognition** - Identify trends and anomalies
+**Phase 4: Volume Assessment** - Evaluate data volume and performance
+**Phase 5: Insight Generation** - Generate actionable business insights
+
+**Sample Output:**
+```
+🔬 Index Analysis Complete: s4c_www
+
+📊 Analysis Summary:
+- Total Events: 2,456,789 events
+- Time Range: 30 days
+- Primary Sourcetypes: access_combined (60%), error_log (25%), ssl_access (15%)
+- Peak Activity: Business hours (9 AM - 6 PM) with weekend traffic
+
+🎯 Actionable Insights:
+
+🔒 Security Analyst:
+- Monitor 404 error patterns (detected unusual spikes)
+- Set up alerts for suspicious user agents and bot traffic
+- Dashboard: | search index=s4c_www status=404 | stats count by clientip
+
+⚙️ DevOps Engineer:
+- SSL certificate errors increasing (5% of traffic)
+- High response times during peak hours (>2s average)
+- Monitor: | search index=s4c_www ssl_error | timechart span=1h count
+
+📈 Business Analyst:
+- Mobile traffic growing 25% month-over-month
+- Popular content pages driving 70% of engagement
+- Track: | search index=s4c_www | stats count by uri_path | sort -count
+
+🚀 Next Steps:
+1. Implement recommended dashboards
+2. Set up automated monitoring alerts
+3. Schedule regular index health checks
+```
+</details>
 
 ---
 
-### Session Management
+## 🎉 Congratulations!
 
-Your conversations are automatically saved. To start fresh:
-- Click **🗑️ Clear Session** in the interface
-- Or start a new session by refreshing the page
-
----
-
-## Step 7: Understanding the Architecture
-
-### Modular Design Benefits
-
-1. **Specialized Expertise** - Each agent excels in its domain
-2. **Automatic Delegation** - Framework routes tasks to appropriate agents
-3. **Extensible** - Easy to add new agents and capabilities
-4. **Session Persistence** - Maintains context across interactions
-5. **Real-Time Integration** - Direct Splunk environment access
-
-### MCP (Model Context Protocol) Integration
-
-- **Real-Time Connection** - Live access to your Splunk environment
-- **Session Management** - Persistent connections with automatic reconnection
-- **Tool Integration** - Rich set of Splunk administration tools
-- **Security** - Secure credential handling and SSL support
-
-### Google ADK Framework
-
-- **Multi-Agent Coordination** - Native support for agent collaboration
-- **Google Search Integration** - Access to current information
-- **Conversation Management** - Advanced dialog state handling
-- **Tool Orchestration** - Seamless tool-to-agent integration
-
-## Need Help?
-
-If you encounter any issues during setup or while using the AI Sidekick, check our comprehensive troubleshooting guide:
-
-**📖 [AI Sidekick Troubleshooting Guide](./docs/ai_sidekick/TROUBLESHOOTING.md)**
-
-For platform-specific issues, also refer to:
-- **🪟 [Windows Troubleshooting](./docs/ai_sidekick/WINDOWS_GUIDE.md#troubleshooting)**
-- **🍎 [macOS Troubleshooting](./docs/ai_sidekick/MACOS_GUIDE.md#troubleshooting)**
-- **🐧 [Linux Troubleshooting](./docs/ai_sidekick/LINUX_GUIDE.md#troubleshooting)**
-
----
-
-## Next Steps
-
-🎉 **Congratulations!** You've successfully set up your personal AI Sidekick for Splunk!
+You've successfully set up and tested your personal AI Sidekick for Splunk!
 
 ### What You've Accomplished:
 - ✅ Deployed a modular AI agent framework
 - ✅ Established real-time Splunk integration
-- ✅ Experienced multi-agent collaboration
-- ✅ Explored advanced search and analysis capabilities
+- ✅ Experienced FlowPilot workflow execution
+- ✅ Explored system health monitoring and index analysis
 
 ### Continue Your Journey:
 - **🔗 Proceed to Lab 4:** [Create Your AI Agent](./create-your-ai-agent.md)
-- **🌟 Contribute:** Add your own agents to the framework
+- **🌟 Contribute:** Add your own workflow agents to the framework
 - **🚀 Deploy:** Set up for production use in your organization
 
 ### Resources:
-- **GitHub Repository:** https://github.com/desclier/ai-sidekick-for-splunk
-- **Documentation:** https://docs.ai-sidekick-for-splunk.com
-- **Issues/Support:** https://github.com/desclier/ai-sidekick-for-splunk/issues
+- **GitHub Repository:** https://github.com/deslicer/ai-sidekick-for-splunk
+- **Documentation:** Complete guides in the repository
+- **Issues/Support:** https://github.com/deslicer/ai-sidekick-for-splunk/issues
 
 ---
 
-## Feedback
+## Need Help?
 
-Your feedback helps us improve! Please share:
-- What worked well in this lab?
-- What was confusing or could be clearer?
-- What additional features would you like to see?
+If you encounter any issues:
 
-**Share feedback:** opensource@deslicer.com
+1. **Check Prerequisites:** Ensure Python 3.11+, uv, and Git are installed
+2. **Environment:** Verify you're in the `dev1666` branch with activated virtual environment
+3. **MCP Connection:** Ensure the MCP server is running (should start automatically)
+4. **Browser:** Try refreshing the web interface at http://localhost:8087
 
 ---
 

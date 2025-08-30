@@ -1,264 +1,411 @@
 # Lab 4: Create Your AI Agent
 
-**Build your own specialized AI agent for Splunk index analysis!**
+**Build your own specialized FlowPilot workflow agent in minutes!**
 
 ## What You'll Build
 
-**Complete Index Analyzer Agent with Orchestrator Integration**
+**Complete FlowPilot Workflow Agent with Auto-Discovery**
 
-You'll create a fully functional Splunk index analysis agent using a systematic 3-step process:
-1. **Create** - Generate the base agent structure for contributors
-2. **Implement** - Add complete working 5-phase analysis workflow
-3. **Integrate** - Connect agent to the main orchestrator as agent tool
+You'll create a fully functional workflow agent that:
+1. **Generate** - Create a validated workflow template using one simple command
+2. **Discover** - Automatically integrates into the AI Sidekick system
+3. **Execute** - Ready to use immediately via ADK web interface
 
 ## Prerequisites
 
 - Completed Lab 3: Setup Your Personal AI Sidekick
-- Basic Python knowledge
-- Familiarity with Splunk indexes and SPL
+- AI Sidekick running with activated virtual environment
+- Basic understanding of Splunk concepts
 
 ---
 
-## Step 1: Create Agent Structure
+## Step 1: Create Your FlowPilot Workflow Agent
 
-Generate the base agent structure that contributors can use:
-
-```bash
-./scripts/agent/create-agent.sh index_analyzer
-```
-
-**This creates the contributor-ready structure:**
-```
-index_analyzer/
-├── __init__.py      # ← Auto-discovery setup
-├── agent.py         # ← Agent class with metadata (methods as TODO)
-├── prompt.py        # ← Placeholder for instructions
-└── README.md        # ← Documentation
-```
-
-**What you get:**
-- ✅ **Base agent class** - Proper inheritance and metadata
-- ✅ **Auto-discovery setup** - Factory functions and exports
-- ✅ **Method placeholders** - TODO comments for core methods
-- ✅ **Prompt structure** - Ready for specific instructions
-
-> **💡 Key Learning:** This creates the foundation that any contributor can use to build agents!
-
----
-
-## Step 2: Add Working Implementation
-
-Add the complete 5-phase workflow implementation:
+Create a new workflow agent with a single command:
 
 ```bash
-./scripts/agent/add-agent.sh index_analyzer
+uv run ai-sidekick --create-flow-agent workshop_demo
 ```
 
-**This adds the complete working agent:**
+<details>
+<summary>📋 What this command does</summary>
 
-### 2.1 What Gets Added
+The unified script will:
+- ✅ **Generate Template** - Create a fully validated workflow JSON using Pydantic models
+- ✅ **Auto-Validation** - Ensure template passes all schema requirements
+- ✅ **Smart Placement** - Place in `contrib/flows/` for community workflows
+- ✅ **Documentation** - Generate README.md with workflow details
+- ✅ **Integration Ready** - Workflow is immediately discoverable by the system
 
-#### **📋 Complete Index Analyzer Prompt (prompt.py)**
-Full 5-phase workflow instructions with real SPL queries:
-- ✅ **Phase 1:** Data Types Discovery with tstats analysis
-- ✅ **Phase 2:** Field Analysis with fieldsummary
-- ✅ **Phase 3:** Sample Data Collection with real events
-- ✅ **Phase 4:** Volume Assessment with REST API
-- ✅ **Phase 5:** Business Insights with persona-based use cases
-
-#### **🔧 Working Agent Methods (agent.py)**
-Complete implementation of all core methods:
-- ✅ **`execute()`** - Full 5-phase workflow with structured output
-- ✅ **`get_adk_agent()`** - ADK integration for orchestrator
-- ✅ **`supports_streaming()`** - Streaming capability detection
-- ✅ **`validate_input()`** - Input validation logic
-- ✅ **`get_capabilities()`** - Capability listing
-
-### 2.2 Implementation Highlights
-
-#### **🎯 Real Working Execute Method**
-```python
-def execute(self, task: str, context: Optional[dict[str, Any]] = None) -> dict[str, Any]:
-    # Extract index name from task
-    index_match = re.search(r'index[=\s]+([^\s]+)', task.lower())
-
-    # Return structured analysis with:
-    # - 5 analysis phases with SPL queries
-    # - Business insights for 3 personas
-    # - Actionable recommendations
+**Expected Output:**
 ```
+🚀 Creating FlowPilot workflow agent: workshop_demo
 
-#### **📊 Structured Output**
-- **Analysis Phases** - Each phase with SPL query and findings
-- **Business Insights** - SecOps, DevOps, and Business Analyst use cases
-- **Recommendations** - Actionable next steps
+✅ Workflow template created: contrib/flows/workshop_demo/workshop_demo.json
+✅ Documentation created: contrib/flows/workshop_demo/README.md
+✅ Pydantic validation: PASSED
+✅ Schema validation: PASSED
 
-> **💡 Workshop Focus:** You now have a complete, working agent ready for testing!
+📋 Workflow Details:
+- ID: contrib.workshop_demo
+- Name: DevWorkshop_Demo_Workshop System Health Agent
+- Type: Troubleshooting workflow
+- Phases: 3 (System Info → Health Checks → Summary Report)
 
----
+🎯 Next Steps:
+1. Restart AI Sidekick: uv run ai-sidekick --stop && uv run ai-sidekick --start
+2. Access via ADK Web: http://localhost:8087
+3. Try: "Use Workshop Demo workflow"
 
-## Step 3: Integrate with Orchestrator
-
-Connect your agent to the main orchestrator so it can be called as a tool:
-
-```bash
-./scripts/agent/integrate-agent.sh index_analyzer
+✨ Your workflow agent is ready!
 ```
+</details>
 
-**This integrates your agent with the orchestrator:**
+### What Gets Created
 
-### 3.1 What Gets Integrated
+Your new workflow includes:
 
-#### **🔗 Agent Import**
-Adds your agent to the main orchestrator imports:
-```python
-from .contrib.agents.index_analyzer.agent import index_analyzer_agent
-```
+**🏗️ Workflow Structure:**
+- **System Information Phase** - Gather Splunk version and available indexes
+- **Health Assessment Phase** - Check data flow and basic performance
+- **Summary Report Phase** - Generate educational insights for workshop participants
 
-#### **🛠️ Agent Tool**
-Adds your agent as an AgentTool in the orchestrator:
-```python
-tools = [
-    # ... existing tools ...
-    AgentTool(index_analyzer_agent),
-]
-```
+**📊 Template Features:**
+- **Validated Schema** - Passes all Pydantic and system validation
+- **Educational Focus** - Designed for workshop learning objectives
+- **Beginner Friendly** - Clear explanations and encouraging feedback
+- **Real Functionality** - Uses actual Splunk MCP and result synthesizer tools
 
-#### **📝 Orchestrator Prompt**
-Updates the orchestrator prompt to document your agent:
-```
-## Index Analyzer Agent
-- **Purpose**: Systematic Splunk index analysis and business insight generation
-- **Capabilities**: 5-phase analysis workflow
-- **Usage**: "Use index_analyzer to analyze index=<index_name>"
-```
+<details>
+<summary>🔍 View Generated Workflow Template Structure</summary>
 
-### 3.2 Integration Benefits
-
-- ✅ **Seamless Routing** - Orchestrator automatically delegates to your agent
-- ✅ **Tool Discovery** - Your agent appears in available tools
-- ✅ **Proper Documentation** - Users know how to invoke your agent
-- ✅ **Production Ready** - Full integration with the AI Sidekick system
-
----
-
-## Step 4: Test Your Complete Agent
-
-**1. Start the ADK lab environment:**
-```bash
-./scripts/lab/start-lab-setup.sh
-```
-
-**2. Test your agent integration:**
-
-**Option A: Direct Python Test**
-```bash
-cd src && uv run python -c "
-from splunk_ai_sidekick.contrib.agents.index_analyzer import index_analyzer_agent
-result = index_analyzer_agent.execute('analyze index=pas')
-print('Agent Response:', result['message'])
-print('Business Insights:', len(result['business_insights']))
-"
-```
-
-**Option B: Web Interface Test**
-- Open `http://localhost:8087` in your browser
-- Try: "Use index analyzer to analyze index=pas"
-- Try: "Help me analyze index=_internal with the index analyzer"
-
-### 4.1 Expected Results
-
-Your agent is **fully functional and integrated**! Here's what you'll see:
-
-#### **✅ Complete Analysis Output**
 ```json
 {
-  "success": true,
-  "message": "Index analysis completed for index=pas",
-  "analysis_phases": {
-    "phase_1": {
-      "name": "Data Types Discovery",
-      "spl_query": "| tstats summariesonly=true count WHERE index=pas by _time, sourcetype...",
-      "findings": "Discovered primary data types and ingestion patterns"
+  "workflow_id": "contrib.workshop_demo",
+  "workflow_name": "DevWorkshop_Demo_Workshop System Health Agent",
+  "version": "1.0.0",
+  "description": "A simple workshop demonstration agent that performs basic Splunk environment health checks...",
+  "workflow_type": "troubleshooting",
+  "workflow_category": "system_health",
+  "source": "contrib",
+  "complexity_level": "beginner",
+  "target_audience": ["Workshop participants", "Splunk beginners", "FlowPilot learners"],
+  "core_phases": {
+    "system_info": {
+      "phase_name": "System Information Gathering",
+      "tasks": [
+        {
+          "task_id": "gather_splunk_version",
+          "title": "Gather Splunk Version",
+          "tool": "splunk_mcp",
+          "prompt": "Please retrieve the Splunk version information..."
+        },
+        {
+          "task_id": "list_available_indexes", 
+          "title": "List Available Indexes",
+          "tool": "splunk_mcp",
+          "prompt": "List all available Splunk indexes..."
+        }
+      ]
     },
-    // ... 4 more phases
-  },
-  "business_insights": [
-    {
-      "persona": "SecOps Analyst",
-      "use_case": "Security Monitoring Dashboard",
-      "dashboard_query": "index=pas | stats count by sourcetype..."
+    "health_checks": {
+      "phase_name": "Basic Health Assessment",
+      "tasks": [
+        {
+          "task_id": "check_recent_data",
+          "title": "Check Recent Data",
+          "tool": "splunk_mcp", 
+          "prompt": "Search for events from the last 24 hours..."
+        },
+        {
+          "task_id": "check_system_performance",
+          "title": "Check System Performance",
+          "tool": "splunk_mcp",
+          "prompt": "Check basic system performance..."
+        }
+      ]
     },
-    // ... 2 more personas
-  ],
-  "recommendations": [
-    "Set up automated dashboards for continuous monitoring",
-    // ... more recommendations
-  ]
+    "summary_report": {
+      "phase_name": "Health Summary Report",
+      "tasks": [
+        {
+          "task_id": "generate_health_summary",
+          "title": "Generate Health Summary", 
+          "tool": "result_synthesizer",
+          "prompt": "Based on the system information and health checks performed, create a clear and friendly summary report..."
+        }
+      ]
+    }
+  }
 }
 ```
-
-#### **✅ Orchestrator Integration**
-- Agent appears in orchestrator tools
-- Requests are properly routed
-- Structured responses are returned
-- Full ADK compatibility
+</details>
 
 ---
 
-## Step 5: Understanding Your Creation
+## Step 2: Restart and Discover Your Agent
 
-### 5.1 What You Built
+### Restart AI Sidekick to discover the new workflow:
 
-**🏗️ Architecture Pattern**
-- **Base Structure** - Standard agent foundation for contributors
-- **Working Implementation** - Complete 5-phase analysis workflow
-- **Orchestrator Integration** - Full tool integration with routing
+```bash
+# Stop current session
+uv run ai-sidekick --stop
 
-**🔧 Technical Components**
-- **Agent Class** - Inherits from BaseAgent with proper metadata
-- **ADK Integration** - LlmAgent creation for orchestrator compatibility
-- **Structured Output** - JSON responses with analysis phases and insights
-- **Tool Registration** - AgentTool wrapper for seamless delegation
+# Start fresh session (discovers new workflows)
+uv run ai-sidekick --start
+```
 
-### 5.2 Key Learning Points
+<details>
+<summary>📋 What happens during restart</summary>
 
-**📋 3-Step Development Process**
-1. **Structure First** - Create reusable foundation
-2. **Implementation Second** - Add working functionality
-3. **Integration Third** - Connect to orchestrator system
+**Auto-Discovery Process:**
+- ✅ **Scan Workflows** - System scans `core/flows/` and `contrib/flows/` directories
+- ✅ **Validate Templates** - Each JSON template is validated against Pydantic schema
+- ✅ **Create Agents** - Valid workflows become FlowPilot agents automatically
+- ✅ **Register Tools** - Agents are registered as available tools in the orchestrator
+- ✅ **Update Web UI** - New agents appear in the ADK web interface
 
-**🎯 Production Patterns**
-- **Auto-discovery** - Agents are automatically found and registered
-- **Tool Delegation** - Orchestrator routes requests to appropriate agents
-- **Structured Responses** - Consistent output format across all agents
-- **Real Integration** - Not just demos, but production-ready components
+**Expected Output:**
+```
+🔍 Discovering workflows...
+✅ Found 4 core workflows
+✅ Found 2 contrib workflows (including workshop_demo)
+✅ All workflows validated successfully
 
-### 5.3 Next Steps
+🤖 Creating FlowPilot agents...
+✅ System_Health_Check agent created
+✅ Index_Analysis agent created  
+✅ System_Info agent created
+✅ Workshop_Demo agent created  ← Your new agent!
 
-**🚀 Enhancement Opportunities**
-- Add real SplunkMCP delegation for live data
-- Implement streaming responses for long-running analysis
-- Add error handling and validation
-- Create custom visualizations for insights
-
-**🔧 Development Workflow**
-- Use the 3-script process for new agents
-- Follow the established patterns for consistency
-- Test integration at each step
-- Document capabilities in orchestrator prompt
+🚀 AI Sidekick ready with 6 workflow agents
+🌐 Web interface: http://localhost:8087
+```
+</details>
 
 ---
 
-## Congratulations! 🎉
+## Step 3: Test Your Agent in ADK Web
 
-You've successfully created a **complete, working AI agent** that:
+### Access the Web Interface
 
-- ✅ **Follows established patterns** for contributor-friendly development
-- ✅ **Implements real functionality** with structured 5-phase analysis
-- ✅ **Integrates seamlessly** with the orchestrator system
-- ✅ **Provides business value** with actionable insights and recommendations
+1. **Open your browser** to http://localhost:8087
+2. **Select Agent** - Choose "AI Sidekick for Splunk" from the dropdown
+3. **Test Your Workflow** - Try these example queries
 
-**Your IndexAnalyzer agent is now part of the AI Sidekick ecosystem and ready for production use!**
+### Example Queries to Test
 
-The 3-step process you learned (Create → Implement → Integrate) is the standard workflow for building agents in this system. You can now use this same process to create any specialized agent for your Splunk environment!
+**Query 1: Direct Workflow Invocation**
+```
+Use Workshop Demo workflow to check my Splunk environment
+```
+
+**Query 2: Natural Language Request**  
+```
+Run the workshop demo health check
+```
+
+**Query 3: Specific Analysis**
+```
+Execute workshop demo workflow and explain the results for beginners
+```
+
+<details>
+<summary>✅ Expected Results</summary>
+
+Your workflow agent will execute and show:
+
+**Phase 1: System Information Gathering**
+```
+🔍 Gathering Splunk Version...
+✅ Splunk Enterprise 9.4.0 (Build: abc123)
+✅ System configured and operational
+
+📋 Listing Available Indexes...
+✅ Found 8 indexes: main, _internal, _audit, pas, security, web_logs, app_logs, network
+✅ Data landscape mapped successfully
+```
+
+**Phase 2: Basic Health Assessment**
+```
+📊 Checking Recent Data Flow...
+✅ 1,234,567 events indexed in last 24 hours
+✅ Data ingestion active and healthy
+
+⚡ Assessing System Performance...
+✅ Average search response time: 0.8 seconds
+✅ System performance within normal parameters
+```
+
+**Phase 3: Health Summary Report**
+```
+📋 Workshop Health Summary Report
+
+🎯 System Overview:
+Your Splunk environment is healthy and ready for workshop activities!
+
+📊 Key Findings:
+- ✅ Splunk 9.4.0 running smoothly
+- ✅ 8 indexes available for exploration
+- ✅ Active data flow (1.2M events/day)
+- ✅ Good system performance
+
+🚀 Workshop Recommendations:
+1. Use 'pas' index for hands-on exercises (rich sample data)
+2. Try 'security' index for security analysis scenarios  
+3. Explore '_internal' for system monitoring examples
+
+💡 Educational Insight:
+This workflow demonstrates how FlowPilot agents coordinate multiple tools (Splunk MCP + Result Synthesizer) to deliver comprehensive analysis. You've just seen a 3-phase workflow execute seamlessly!
+
+🎉 Your Splunk environment is workshop-ready!
+```
+</details>
+
+---
+
+## Step 4: Understanding Your Creation
+
+### What You Built
+
+**🏗️ FlowPilot Workflow Agent**
+- **Template-Driven** - JSON configuration defines behavior
+- **Auto-Discovery** - System finds and integrates automatically  
+- **Multi-Phase** - Structured workflow with clear progression
+- **Tool Coordination** - Orchestrates Splunk MCP and Result Synthesizer
+- **Educational Focus** - Designed for learning and demonstration
+
+### Key Architecture Benefits
+
+**🚀 Instant Integration**
+- No code changes required in core system
+- Automatic discovery and registration
+- Immediate availability in web interface
+
+**📋 Template Validation**
+- Pydantic schema ensures correctness
+- Prevents runtime errors
+- Maintains system stability
+
+**🔧 Tool Orchestration**
+- Coordinates multiple specialized tools
+- Structured phase-by-phase execution
+- Comprehensive result synthesis
+
+**🎯 Scalable Design**
+- Add unlimited workflow agents
+- Community contributions without code changes
+- Enterprise and open-source hybrid model
+
+<details>
+<summary>🔍 Advanced: How Auto-Discovery Works</summary>
+
+**Discovery Process:**
+1. **Scan Directories** - System scans `core/flows/` and `contrib/flows/`
+2. **Load Templates** - Each `.json` file is loaded and parsed
+3. **Validate Schema** - Pydantic models ensure template correctness
+4. **Create Agents** - Valid templates become FlowPilot agent instances
+5. **Register Tools** - Agents are wrapped as AgentTools for orchestrator
+6. **Update Registry** - New agents appear in available tools list
+
+**Dynamic Factory Pattern:**
+```python
+# Simplified view of what happens internally
+def discover_workflows():
+    workflows = scan_workflow_directories()
+    for template in workflows:
+        if validate_template(template):
+            agent = create_flowpilot_agent(template)
+            register_agent_tool(agent)
+```
+
+This means you can add unlimited workflow agents just by creating JSON templates!
+</details>
+
+---
+
+## Step 5: Create More Workflow Agents (Optional)
+
+Try creating additional workflow agents for different scenarios:
+
+### Security Analysis Workflow
+```bash
+uv run ai-sidekick --create-flow-agent security_audit
+```
+
+### Performance Monitoring Workflow  
+```bash
+uv run ai-sidekick --create-flow-agent performance_monitor
+```
+
+### Data Quality Assessment Workflow
+```bash
+uv run ai-sidekick --create-flow-agent data_quality
+```
+
+Each workflow will:
+- ✅ Generate with appropriate templates for the use case
+- ✅ Auto-integrate after restart
+- ✅ Be immediately available in ADK web interface
+- ✅ Provide structured, educational results
+
+---
+
+## 🎉 Congratulations!
+
+You've successfully created and deployed your own FlowPilot workflow agent!
+
+### What You've Accomplished:
+- ✅ **Built a Workflow Agent** - Created template-driven AI agent in minutes
+- ✅ **Experienced Auto-Discovery** - Saw automatic system integration
+- ✅ **Tested Real Functionality** - Executed multi-phase workflows via web interface
+- ✅ **Understood Architecture** - Learned scalable, template-driven design
+
+### Key Learning Points:
+
+**🚀 Rapid Development**
+- Single command creates complete workflow agent
+- No coding required - just JSON configuration
+- Immediate integration and availability
+
+**📋 Template-Driven Architecture**
+- JSON templates define agent behavior
+- Pydantic validation ensures correctness
+- Automatic tool coordination and result synthesis
+
+**🔧 Production-Ready System**
+- Auto-discovery enables unlimited agents
+- Community contributions without code changes
+- Enterprise scalability with open-source flexibility
+
+### Next Steps:
+
+**🌟 Contribute to Open Source**
+- Share your workflow templates with the community
+- Create specialized agents for your industry/use case
+- Help expand the FlowPilot ecosystem
+
+**🚀 Deploy in Production**
+- Use this pattern for enterprise workflow automation
+- Create organization-specific workflow libraries
+- Scale to hundreds of specialized agents
+
+**🔧 Advanced Development**
+- Explore custom tool integration
+- Build complex multi-agent workflows
+- Contribute to the core FlowPilot engine
+
+---
+
+## Resources
+
+- **GitHub Repository:** https://github.com/deslicer/ai-sidekick-for-splunk
+- **FlowPilot Documentation:** Complete workflow development guides
+- **Community Templates:** Share and discover workflow templates
+- **Issues/Support:** https://github.com/deslicer/ai-sidekick-for-splunk/issues
+
+---
+
+**Your journey from zero to AI agent creator is complete! 🚀**
+
+*The FlowPilot system you've experienced represents the future of scalable, template-driven AI agent development. You've not just used the system - you've extended it!*
