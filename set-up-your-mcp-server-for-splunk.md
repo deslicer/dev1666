@@ -56,7 +56,17 @@ Run this first to install all project dependencies as defined by the lockfile. S
 uv sync
 ```
 
-### 2.2 Run the MCP server
+### 2.2 Copy environment template
+
+To get started immediately, copy the prepared environment template to set up your Splunk connection:
+
+```bash
+cp env.lab .env
+```
+
+This creates a `.env` file with default configuration values. Open `.env` in your editor and update the Splunk password (SPLUNK_PASSWORD) with your actual values before proceeding.
+
+### 2.3 Run the MCP server
 
 Run this to start the MCP server locally in the background (detached), auto‑starting the MCP Inspector when available:
 
@@ -105,7 +115,7 @@ uv run mcp-server --stop
 
 </details>
 
-### 2.3 Verify the MCP server
+### 2.4 Verify the MCP server
 
 ```bash
 uv run test-mcp-server
