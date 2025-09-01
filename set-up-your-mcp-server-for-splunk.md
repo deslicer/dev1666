@@ -1,5 +1,5 @@
 
-# Set up MCP for Splunk (🔧)
+# Lab1. Set up MCP for Splunk (🔧)
 
 Install prerequisites, prepare your environment, and run the MCP server.
 
@@ -64,11 +64,10 @@ To get started immediately, copy the prepared environment template to set up you
 cp env.lab .env
 ```
 
-This creates a `.env` file with default configuration values. Open `.env` in your editor and update the Splunk password (SPLUNK_PASSWORD) with your actual values before proceeding.
-
 ### 2.3 Run the MCP server
 
 Run this to start the MCP server locally in the background (detached), auto‑starting the MCP Inspector when available:
+You need to provide the splunk password through the prompt. (SPLUNK_PASSWORD)
 
 ```bash
 uv run mcp-server --local --detached
@@ -185,3 +184,6 @@ Using Health Dashboard
 - Navigate to `http://localhost:8003`
 - Verify that Service Status is <span style="color: green; font-weight: 600;">Running</span> and Splunk Connection is <span style="color: green; font-weight: 600;">Connected</span>
 </details>
+
+
+### Please continue with the next lab [Lab2. Create your custom MCP tool](create-your-custom-mcp-tool.md)
