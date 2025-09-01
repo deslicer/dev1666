@@ -7,9 +7,9 @@ Build your first tool with the generator, validate it, and run it in MCP Inspect
 ## 1. Generate a Splunk Search tool with the helper script (🚀)
 
 ```bash
-# Interactive generator (recommended)
 uv run generate-tool
 ```
+
 Follow the instructions in the script output. or follow the simple search tool steps.
 <details>
 <summary><b>Steps: Create a simple search tool</b></summary>
