@@ -84,9 +84,10 @@ Restart the mcp server, to verify that changes take affect.
 uv run mcp-server --restart
 ```
 
-- Open MCP Inspector at `http://localhost:6274`
-- Select your tool by its `METADATA.name` (for example `hello_world`)
-- Provide parameters (for example `{ "name": "Splunk" }`)
+- Open MCP Inspector at [http://localhost:6274](http://localhost:6274)
+- Connect to your MCP server
+- navigate to tools tab and click list_tools
+- Select your tool by its `METADATA.name` (for example `dev1666`)
 - Click Run and review the formatted result
 
 For Splunk tools, verify your `.env` connection settings. If you see connection errors, confirm `MCP_SPLUNK_HOST`, `MCP_SPLUNK_USERNAME`, and `MCP_SPLUNK_PASSWORD` are set and the Splunk instance is reachable.
