@@ -1,4 +1,4 @@
-# Lab2. Create your custom MCP tool (🧩)
+# Lab 2: Create your custom MCP tool (🧩)
 
 Build your first tool with the generator, validate it, and run it in MCP Inspector.
 
@@ -102,7 +102,7 @@ For Splunk tools, verify your `.env` connection settings. If you see connection 
 
 ---
 
-### Lab 2 Completed, please continue with Lab3. [Setup your personal AI Sidekick](setup-your-personal-ai-sidekick.md)
+### Lab 2 Completed, please continue with Lab 3 [Setup your personal AI Sidekick](setup-your-personal-ai-sidekick.md)
 
 ---
 

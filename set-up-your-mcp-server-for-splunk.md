@@ -1,5 +1,5 @@
 
-# Lab1. Set up MCP for Splunk (🔧)
+# Lab 1: Set up MCP for Splunk (🔧)
 
 Install prerequisites, prepare your environment, and run the MCP server.
 
@@ -186,4 +186,4 @@ Using Health Dashboard
 </details>
 
 
-### Please continue with the next lab [Lab2. Create your custom MCP tool](create-your-custom-mcp-tool.md)
+### Please continue with the next lab [Lab 2: Create your custom MCP tool](create-your-custom-mcp-tool.md)
