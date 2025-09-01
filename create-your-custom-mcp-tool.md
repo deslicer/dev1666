@@ -1,4 +1,4 @@
-# Create your custom MCP tool (🧩)
+# Lab2. Create your custom MCP tool (🧩)
 
 Build your first tool with the generator, validate it, and run it in MCP Inspector.
 
@@ -102,6 +102,12 @@ For Splunk tools, verify your `.env` connection settings. If you see connection 
 
 ---
 
+### Lab 2 Completed, please continue with Lab3. [Setup your personal AI Sidekick](setup-your-personal-ai-sidekick.md)
+
+---
+
 ### Extra: Part 3 — Create and run a workflow
 
 If you have extra time, try Part 3: build and execute a workflow using the workflow tools. You can discover available workflows and run them with parameters, then review results in MCP Inspector. See: [Hands-on Lab — Part 3 (Create and run a workflow)](https://github.com/deslicer/mcp-for-splunk/blob/main/docs/labs/hands-on-lab.md#part-3--extra-create-and-run-a-workflow-).
+
+
