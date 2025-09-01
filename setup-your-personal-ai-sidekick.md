@@ -175,7 +175,10 @@ Let's test your AI Sidekick with three essential workflows:
 
 ### Example 1: System Health Check 🏥
 
-**You:** "Run a system health check"
+**You:** 
+```bash
+Run a system health check
+```
 
 <details>
 <summary>Expected Response</summary>
@@ -208,7 +211,10 @@ This health check verified your Splunk environment is ready for workshop activit
 
 ### Example 2: List Available Indexes 📋
 
-**You:** "List all available indexes"
+**You:** 
+```bash
+List all available indexes
+```
 
 <details>
 <summary>Expected Response</summary>
@@ -238,7 +244,10 @@ The Splunk MCP agent will:
 
 ### Example 3: Index Analysis Flow 🔬
 
-**You:** "Use index analysis flow to analyze index=s4c_www and provide actionable insights"
+**You:** 
+```bash
+Use index analysis flow to analyze index=s4c_www and provide actionable insights
+```
 
 <details>
 <summary>Expected Response</summary>
@@ -290,6 +299,7 @@ The **Index Analysis Flow** (FlowPilot workflow) will execute a comprehensive an
 ## 🎉 Congratulations!
 
 You've successfully set up and tested your personal AI Sidekick for Splunk!
+### Please continue with Lab 4: [Create your AI Agent](create-your-ai-agent.md)
 
 ### What You've Accomplished:
 - ✅ Deployed a modular AI agent framework
@@ -298,7 +308,6 @@ You've successfully set up and tested your personal AI Sidekick for Splunk!
 - ✅ Explored system health monitoring and index analysis
 
 ### Continue Your Journey:
-- **🔗 Proceed to Lab 4:** [Create Your AI Agent](./create-your-ai-agent.md)
 - **🌟 Contribute:** Add your own workflow agents to the framework
 - **🚀 Deploy:** Set up for production use in your organization
 
