@@ -12,7 +12,7 @@ uv run generate-tool
 ```
 Follow the instructions in the script output. or follow the simple search tool steps.
 <details>
-<summary>Simple search tool</summary>
+<summary><b>Steps: Create a simple search tool</b></summary>
 
 - Select the template: ***2*** (Splunk Search)
 - Choose a category: ***1*** (examples)
