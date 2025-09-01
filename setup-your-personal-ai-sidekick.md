@@ -23,6 +23,7 @@ By the end of this lab, you'll have:
 ## Step 1: Clone and Setup Repository
 
 `Start a new terminal window`
+
 First, let's get the AI Sidekick project and switch to the workshop branch:
 
 ```bash
