@@ -25,6 +25,8 @@ By the end of this lab, you'll have:
 First, let's get the AI Sidekick project and switch to the workshop branch:
 
 ```bash
+mkdir ~/dev1666
+cd ~/dev1666
 git clone https://github.com/deslicer/ai-sidekick-for-splunk.git
 cd ai-sidekick-for-splunk
 git checkout dev1666
