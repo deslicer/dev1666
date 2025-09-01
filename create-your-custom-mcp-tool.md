@@ -1,4 +1,4 @@
-# Create your custom MCP tool (🧩)
+# Lab 2: Create your custom MCP tool (🧩)
 
 Build your first tool with the generator, validate it, and run it in MCP Inspector.
 
