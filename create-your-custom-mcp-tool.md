@@ -103,7 +103,7 @@ For Splunk tools, verify your `.env` connection settings. If you see connection 
 
 ---
 
-### Lab 2 Completed, please continue with Lab 3 [Setup your personal AI Sidekick](setup-your-personal-ai-sidekick.md)
+### Please continue with Lab 3 [Setup your personal AI Sidekick](setup-your-personal-ai-sidekick.md)
 
 ---
 
