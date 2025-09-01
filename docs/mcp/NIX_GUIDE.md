@@ -5,6 +5,8 @@ This guide covers installing prerequisites and running the MCP Server for Splunk
 ## 1) Clone the repository
 
 ```bash
+mkdir ~/dev1666
+cd ~/dev1666
 git clone https://github.com/deslicer/mcp-for-splunk.git
 cd mcp-for-splunk
 # Checkout dev1666 branch in git, this branch has a prepared .env file for you.
