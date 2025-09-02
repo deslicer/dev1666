@@ -61,43 +61,6 @@ If Splunk shows "Not connected ❌":
   uv run mcp-server --setup --local -d
   ```
   
-What this does:
-- Installs uv (official Windows installer)
-- Installs Node.js (for MCP Inspector) via WinGet (Chocolatey fallback)
-- Uses uv to install a compatible Python from `.python-version` or `requires-python`
-- Verifies with `uv python find`
-
-## 📋 Prerequisites
-
-### Required Software
-- PowerShell 5.1+ or Core 7+ (built-in or via the Microsoft Store)
-- Git (for cloning the repository)
-
-### Optional Software
-- Docker Desktop: full-stack deployment with containers
-- Windows Terminal: improved terminal experience
-
-## 🧰 Managed Python with uv
-
-You don’t need a system Python. The installer uses uv to install and manage a compatible Python automatically based on `.python-version` or `pyproject.toml`’s `requires-python`.
-
-Install uv (Windows):
-```powershell
-# Official installer (Recommended)
-powershell -ExecutionPolicy Bypass -c "irm https://astral.sh/uv/install.ps1 | iex"
-
-# Verify
-uv --version
-```
-
-Alternate uv installations:
-```powershell
-# WinGet
-winget install astral-sh.uv
-
-# PyPI (pipx preferred)
-pipx install uv
-```
 
 ## 🛠️ Manual Setup (Alternative)
 
