@@ -30,7 +30,7 @@ macOS/Linux (bash):
 ```
 Windows (PowerShell):
 ```powershell
-pwsh -File ..\..\scripts\smart-install.ps1
+pwsh -File scripts\smart-install.ps1
 ```
 ### 4) Run the server locally
 
