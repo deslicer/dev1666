@@ -14,7 +14,7 @@ git checkout dev1666
 ```
 ### 2) Copy the lab environment
 ```powershell
-cp env.lab .env
+Copy-Item env.lab .env -Force
 ```
 
 ### 3) Install prerequisites (uv, Node.js, Python via uv)
