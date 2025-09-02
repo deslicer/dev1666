@@ -20,37 +20,19 @@ All setup scripts are in this repository under `scripts/`.
 | Software | Version | Installation Method | Notes |
 |----------|---------|-------------------|-------|
 | **PowerShell** | 5.1+ or Core 7+ | Built-in or [Microsoft Store](https://aka.ms/powershell) | Required for main script |
-| **Python** | 3.10+ | [Microsoft Store](https://apps.microsoft.com/store/detail/python-310/9PJPW5LDXLZ5) or [python.org](https://python.org) | Use Microsoft Store version for best PATH handling |
-| **Git** | Latest | [git-scm.com](https://git-scm.com/download/win) | For cloning the repository |
-
-### Optional Software
-
-| Software | Purpose | Installation |
-|----------|---------|--------------|
-| **Node.js** | MCP Inspector testing | [nodejs.org](https://nodejs.org/) |
 | **Node.js** | MCP Inspector testing | [nodejs.org](https://nodejs.org/) |
 | **Windows Terminal** | Better terminal experience | [Microsoft Store](https://aka.ms/terminal) |
 
-### Python Installation (Windows)
+## Quck Install
+
+Open PowerShell as normal (no admin required unless WinGet/Choco needs it), from repo root
 
 ```powershell
-# Option 1: Microsoft Store (Recommended)
-# Search "Python" in Microsoft Store and install Python 3.11+
-
-# Option 2: Official installer
-# Download from https://python.org/downloads/
-# ✅ Check "Add Python to PATH" during installation
-
-# Option 3: Winget
-winget install Python.Python.3.12
-
-# Option 4: Chocolatey
-choco install python
-
-# Verify installation
-python --version
-pip --version
+pwsh -File scripts/smart-install.ps1
 ```
+Expected: uv installs, Node.js installs, uv installs compatible Python, verification prints versions
+
+## Manual Install
 
 ### UV Package Manager Installation (Windows)
 
