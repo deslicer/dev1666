@@ -24,14 +24,14 @@ pwsh -File ..\..\scripts\smart-install.ps1
 
 ### 4) Run the server locally
 
-```powershell
+```python
 uv run mcp-server --local -d
 # Updated SPLUNK_PASSWORD will be provided by instructors
 ```
 
 ### 5) Verify the mcp server and Splunk connection
 
-```powershell
+```python
 uv run mcp-server --test -detailed
 ```
 
@@ -57,7 +57,7 @@ URL: http://0.0.0.0:8003/mcp/
 If Splunk shows "Not connected ❌":
 
 - Verify your `.env` file contains correct values for `SPLUNK_HOST`, `SPLUNK_PORT`, `SPLUNK_USERNAME`, `SPLUNK_PASSWORD`, `SPLUNK_SCHEME`, `SPLUNK_VERIFY_SSL`.
-  ```powershell
+  ```python
   uv run mcp-server --setup --local -d
   ```
   
