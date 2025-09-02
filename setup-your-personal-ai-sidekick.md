@@ -58,7 +58,7 @@ Choose your operating system and run the appropriate prerequisite script:
    ```
 
 ### 🐍 Cross-Platform (Python)
-Alternative Python-based script:
+Alternative Python-based script(If you already have python installed):
    ```bash
 python scripts/check-prerequisites.py
 ```
@@ -177,7 +177,7 @@ Let's test your AI Sidekick with three essential workflows:
 
 ### Example 1: System Health Check 🏥
 
-**You:** 
+**You:**
 ```bash
 Run a system health check
 ```
@@ -213,7 +213,7 @@ This health check verified your Splunk environment is ready for workshop activit
 
 ### Example 2: List Available Indexes 📋
 
-**You:** 
+**You:**
 ```bash
 List all available indexes
 ```
