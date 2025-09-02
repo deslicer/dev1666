@@ -2,61 +2,62 @@
 
 This guide covers installing prerequisites and running the MCP Server for Splunk on macOS and Linux.
 
-## 1) Clone the repository
+## 🚀 Quick Start (Recommended)
+
+### 1) Clone the repository
 
 ```bash
-mkdir ~/dev1666
-cd ~/dev1666
 git clone https://github.com/deslicer/mcp-for-splunk.git
 cd mcp-for-splunk
 # Checkout dev1666 branch in git, this branch has a prepared .env file for you.
 git checkout dev1666
 ```
-
-All setup scripts are in this repository under `scripts/`.
-
-## 2) Check and install prerequisites (smart)
-
-### 2.1 Check install (dry-run)
-
+### 2) Copy the lab environment
 ```bash
-./scripts/smart-install.sh --dry-run
+cp env.lab .env
 ```
 
-Review what would be installed, then run the installer to apply changes:
-
-### 2.2 Install missing prerequisites
-
+### 3) Install prerequisites (uv, Node.js, Python via uv)
 ```bash
-./scripts/smart-install.sh            # base: Python, uv, Git, Node.js
-# ./scripts/smart-install.sh --all    # base + docker and docker compose
+./scripts/smart-install.sh
 ```
 
-### 2.3 Run the checker to confirm
+### 4) Run the server locally
 
-```bash
-./scripts/check-prerequisites.sh --detailed
+```python
+uv run mcp-server --local -d
+# Updated SPLUNK_PASSWORD will be provided by instructors
+```
+
+### 5) Verify the mcp server and Splunk connection
+
+```python
+uv run mcp-server --test -detailed
 ```
 
 <details>
-<summary>Manual checks</summary>
+<summary>View sample successful output</summary>
+
 ```bash
-python3 --version
-uv --version
-git --version
-node --version
-docker --version       # if installed
-docker compose version # if installed
+== MCP Server Check ==
+URL: http://0.0.0.0:8003/mcp/
+• MCP Server: OK ✅
+• Tools: 39 | Resources: 17
+
+-- Splunk Health --
+• Status: Connected ✅
+• Server: sh-i-0b8d6e25a.deslicer.splunkcloud.com
+• Version: 9.3.2411.113
+• Source: server_config
 ```
 </details>
 
-## All checks pass ✅
+**Lab complete:** If the script returns MCP Server: OK ✅ and Splunk Health  Status: Connected ✅ you have successfully completed the set up lab.
 
-- ***Return to: [Main Guide](../../set-up-your-mcp-server-for-splunk.md#2-prepare-your-environment)***
+If Splunk shows "Not connected ❌":
 
-## Troubleshooting ⚠️
-
-- If `uv` not found after install, ensure `~/.cargo/bin` is in your PATH
-- If Docker requires sudo: add your user to `docker` group and re-login (Linux)
-- If Docker commands fail on macOS: ensure Docker Desktop is running
-- Permission denied on scripts: `chmod +x ./scripts/*.sh`
+- Verify your `.env` file contains correct values for `SPLUNK_HOST`, `SPLUNK_PORT`, `SPLUNK_USERNAME`, `SPLUNK_PASSWORD`, `SPLUNK_SCHEME`, `SPLUNK_VERIFY_SSL`.
+  ```python
+  uv run mcp-server --setup --local -d
+  ```
+  
