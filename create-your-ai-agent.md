@@ -174,7 +174,7 @@ uv run ai-sidekick --start
 
 🤖 Creating FlowPilot agents...
 ✅ System_Health_Check agent created
-✅ Index_Analysis agent created  
+✅ Index_Analysis agent created
 ✅ System_Info agent created
 ✅ Workshop_Demo agent created  ← Your new agent!
 
@@ -200,7 +200,7 @@ uv run ai-sidekick --start
 Use Workshop Demo workflow to check my Splunk environment
 ```
 
-**Query 2: Natural Language Request**  
+**Query 2: Natural Language Request**
 ```
 Run the workshop demo health check
 ```
@@ -252,7 +252,7 @@ Your Splunk environment is healthy and ready for workshop activities!
 
 🚀 Workshop Recommendations:
 1. Use 'pas' index for hands-on exercises (rich sample data)
-2. Try 'security' index for security analysis scenarios  
+2. Try 'security' index for security analysis scenarios
 3. Explore '_internal' for system monitoring examples
 
 💡 Educational Insight:
@@ -270,7 +270,7 @@ This workflow demonstrates how FlowPilot agents coordinate multiple tools (Splun
 
 **🏗️ FlowPilot Workflow Agent**
 - **Template-Driven** - JSON configuration defines behavior
-- **Auto-Discovery** - System finds and integrates automatically  
+- **Auto-Discovery** - System finds and integrates automatically
 - **Multi-Phase** - Structured workflow with clear progression
 - **Tool Coordination** - Orchestrates Splunk MCP and Result Synthesizer
 - **Educational Focus** - Designed for learning and demonstration
@@ -333,7 +333,7 @@ Try creating additional workflow agents for different scenarios:
 uv run ai-sidekick --create-flow-agent security_audit
 ```
 
-### Performance Monitoring Workflow  
+### Performance Monitoring Workflow
 ```bash
 uv run ai-sidekick --create-flow-agent performance_monitor
 ```

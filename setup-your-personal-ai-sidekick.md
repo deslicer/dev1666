@@ -16,19 +16,122 @@ By the end of this lab, you'll have:
 - Basic familiarity with command line/terminal
 - Access to a Splunk instance (local or remote)
 - Internet connection for downloading dependencies
-- Git installed on your system (will be checked and installed if needed)
+- Administrator privileges on your machine (for installing packages)
 
 ---
 
-## Step 1: Clone and Setup Repository
+## Step 1: Pre-Setup Requirements
+
+Before cloning the repository, let's ensure you have the necessary tools installed:
+
+### 🍎 macOS Users
+
+macOS typically has Git pre-installed, but you may need to install Command Line Tools:
+
+```bash
+# Test if git is available
+git --version
+```
+
+<details>
+<summary><strong>🔧 Troubleshooting: If you get "command line tools" prompt or error</strong></summary>
+
+If you see a popup asking to install Command Line Tools or get an error like "xcrun: error: invalid active developer path", follow these steps:
+
+1. **Install Xcode Command Line Tools:**
+   ```bash
+   xcode-select --install
+   ```
+
+2. **Wait for installation to complete** (this may take several minutes)
+
+3. **Verify installation:**
+   ```bash
+   xcode-select -p
+   ```
+   You should see: `/Applications/Xcode.app/Contents/Developer` or `/Library/Developer/CommandLineTools`
+
+4. **Test Git again:**
+   ```bash
+   git --version
+   ```
+   You should see something like: `git version 2.39.3 (Apple Git-145)`
+
+5. **If still having issues, try:**
+   ```bash
+   sudo xcode-select --reset
+   xcode-select --install
+   ```
+
+</details>
+
+### 🪟 Windows Users
+
+Windows doesn't have Git pre-installed, so let's install it:
+
+> **💡 Skip this section if you already have Git installed.** You can check by running `git --version` in PowerShell.
+
+1. **Install Git for Windows:**
+
+   **Option A: Using winget (Recommended - Windows 10/11):**
+   ```powershell
+   winget install Git.Git
+   ```
+   **Option B: Manual Download:**
+   - Visit [https://git-scm.com/download/windows](https://git-scm.com/download/windows)
+   - Download and run the installer
+   - Use default settings during installation
+
+2. **Restart your terminal/PowerShell** after installation
+
+3. **Verify Git installation:**
+   ```powershell
+   git --version
+   ```
+   You should see something like: `git version 2.45.2.windows.1`
+
+<details>
+<summary><strong>🔧 Troubleshooting: If git command is not found</strong></summary>
+
+If you get "'git' is not recognized as an internal or external command":
+
+1. **Close and reopen your terminal/PowerShell**
+2. **Check if Git is in your PATH:**
+   ```powershell
+   $env:PATH -split ';' | Select-String -Pattern 'Git'
+   ```
+3. **If not found, add Git to PATH manually:**
+   - Open System Properties → Environment Variables
+   - Add `C:\Program Files\Git\bin` to your PATH variable
+   - Restart terminal and test again
+
+4. **Alternative: Use Git Bash**
+   - Search for "Git Bash" in Start Menu
+   - Use Git Bash instead of PowerShell for git commands
+
+</details>
+
+---
+
+## Step 2: Clone and Setup Repository
 
 `Start a new terminal window`
 
-First, let's get the AI Sidekick project and switch to the workshop branch:
+Now let's get the AI Sidekick project and switch to the workshop branch:
 
+### 🍎 macOS / 🐧 Linux
 ```bash
 mkdir ~/dev1666
 cd ~/dev1666
+git clone https://github.com/deslicer/ai-sidekick-for-splunk.git
+cd ai-sidekick-for-splunk
+git checkout dev1666
+```
+
+### 🪟 Windows
+```powershell
+mkdir $HOME\dev1666
+cd $HOME\dev1666
 git clone https://github.com/deslicer/ai-sidekick-for-splunk.git
 cd ai-sidekick-for-splunk
 git checkout dev1666
@@ -38,24 +141,19 @@ git checkout dev1666
 
 ---
 
-## Step 2: Install Prerequisites and Dependencies
+## Step 3: Install Prerequisites and Dependencies
 
 Choose your operating system and run the appropriate prerequisite script:
+
+### 🍎 macOS / 🐧 Linux
+```bash
+./scripts/lab/check-prerequisites.sh
+```
 
 ### 🪟 Windows
 ```powershell
 .\scripts\lab\check-prerequisites.ps1
 ```
-
-### 🍎 macOS
-```bash
-./scripts/lab/check-prerequisites.sh
-```
-
-### 🐧 Linux
-   ```bash
-./scripts/lab/check-prerequisites.sh
-   ```
 
 ### 🐍 Cross-Platform (Python)
 Alternative Python-based script(If you already have python installed):
@@ -113,20 +211,20 @@ uv sync
 
 ---
 
-## Step 3: Start AI Sidekick
+## Step 4: Start AI Sidekick
 
 > **💡 Great news!** The prerequisite scripts have already created your virtual environment and installed all dependencies. You can start immediately!
 
 ### Activate the Python environment:
 
-**Windows:**
-```powershell
-.venv\Scripts\activate
-```
-
-**macOS/Linux:**
+### 🍎 macOS / 🐧 Linux
 ```bash
 source .venv/bin/activate
+```
+
+### 🪟 Windows
+```powershell
+.venv\Scripts\activate
 ```
 
 ### Start the AI Sidekick:
@@ -150,7 +248,7 @@ Opening web interface in your browser...
 
 ---
 
-## Step 4: Meet Your AI Sidekick
+## Step 5: Meet Your AI Sidekick
 
 ### Understanding the Agent Architecture
 
@@ -158,7 +256,6 @@ Your AI Sidekick uses a **modular multi-agent architecture** with these speciali
 
 1. **🎯 Root Agent** - Main coordinator and conversation handler
 2. **🔍 Search Guru** - SPL expert for search optimization and strategy
-3. **🔬 Data Explorer** - Comprehensive data analysis with 5-phase workflow
 4. **🧠 Researcher** - Google Search integration for current information
 5. **🔧 SplunkShow** - Direct Splunk environment access and execution
 6. **⚡ FlowPilot Workflows** - Template-driven specialized workflows
@@ -171,7 +268,7 @@ Your AI Sidekick uses a **modular multi-agent architecture** with these speciali
 
 ---
 
-## Step 5: Try Your AI Sidekick
+## Step 6: Try Your AI Sidekick
 
 Let's test your AI Sidekick with three essential workflows:
 
@@ -246,7 +343,7 @@ The SplunkShow agent will:
 
 ### Example 3: Index Analysis Flow 🔬
 
-**You:** 
+**You:**
 ```bash
 Use index analysis flow to analyze index=s4c_www and provide actionable insights
 ```
