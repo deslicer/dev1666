@@ -34,6 +34,36 @@ uv run mcp-server --local -d
 uv run mcp-server --test -detailed
 ```
 
+<details>
+<summary>View sample successful output</summary>
+
+```bash
+== MCP Server Check ==
+URL: http://0.0.0.0:8003/mcp/
+• MCP Server: OK ✅
+• Tools: 39 | Resources: 17
+
+-- Splunk Health --
+• Status: Connected ✅
+• Server: sh-i-0b8d6e25a.deslicer.splunkcloud.com
+• Version: 9.3.2411.113
+• Source: server_config
+```
+</details>
+
+**Lab complete:** If the script returns MCP Server: OK ✅ and Splunk Health  Status: Connected ✅ you have successfully completed the set up lab.
+
+If Splunk shows "Not connected ❌":
+
+- Verify your `.env` file contains correct values for `SPLUNK_HOST`, `SPLUNK_PORT`, `SPLUNK_USERNAME`, `SPLUNK_PASSWORD`, `SPLUNK_SCHEME`, `SPLUNK_VERIFY_SSL`.
+  ```powershell
+  uv run mcp-server --setup
+  ```
+  
+- Restart the server:
+  ```powershell
+  uv run mcp-server --restart
+  ```
 
 What this does:
 - Installs uv (official Windows installer)
