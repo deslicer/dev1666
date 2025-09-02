@@ -1,6 +1,15 @@
-# macOS Setup Guide for AI Sidekick for Splunk
+# AI Sidekick for Splunk - macOS User Guide
 
-This guide covers setting up the AI Sidekick for Splunk on macOS systems.
+Complete setup and usage guide for Mac users. This guide walks you through installing, configuring, and using your personal AI Sidekick for Splunk on macOS.
+
+## What You'll Build
+
+By the end of this guide, you'll have:
+- ✅ A fully functional AI Sidekick running on your Mac
+- ✅ Real-time connection to your Splunk environment via MCP
+- ✅ Access to specialized AI agents for search, research, and administration
+- ✅ A web interface to interact with your AI Sidekick
+- ✅ Understanding of the modular agent architecture
 
 ## Prerequisites
 
@@ -8,148 +17,70 @@ This guide covers setting up the AI Sidekick for Splunk on macOS systems.
 - Terminal access (built-in Terminal app or iTerm2)
 - Internet connection for downloading dependencies
 - Access to a Splunk instance (local or remote)
+- Basic familiarity with command line/terminal
 
-## 1) Clone the Repository
+---
+
+## Step 1: Pre-Setup Requirements
+
+Before cloning the repository, let's ensure you have Git available:
 
 ```bash
+# Test if git is available
+git --version
+```
+
+<details>
+<summary><strong>🔧 Troubleshooting: If you get "command line tools" prompt or error</strong></summary>
+
+If you see a popup asking to install Command Line Tools or get an error like "xcrun: error: invalid active developer path", follow these steps:
+
+1. **Install Xcode Command Line Tools:**
+   ```bash
+   xcode-select --install
+   ```
+
+2. **Wait for installation to complete** (this may take several minutes)
+
+3. **Verify installation:**
+   ```bash
+   xcode-select -p
+   ```
+   You should see: `/Applications/Xcode.app/Contents/Developer` or `/Library/Developer/CommandLineTools`
+
+4. **Test Git again:**
+   ```bash
+   git --version
+   ```
+   You should see something like: `git version 2.39.3 (Apple Git-145)`
+
+5. **If still having issues, try:**
+   ```bash
+   sudo xcode-select --reset
+   xcode-select --install
+   ```
+
+</details>
+
+---
+
+## Step 2: Clone and Setup Repository
+
+Now let's get the AI Sidekick project and switch to the workshop branch:
+
+```bash
+mkdir ~/dev1666
+cd ~/dev1666
 git clone https://github.com/deslicer/ai-sidekick-for-splunk.git
 cd ai-sidekick-for-splunk
+git checkout dev1666
 ```
 
-## 2) Install Prerequisites
+> **💡 Important:** The `dev1666` branch has pre-configured `.env` file with all required environment variables for the workshop.
 
-### Required Software
+---
 
-| Software | Version | Installation Method | Notes |
-|----------|---------|-------------------|-------|
-| **Homebrew** | Latest | [brew.sh](https://brew.sh/) | Package manager for macOS |
-| **Python** | 3.11+ | `brew install python` | Required for AI Sidekick |
-| **Git** | Latest | `brew install git` | For cloning repositories |
-
-### Optional Software
-
-| Software | Purpose | Installation |
-|----------|---------|--------------|
-| **Node.js** | MCP Inspector testing | `brew install node` |
-| **iTerm2** | Better terminal experience | `brew install --cask iterm2` |
-
-### Quick Installation (Recommended)
-
-```bash
-# Install Homebrew (if not already installed)
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-# Install all prerequisites
-brew install python git node uv
-
-# Verify installations
-python3 --version && uv --version && node --version && git --version
-```
-
-### Manual Installation Steps
-
-#### Homebrew Installation
-```bash
-# Install Homebrew package manager
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-
-# Add Homebrew to PATH (follow the instructions shown after installation)
-echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
-# Verify installation
-brew --version
-```
-
-#### Python Installation
-```bash
-# Option 1: Homebrew (Recommended)
-brew install python
-
-# Option 2: Official installer
-# Download from https://python.org/downloads/
-
-# Option 3: pyenv for version management
-brew install pyenv
-pyenv install 3.12.0
-pyenv global 3.12.0
-
-# Verify installation
-python3 --version
-pip3 --version
-```
-
-#### UV Package Manager Installation
-```bash
-# Option 1: Homebrew (Recommended)
-brew install uv
-
-# Option 2: Official installer
-curl -LsSf https://astral.sh/uv/install.sh | sh
-
-# Option 3: Pip fallback
-pip3 install uv
-
-# Verify installation
-uv --version
-```
-
-## 3) Configure Environment Variables
-
-### Quick Setup (Recommended)
-
-Use the interactive setup script:
-
-```bash
-chmod +x scripts/lab/setup-env.sh
-./scripts/lab/setup-env.sh
-```
-
-This script will:
-- ✅ Set up pre-configured Google API key for workshop or optionally provide your own key
-- ✅ Configure MCP server URL
-- ✅ Set optimal model defaults
-- ✅ Create your `.env` file automatically
-
-
-### Manual Setup (Alternative)
-
-1. **Copy the workshop template:**
-   ```bash
-   cp .env_lab .env
-   ```
-
-2. **Edit the `.env` file:**
-   ```bash
-   # Edit with your preferred editor
-   nano .env  # or code .env or vim .env
-   ```
-
-3. **Required settings for the workshop:**
-   ```env
-   # Google ADK Configuration (Required)
-   GOOGLE_GENAI_USE_VERTEXAI=False
-   GOOGLE_API_KEY=your-google-ai-studio-api-key
-
-   # MCP Server Configuration (Required)
-   SPLUNK_MCP_SERVER_URL=http://localhost:8003/mcp/
-
-   # Splunk Connection (Required for MCP server)
-   SPLUNK_HOST=dev1666-i-035e95d7e4ea1c310.splunk.show
-   SPLUNK_PORT=8089
-   SPLUNK_SCHEME=https
-   SPLUNK_USERNAME=admin
-   SPLUNK_PASSWORD=workshop-password-provided-during-session
-
-   # Model Configuration
-   BASE_MODEL=gemini-2.0-flash-exp
-
-   # Server Configuration
-   HOST=0.0.0.0
-   PORT=8087
-   ```
-
-## 4) Install Dependencies
+## Step 3: Install Prerequisites and Dependencies
 
 Run the prerequisites script to check and install required packages:
 
@@ -159,18 +90,40 @@ chmod +x scripts/lab/check-prerequisites.sh
 ```
 
 This script will:
-- ✅ Check for Python 3.11+
-- ✅ Install `uv` (fast Python package manager)
+- ✅ Check and install `uv` (fast Python package manager) 
 - ✅ Create virtual environment with `uv`
 - ✅ Install Google ADK and required dependencies
 - ✅ Test Google API key connection
 - ✅ Test MCP server connectivity
 
-## 5) Start the AI Sidekick
+<details>
+<summary><strong>💡 What does this script do?</strong></summary>
+
+The script uses a **UV-First Approach**:
+- **No Python installation needed** - `uv` automatically downloads and manages Python 3.11+ for the project
+- **Automatic environment setup** - Creates `.venv` and installs all dependencies
+- **Cross-platform compatibility** - Works on macOS, Linux, and Windows
+- **Fast and reliable** - Uses `uv` for faster package installation
+
+> **💡 Note:** `uv` automatically downloads and manages the required Python version (3.11+) for the project, so you don't need to install Python separately.
+</details>
+
+---
+
+## Step 4: Start AI Sidekick
+
+> **💡 Great news!** The prerequisite scripts have already created your virtual environment and installed all dependencies. You can start immediately!
+
+### Activate the Python environment:
 
 ```bash
-chmod +x scripts/lab/start-lab-setup.sh
-./scripts/lab/start-lab-setup.sh
+source .venv/bin/activate
+```
+
+### Start the AI Sidekick:
+
+```bash
+uv run ai-sidekick --start
 ```
 
 You should see output like:
@@ -187,186 +140,186 @@ You should see output like:
 Opening web interface in your browser...
 ```
 
-## 6) Access Your AI Sidekick
+---
+
+## Step 5: Access Your AI Sidekick
 
 1. **Open your web browser** and navigate to: `http://localhost:8087`
 2. **In the web interface**, locate the **Agent Selection** dropdown in the top left
 3. **Select "AI Sidekick for Splunk"** from the dropdown
 4. **Start chatting** with your AI Sidekick!
 
-## Troubleshooting
+### Example Conversations
 
-### Common macOS Issues
+Let's test your AI Sidekick with three essential workflows:
 
-#### Command Not Found Errors
+### Example 1: System Health Check 🏥
+
+**You:**
 ```bash
-# If 'brew' command not found, add to PATH
-echo 'eval "$(/opt/homebrew/bin/brew shellenv)"' >> ~/.zprofile
-source ~/.zprofile
-
-# If 'python3' command not found, check installation
-which python3
-brew install python
-
-# If 'uv' command not found
-brew install uv
-# OR
-curl -LsSf https://astral.sh/uv/install.sh | sh
-source ~/.bashrc  # or ~/.zshrc
+Run a system health check
 ```
 
-#### Permission Issues
-```bash
-# Make scripts executable
-chmod +x scripts/lab/*.sh
+<details>
+<summary>Expected Response</summary>
 
-# Fix Homebrew permissions (if needed)
-sudo chown -R $(whoami) /opt/homebrew/
+The AI Sidekick will:
+- Automatically delegate to the **System Health Check Flow** (FlowPilot workflow)
+- Check Splunk connectivity and version
+- Verify data ingestion (last 24 hours)
+- Assess basic system performance
+- Provide health recommendations and educational insights
+
+**Sample Output:**
+```
+✅ System Health Check Complete
+
+📊 System Overview:
+- Splunk Version: 9.4.0 (Build: abc123)
+- System Status: Healthy
+- Data Flow: Active (1.2M events/24h)
+
+🎯 Health Assessment:
+- ✅ Splunk services running normally
+- ✅ Data ingestion active
+- ⚠️  Consider index optimization for better performance
+
+📚 Educational Insights:
+This health check verified your Splunk environment is ready for workshop activities.
+```
+</details>
+
+### Example 2: List Available Indexes 📋
+
+**You:**
+```bash
+List all available indexes
 ```
 
-#### Python Version Issues
+<details>
+<summary>Expected Response</summary>
+
+The SplunkShow agent will:
+- Connect to your Splunk environment
+- Retrieve all available indexes
+- Show data volume and last update information
+- Provide index usage recommendations
+
+**Sample Output:**
+```
+📋 Available Splunk Indexes:
+
+🔍 Core Indexes:
+- main (2.1GB, last event: 2 minutes ago)
+- _internal (890MB, last event: 30 seconds ago)
+- _audit (45MB, last event: 1 minute ago)
+
+🏢 Workshop Indexes:
+- pas (1.5GB, last event: 5 minutes ago)
+- security (780MB, last event: 3 minutes ago)
+
+💡 Recommendation: Use 'pas' index for analysis exercises - it has rich sample data perfect for learning.
+```
+</details>
+
+### Example 3: Index Analysis Flow 🔬
+
+**You:**
 ```bash
-# Check Python version
-python3 --version
-
-# If version is too old, update
-brew upgrade python
-
-# Use pyenv for version management
-brew install pyenv
-pyenv install 3.12.0
-pyenv global 3.12.0
+Use index analysis flow to analyze index=s4c_www and provide actionable insights
 ```
 
-#### Web Interface Won't Load
-```bash
-# Check if port 8087 is in use
-lsof -i :8087
+<details>
+<summary>Expected Response</summary>
 
-# Try accessing alternative URL
-# http://127.0.0.1:8087
+The **Index Analysis Flow** (FlowPilot workflow) will execute a comprehensive analysis:
 
-# Run ADK web interface manually
-cd ai-sidekick-for-splunk
-source .venv/bin/activate
-cd src
-adk web --port 8087
+**Phase 1: Data Collection** - Gather basic index information and samples
+**Phase 2: Field Analysis** - Analyze field patterns and distributions
+**Phase 3: Pattern Recognition** - Identify trends and anomalies
+**Phase 4: Volume Assessment** - Evaluate data volume and performance
+**Phase 5: Insight Generation** - Generate actionable business insights
+
+**Sample Output:**
 ```
+🔬 Index Analysis Complete: s4c_www
 
-#### Virtual Environment Issues
-```bash
-# Delete virtual environment and recreate
-rm -rf .venv
-./scripts/lab/check-prerequisites.sh
+📊 Analysis Summary:
+- Total Events: 2,456,789 events
+- Time Range: 30 days
+- Primary Sourcetypes: access_combined (60%), error_log (25%), ssl_access (15%)
+- Peak Activity: Business hours (9 AM - 6 PM) with weekend traffic
+
+🎯 Actionable Insights:
+
+🔒 Security Analyst:
+- Monitor 404 error patterns (detected unusual spikes)
+- Set up alerts for suspicious user agents and bot traffic
+- Dashboard: | search index=s4c_www status=404 | stats count by clientip
+
+⚙️ DevOps Engineer:
+- SSL certificate errors increasing (5% of traffic)
+- High response times during peak hours (>2s average)
+- Monitor: | search index=s4c_www ssl_error | timechart span=1h count
+
+📈 Business Analyst:
+- Mobile traffic growing 25% month-over-month
+- Popular content pages driving 70% of engagement
+- Track: | search index=s4c_www | stats count by uri_path | sort -count
+
+🚀 Next Steps:
+1. Implement recommended dashboards
+2. Set up automated monitoring alerts
+3. Schedule regular index health checks
 ```
+</details>
 
-### MCP Server Connection Issues
+### Session Management
 
-If you see "MCP Server not responding":
+Your conversations are automatically saved. To start fresh:
+- Click **🗑️ Clear Session** in the interface
+- Or start a new session by refreshing the page
 
-1. **Start the MCP server first:**
-   ```bash
-   # Navigate to MCP server directory
-   cd ../mcp-for-splunk
+## Need Help?
 
-   # Run the automated build and run script
-   ./scripts/build_and_run.sh
-   ```
+If you encounter any issues during setup or usage, please refer to our comprehensive troubleshooting guide:
 
-2. **Manual MCP server setup (if build script fails):**
-   ```bash
-   cd ../mcp-for-splunk
-   uv run fastmcp run src/server.py --transport http --port 8003
-   ```
-
-3. **Verify MCP server is running:**
-   ```bash
-   # Test local connection
-   curl http://localhost:8003/health
-   ```
-   ```bash
-   # Test docker connection
-   curl http://localhost:8003/mcp/health
-   ```
-### macOS-Specific Issues
-
-#### Xcode Command Line Tools
-```bash
-# Install Xcode command line tools (if needed)
-xcode-select --install
-```
-
-#### Rosetta 2 (Apple Silicon Macs)
-```bash
-# Install Rosetta 2 for Intel compatibility (if needed)
-softwareupdate --install-rosetta
-```
-
-#### Firewall Issues
-```bash
-# Check if macOS firewall is blocking connections
-sudo /usr/libexec/ApplicationFirewall/socketfilterfw --getglobalstate
-
-# Temporarily disable firewall for testing (not recommended for production)
-sudo /usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate off
-```
-
-### Getting Help
-
-1. **Check the logs:**
-   ```bash
-   # View recent logs
-   tail -f logs/ai-sidekick.log
-   ```
-
-2. **Restart services:**
-   ```bash
-   # Stop services
-   ./scripts/lab/stop-lab-setup.sh
-   # Restart everything
-   ./scripts/lab/start-lab-setup.sh
-   ```
-
-3. **Reset configuration:**
-   ```bash
-   # Remove existing configuration and restart
-   rm -f .env
-   ./scripts/lab/start-lab-setup.sh
-   ```
-
-### Debugging Commands
-
-```bash
-# Check all prerequisites
-python3 --version
-uv --version
-node --version
-git --version
-
-# Check macOS version
-sw_vers
-
-# Check system architecture
-uname -m
-
-# Test network connectivity
-nc -zv localhost 8087
-nc -zv localhost 8003
-
-# Check running processes
-ps aux | grep -E "(python|uv|adk)"
-```
-
-## Next Steps
-
-🎉 **Congratulations!** You've successfully set up your AI Sidekick for Splunk on macOS!
-
-### Continue Your Journey:
-- **🔗 Return to Main Guide:** [Continue with Step 3: Configure Environment Variables](../../setup-your-personal-ai-sidekick.md#step-3-configure-environment-variables)
-- **🔗 Proceed to Lab 4:** [Create Your AI Agent](../../create-your-ai-agent.md)
-- **🌟 Explore:** Try the example conversations in the main guide
-- **🚀 Customize:** Modify agent configurations for your use case
+**📋 [Troubleshooting Guide](TROUBLESHOOTING.md)** - Complete solutions for common issues
 
 ---
 
-***Return to: [Main AI Sidekick Guide](../../setup-your-personal-ai-sidekick.md)***
+## Next Steps
+
+🎉 **Congratulations!** You've successfully set up your personal AI Sidekick for Splunk!
+
+### What You've Accomplished:
+- ✅ Deployed a modular AI agent framework
+- ✅ Established real-time Splunk integration
+- ✅ Experienced multi-agent collaboration
+- ✅ Explored advanced search and analysis capabilities
+
+### Continue Your Journey:
+- **🌟 Explore:** Try more complex multi-agent workflows
+- **🚀 Customize:** Modify agent configurations for your use case
+- **🤝 Connect:** Join our community for support and collaboration
+- **📚 Learn More:** Explore the architecture and extend the framework
+
+### Resources:
+- **GitHub Repository:** https://github.com/deslicer/ai-sidekick-for-splunk
+- **Documentation:** https://github.com/deslicer/ai-sidekick-for-splunk/blob/main/README.md
+- **Issues/Support:** https://github.com/deslicer/ai-sidekick-for-splunk/issues
+
+---
+
+## Feedback
+
+Your feedback helps us improve! Please share:
+- What worked well in this lab?
+- What was confusing or could be clearer?
+- What additional features would you like to see?
+
+**Share feedback:** https://deslicer.com/contact
+
+---
+
+*Thank you for participating in the Splunk AI Sidekick lab! 🚀*
