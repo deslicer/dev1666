@@ -12,17 +12,28 @@ cd mcp-for-splunk
 # Checkout dev1666 branch in git, this branch has a prepared .env file for you.
 git checkout dev1666
 ```
+### 2) Copy the lab environment
+```powershell
+cp env.lab .env
+```
 
-### 2) Install prerequisites (uv, Node.js, Python via uv)
+### 3) Install prerequisites (uv, Node.js, Python via uv)
 ```powershell
 pwsh -File ..\..\scripts\smart-install.ps1
 ```
 
-### 3) Run the server locally
+### 4) Run the server locally
 
 ```powershell
 uv run mcp-server --local -d
 ```
+
+### 5) Verify the mcp server and Splunk connection
+
+```powershell
+uv run mcp-server --test -detailed
+```
+
 
 What this does:
 - Installs uv (official Windows installer)
