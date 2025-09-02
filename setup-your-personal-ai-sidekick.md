@@ -16,7 +16,7 @@ By the end of this lab, you'll have:
 - Basic familiarity with command line/terminal
 - Access to a Splunk instance (local or remote)
 - Internet connection for downloading dependencies
-- Administrator privileges on your machine (for installing Python packages)
+- Git installed on your system (will be checked and installed if needed)
 
 ---
 
@@ -53,13 +53,13 @@ Choose your operating system and run the appropriate prerequisite script:
 ```
 
 ### 🐧 Linux
-```bash
+   ```bash
 ./scripts/lab/check-prerequisites.sh
-```
+   ```
 
 ### 🐍 Cross-Platform (Python)
-If you already have Python 3.11+ installed:
-```bash
+Alternative Python-based script:
+   ```bash
 python scripts/check-prerequisites.py
 ```
 
@@ -67,24 +67,25 @@ python scripts/check-prerequisites.py
 <summary>📋 What the prerequisite scripts do</summary>
 
 The scripts will:
-- ✅ Check for Python 3.11+ and install if needed
-- ✅ Install `uv` (fast Python package manager)
-- ✅ Create Python virtual environment using `uv`
-- ✅ Install all project dependencies
-- ✅ Verify Git installation
-- ✅ Prepare your system for AI Sidekick
+- ✅ Install `uv` (fast Python package manager) - handles Python automatically
+- ✅ Create Python virtual environment using `uv sync`
+- ✅ Install all project dependencies automatically
+- ✅ Verify Git installation and install if needed
+- ✅ Complete environment setup in one step
 
 **Expected output:**
 ```
-[SUCCESS] ✅ Python 3.11+ is installed
-[SUCCESS] ✅ uv is installed and ready
-[SUCCESS] ✅ Git is installed
-[SUCCESS] ✅ Virtual environment created successfully
-[SUCCESS] ✅ Dependencies installed successfully
+✅ UV Package Manager available
+✅ Setting up project environment...
+✅ Virtual environment created and dependencies installed
+✅ Git version control available
 
-Next Steps:
-1. Activate Python environment: source .venv/bin/activate (macOS/Linux) or .venv\Scripts\activate (Windows)
+🚀 Ready to Start:
+1. Activate the virtual environment: source .venv/bin/activate
 2. Start AI Sidekick: uv run ai-sidekick --start
+3. Access web interface: http://localhost:8087
+
+Virtual environment and dependencies are ready!
 ```
 </details>
 
@@ -93,12 +94,7 @@ Next Steps:
 
 If the prerequisite scripts don't work for your system:
 
-**Install Python 3.11+:**
-- **Windows:** Download from [python.org](https://python.org)
-- **macOS:** `brew install python@3.11` or download from [python.org](https://python.org)
-- **Linux:** `sudo apt install python3.11` (Ubuntu/Debian) or `sudo yum install python3.11` (RHEL/CentOS)
-
-**Install uv:**
+**Install uv (handles Python automatically):**
 ```bash
 # macOS/Linux
 curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -109,14 +105,17 @@ powershell -c "irm https://astral.sh/uv/install.ps1 | iex"
 
 **Create virtual environment and install dependencies:**
 ```bash
-uv venv
 uv sync
 ```
+
+> **💡 Note:** `uv` automatically downloads and manages the required Python version (3.11+) for the project, so you don't need to install Python separately.
 </details>
 
 ---
 
-## Step 3: Activate Environment and Start AI Sidekick
+## Step 3: Start AI Sidekick
+
+> **💡 Great news!** The prerequisite scripts have already created your virtual environment and installed all dependencies. You can start immediately!
 
 ### Activate the Python environment:
 
@@ -132,7 +131,6 @@ source .venv/bin/activate
 
 ### Start the AI Sidekick:
 ```bash
-uv sync
 uv run ai-sidekick --start
 ```
 
@@ -162,7 +160,7 @@ Your AI Sidekick uses a **modular multi-agent architecture** with these speciali
 2. **🔍 Search Guru** - SPL expert for search optimization and strategy
 3. **🔬 Data Explorer** - Comprehensive data analysis with 5-phase workflow
 4. **🧠 Researcher** - Google Search integration for current information
-5. **🔧 Splunk MCP** - Direct Splunk environment access and execution
+5. **🔧 SplunkShow** - Direct Splunk environment access and execution
 6. **⚡ FlowPilot Workflows** - Template-driven specialized workflows
 
 ### Agent Selection
@@ -223,7 +221,7 @@ List all available indexes
 <details>
 <summary>Expected Response</summary>
 
-The Splunk MCP agent will:
+The SplunkShow agent will:
 - Connect to your Splunk environment
 - Retrieve all available indexes
 - Show data volume and last update information
@@ -326,7 +324,7 @@ You've successfully set up and tested your personal AI Sidekick for Splunk!
 
 If you encounter any issues:
 
-1. **Check Prerequisites:** Ensure Python 3.11+, uv, and Git are installed
+1. **Re-run Prerequisites:** Run the prerequisite script again to ensure all components are installed
 2. **Environment:** Verify you're in the `dev1666` branch with activated virtual environment
 3. **MCP Connection:** Ensure the MCP server is running (should start automatically)
 4. **Browser:** Try refreshing the web interface at http://localhost:8087
