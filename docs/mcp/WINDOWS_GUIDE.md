@@ -26,6 +26,7 @@ pwsh -File ..\..\scripts\smart-install.ps1
 
 ```powershell
 uv run mcp-server --local -d
+# Updated SPLUNK_PASSWORD will be provided by instructors
 ```
 
 ### 5) Verify the mcp server and Splunk connection
@@ -57,14 +58,9 @@ If Splunk shows "Not connected ❌":
 
 - Verify your `.env` file contains correct values for `SPLUNK_HOST`, `SPLUNK_PORT`, `SPLUNK_USERNAME`, `SPLUNK_PASSWORD`, `SPLUNK_SCHEME`, `SPLUNK_VERIFY_SSL`.
   ```powershell
-  uv run mcp-server --setup
+  uv run mcp-server --setup --local -d
   ```
   
-- Restart the server:
-  ```powershell
-  uv run mcp-server --restart
-  ```
-
 What this does:
 - Installs uv (official Windows installer)
 - Installs Node.js (for MCP Inspector) via WinGet (Chocolatey fallback)
