@@ -42,7 +42,7 @@ uv run mcp-server --local -d
 ### 5) Verify the mcp server and Splunk connection
 
 ```python
-uv run mcp-server --test -detailed
+uv run mcp-server --test --detailed
 ```
 
 <details>
