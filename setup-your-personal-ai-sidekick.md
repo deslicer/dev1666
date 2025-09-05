@@ -121,7 +121,7 @@ Now let's get the AI Sidekick project and switch to the workshop branch:
 
 ### 🍎 macOS / 🐧 Linux
 ```bash
-mkdir ~/dev1666
+mkdir -p ~/dev1666
 cd ~/dev1666
 git clone https://github.com/deslicer/ai-sidekick-for-splunk.git
 cd ai-sidekick-for-splunk
