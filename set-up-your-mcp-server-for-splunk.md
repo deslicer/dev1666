@@ -35,10 +35,10 @@ Windows (PowerShell):
 pwsh -File scripts\smart-install.ps1
 ```
 ### 4) Run the server locally
-
+**Updated SPLUNK_PASSWORD will be provided by instructors**
 ```python
 uv run mcp-server --local -d
-# Updated SPLUNK_PASSWORD will be provided by instructors
+
 ```
 
 ### 5) Verify the mcp server and Splunk connection
