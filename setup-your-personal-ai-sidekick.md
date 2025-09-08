@@ -121,7 +121,6 @@ Now let's get the AI Sidekick project and switch to the workshop branch:
 
 ### 🍎 macOS / 🐧 Linux
 ```bash
-mkdir -p ~/dev1666
 cd ~/dev1666
 git clone https://github.com/deslicer/ai-sidekick-for-splunk.git
 cd ai-sidekick-for-splunk
@@ -130,7 +129,6 @@ git checkout dev1666
 
 ### 🪟 Windows
 ```powershell
-mkdir $HOME\dev1666
 cd $HOME\dev1666
 git clone https://github.com/deslicer/ai-sidekick-for-splunk.git
 cd ai-sidekick-for-splunk
@@ -193,7 +191,7 @@ Virtual environment and dependencies are ready!
 If the prerequisite scripts don't work for your system:
 
 **Install uv (handles Python automatically):**
-```bash
+   ```bash
 # macOS/Linux
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
@@ -231,6 +229,24 @@ source .venv/bin/activate
 ```bash
 uv run ai-sidekick --start
 ```
+
+<details>
+<summary>🔧 First-Time Environment Setup (Interactive Prompts)</summary>
+
+On your first run, the system will automatically prompt you to configure your Splunk connection details. You'll be asked to provide:
+
+- **Google AI Studio API key** - Required for AI agent functionality
+- **Splunk MCP server URL** - URL to your MCP server (e.g., http://localhost:8003)
+- **Splunk host** - Your Splunk management host and port (e.g., localhost:8089)
+- **Splunk username** - Username for Splunk authentication
+- **Splunk password** - Password for authentication (will be masked in display)
+
+After providing these details, the system will:
+- Save your configuration to the .env file
+- Display your connection information (with masked sensitive data)
+- Proceed with startup
+
+</details>
 
 You should see output like:
 ```

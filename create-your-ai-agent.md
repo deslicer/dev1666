@@ -21,10 +21,10 @@ You'll create a fully functional workflow agent that:
 
 ## Step 1: Create Your FlowPilot Workflow Agent
 
-Create a new workflow agent with a single command:
+Create a new workflow agent using the built-in data quality check template:
 
 ```bash
-uv run ai-sidekick --create-flow-agent workshop_demo
+uv run ai-sidekick --create-flow-agent data_quality_check --template data_quality_check
 ```
 
 <details>
@@ -39,23 +39,24 @@ The unified script will:
 
 **Expected Output:**
 ```
-🚀 Creating FlowPilot workflow agent: workshop_demo
+🚀 Creating FlowPilot workflow agent: data_quality_check
 
-✅ Workflow template created: contrib/flows/workshop_demo/workshop_demo.json
-✅ Documentation created: contrib/flows/workshop_demo/README.md
+✅ Using built-in template: data_quality_check
+✅ Workflow template created: contrib/flows/data_quality_check/data_quality_check.json
+✅ Documentation created: contrib/flows/data_quality_check/README.md
 ✅ Pydantic validation: PASSED
 ✅ Schema validation: PASSED
 
 📋 Workflow Details:
-- ID: contrib.workshop_demo
-- Name: DevWorkshop_Demo_Workshop System Health Agent
-- Type: Troubleshooting workflow
-- Phases: 3 (System Info → Health Checks → Summary Report)
+- ID: contrib.data_quality_check
+- Name: Data Quality Check Agent
+- Type: Data analysis workflow
+- Phases: 3 (Data Discovery → Quality Assessment → Recommendations)
 
 🎯 Next Steps:
 1. Restart AI Sidekick: uv run ai-sidekick --stop && uv run ai-sidekick --start
 2. Access via ADK Web: http://localhost:8087
-3. Try: "Use Workshop Demo workflow"
+3. Try: "Use Data Quality Check workflow"
 
 ✨ Your workflow agent is ready!
 ```
@@ -66,14 +67,15 @@ The unified script will:
 Your new workflow includes:
 
 **🏗️ Workflow Structure:**
-- **System Information Phase** - Gather Splunk version and available indexes
-- **Health Assessment Phase** - Check data flow and basic performance
-- **Summary Report Phase** - Generate educational insights for workshop participants
+- **Data Discovery Phase** - Identify available indexes and data sources
+- **Quality Assessment Phase** - Analyze data completeness, consistency, and patterns
+- **Recommendations Phase** - Generate actionable data quality insights and improvements
 
 **📊 Template Features:**
+- **Built-in Template** - Uses proven data quality check patterns
 - **Validated Schema** - Passes all Pydantic and system validation
-- **Educational Focus** - Designed for workshop learning objectives
-- **Beginner Friendly** - Clear explanations and encouraging feedback
+- **Production-Ready** - Based on real-world data quality assessment needs
+- **Educational Focus** - Clear explanations and learning opportunities
 - **Real Functionality** - Uses actual Splunk MCP and result synthesizer tools
 
 <details>
@@ -81,58 +83,58 @@ Your new workflow includes:
 
 ```json
 {
-  "workflow_id": "contrib.workshop_demo",
-  "workflow_name": "DevWorkshop_Demo_Workshop System Health Agent",
+  "workflow_id": "contrib.data_quality_check",
+  "workflow_name": "Data Quality Check Agent",
   "version": "1.0.0",
-  "description": "A simple workshop demonstration agent that performs basic Splunk environment health checks...",
-  "workflow_type": "troubleshooting",
-  "workflow_category": "system_health",
+  "description": "Comprehensive data quality assessment workflow that analyzes Splunk data for completeness, consistency, and patterns...",
+  "workflow_type": "data_analysis",
+  "workflow_category": "data_quality",
   "source": "contrib",
-  "complexity_level": "beginner",
-  "target_audience": ["Workshop participants", "Splunk beginners", "FlowPilot learners"],
+  "complexity_level": "intermediate",
+  "target_audience": ["Data analysts", "Splunk administrators", "Quality engineers"],
   "core_phases": {
-    "system_info": {
-      "phase_name": "System Information Gathering",
+    "data_discovery": {
+      "phase_name": "Data Discovery and Inventory",
       "tasks": [
         {
-          "task_id": "gather_splunk_version",
-          "title": "Gather Splunk Version",
+          "task_id": "discover_data_sources",
+          "title": "Discover Available Data Sources",
           "tool": "splunk_mcp",
-          "prompt": "Please retrieve the Splunk version information..."
+          "prompt": "Identify all available indexes and their data characteristics..."
         },
         {
-          "task_id": "list_available_indexes", 
-          "title": "List Available Indexes",
+          "task_id": "analyze_data_volume", 
+          "title": "Analyze Data Volume Patterns",
           "tool": "splunk_mcp",
-          "prompt": "List all available Splunk indexes..."
+          "prompt": "Examine data ingestion patterns and volume trends..."
         }
       ]
     },
-    "health_checks": {
-      "phase_name": "Basic Health Assessment",
+    "quality_assessment": {
+      "phase_name": "Data Quality Assessment",
       "tasks": [
         {
-          "task_id": "check_recent_data",
-          "title": "Check Recent Data",
+          "task_id": "check_data_completeness",
+          "title": "Assess Data Completeness",
           "tool": "splunk_mcp", 
-          "prompt": "Search for events from the last 24 hours..."
+          "prompt": "Analyze data completeness and identify gaps..."
         },
         {
-          "task_id": "check_system_performance",
-          "title": "Check System Performance",
+          "task_id": "validate_data_consistency",
+          "title": "Validate Data Consistency",
           "tool": "splunk_mcp",
-          "prompt": "Check basic system performance..."
+          "prompt": "Check for data consistency issues and anomalies..."
         }
       ]
     },
-    "summary_report": {
-      "phase_name": "Health Summary Report",
+    "recommendations": {
+      "phase_name": "Quality Recommendations",
       "tasks": [
         {
-          "task_id": "generate_health_summary",
-          "title": "Generate Health Summary", 
+          "task_id": "generate_quality_report",
+          "title": "Generate Data Quality Report", 
           "tool": "result_synthesizer",
-          "prompt": "Based on the system information and health checks performed, create a clear and friendly summary report..."
+          "prompt": "Create comprehensive data quality assessment with actionable recommendations..."
         }
       ]
     }
@@ -169,14 +171,14 @@ uv run ai-sidekick --start
 ```
 🔍 Discovering workflows...
 ✅ Found 4 core workflows
-✅ Found 2 contrib workflows (including workshop_demo)
+✅ Found 2 contrib workflows (including data_quality_check)
 ✅ All workflows validated successfully
 
 🤖 Creating FlowPilot agents...
 ✅ System_Health_Check agent created
 ✅ Index_Analysis agent created
 ✅ System_Info agent created
-✅ Workshop_Demo agent created  ← Your new agent!
+✅ Data_Quality_Check agent created  ← Your new agent!
 
 🚀 AI Sidekick ready with 6 workflow agents
 🌐 Web interface: http://localhost:8087
@@ -197,17 +199,17 @@ uv run ai-sidekick --start
 
 **Query 1: Direct Workflow Invocation**
 ```
-Use Workshop Demo workflow to check my Splunk environment
+Use Data Quality Check workflow to analyze my Splunk data
 ```
 
 **Query 2: Natural Language Request**
 ```
-Run the workshop demo health check
+Run data quality assessment on my indexes
 ```
 
 **Query 3: Specific Analysis**
 ```
-Execute workshop demo workflow and explain the results for beginners
+Execute data quality check workflow and provide recommendations
 ```
 
 <details>
@@ -215,51 +217,41 @@ Execute workshop demo workflow and explain the results for beginners
 
 Your workflow agent will execute and show:
 
-**Phase 1: System Information Gathering**
+**🔍 Data Quality Check Analysis**
+
 ```
-🔍 Gathering Splunk Version...
-✅ Splunk Enterprise 9.4.0 (Build: abc123)
-✅ System configured and operational
+Summary of Findings:
 
-📋 Listing Available Indexes...
-✅ Found 8 indexes: main, _internal, _audit, pas, security, web_logs, app_logs, network
-✅ Data landscape mapped successfully
+• Ingestion Latency: For the access_combined sourcetype, the median ingestion latency is 2 seconds, and the 95th percentile is 3 seconds.
+• Timestamp Parsing Warnings: No timestamp parsing warnings were found in the splunkd logs.
+• Line Breaking Risk: No events with a length greater than or equal to 10000 characters were found, indicating no immediate line breaking risk.
+• Duplicate Events: No duplicate events were found.
+• Time Issues: No events with time issues (future_gt_1h or past_gt_1y) were found.
+• Field Coverage Summary: The 'cookie' and 'root' fields are always null, which may indicate a data ingestion or configuration issue.
+• Source Host Coverage: The sourcetype access_combined has 1 host and 1 source.
+• Event Rate Stability: No significant changes in event rate were detected.
+• Queue Pressure: The typingqueue has the highest fill percentage at 1.44%. The nullqueue fill percentage is 0.00%.
+• Index Storage Headroom: The index 's4c_weather' is at 33.00% of its maximum size, 's4c_tutorial' is at 17.00%, and 's4c_www' is at 4.75%.
+• Line Breaking Candidates (XML/JSON): No line breaking candidates were found in XML or JSON events.
+
+Potential Issues Identified:
+
+• The 'cookie' and 'root' fields are always null, indicating a potential data ingestion or configuration issue. Further investigation is recommended.
+
+Recommendation:
+
+Investigate why the 'cookie' and 'root' fields are always null, as this may indicate a data ingestion or configuration issue. Would you like me to investigate this further?
 ```
 
-**Phase 2: Basic Health Assessment**
-```
-📊 Checking Recent Data Flow...
-✅ 1,234,567 events indexed in last 24 hours
-✅ Data ingestion active and healthy
+**💡 Key Insights from Real Analysis:**
+- **Comprehensive Coverage**: The workflow analyzes ingestion latency, timestamp parsing, line breaking risks, duplicates, and field coverage
+- **Performance Metrics**: Provides specific latency percentiles (median: 2s, 95th: 3s) 
+- **Storage Analysis**: Shows index storage utilization across multiple indexes
+- **Issue Detection**: Identifies specific problems like null fields that need investigation
+- **Actionable Results**: Offers to investigate further and provides specific recommendations
 
-⚡ Assessing System Performance...
-✅ Average search response time: 0.8 seconds
-✅ System performance within normal parameters
-```
-
-**Phase 3: Health Summary Report**
-```
-📋 Workshop Health Summary Report
-
-🎯 System Overview:
-Your Splunk environment is healthy and ready for workshop activities!
-
-📊 Key Findings:
-- ✅ Splunk 9.4.0 running smoothly
-- ✅ 8 indexes available for exploration
-- ✅ Active data flow (1.2M events/day)
-- ✅ Good system performance
-
-🚀 Workshop Recommendations:
-1. Use 'pas' index for hands-on exercises (rich sample data)
-2. Try 'security' index for security analysis scenarios
-3. Explore '_internal' for system monitoring examples
-
-💡 Educational Insight:
-This workflow demonstrates how FlowPilot agents coordinate multiple tools (Splunk MCP + Result Synthesizer) to deliver comprehensive analysis. You've just seen a 3-phase workflow execute seamlessly!
-
-🎉 Your Splunk environment is workshop-ready!
-```
+**🎯 Educational Value:**
+This demonstrates how FlowPilot workflows can perform production-level data quality assessments, providing detailed technical insights that help maintain healthy Splunk environments.
 </details>
 
 ---
