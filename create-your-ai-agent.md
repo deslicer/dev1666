@@ -199,12 +199,12 @@ uv run ai-sidekick --start
 
 **Query 1: Direct Workflow Invocation**
 ```
-Use Data Quality Check workflow to analyze my Splunk data
+Execute data quality check workflow and provide recommendations
 ```
 
 **Query 2: Specific Analysis**
 ```
-Execute data quality check workflow and provide recommendations
+Use Data Quality Check workflow to analyze my Splunk data
 ```
 
 <details>
