@@ -202,12 +202,7 @@ uv run ai-sidekick --start
 Use Data Quality Check workflow to analyze my Splunk data
 ```
 
-**Query 2: Natural Language Request**
-```
-Run data quality assessment on my indexes
-```
-
-**Query 3: Specific Analysis**
+**Query 2: Specific Analysis**
 ```
 Execute data quality check workflow and provide recommendations
 ```
@@ -328,11 +323,6 @@ uv run ai-sidekick --create-flow-agent security_audit
 ### Performance Monitoring Workflow
 ```bash
 uv run ai-sidekick --create-flow-agent performance_monitor
-```
-
-### Data Quality Assessment Workflow
-```bash
-uv run ai-sidekick --create-flow-agent data_quality
 ```
 
 Each workflow will:
