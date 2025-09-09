@@ -1,6 +1,8 @@
 
 # Lab 1: Set up MCP for Splunk (🔧)
 
+> **📖 For a better user experience, please follow the comprehensive instructions in the [README.md Lab 1 section](./README.md#lab-1-set-up-mcp-server-for-data-analytics).**
+
 Install prerequisites, prepare your environment, and run the MCP server.
 
 ## 🚀 Quick Start (Recommended)

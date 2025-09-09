@@ -1,5 +1,7 @@
 # Lab 4: Create Your AI Agent
 
+> **📖 For a better user experience, please follow the comprehensive instructions in the [README.md Lab 3 section](./README.md#lab-3-create-your-ai-agent).**
+
 **Build your own specialized FlowPilot workflow agent in minutes!**
 
 ## What You'll Build

@@ -1,5 +1,7 @@
 # Lab 3: Setup Your Personal AI Sidekick
 
+> **📖 For a better user experience, please follow the comprehensive instructions in the [README.md Lab 2 section](./README.md#lab-2-set-up-your-personal-ai-sidekick).**
+
 Welcome to the AI Sidekick for Splunk hands-on lab! In this lab, you'll set up and run your own personal AI Sidekick for Splunk - a powerful, modular agent framework that integrates seamlessly with your Splunk environment.
 
 ## What You'll Build
