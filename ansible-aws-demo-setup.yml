@@ -1,0 +1,462 @@
+---
+# ========================================
+# AI Sidekick for Splunk - Demo Environment Setup
+# ========================================
+#
+# USAGE EXAMPLES:
+#
+# 1. Using your own inventory and target group:
+#    ansible-playbook -i /path/to/your/inventory.ini ansible-aws-demo-setup.yml -e "target_hosts=your_group_name"
+#
+# 2. Example with specific paths:
+#    ansible-playbook -i ~/ansible/production.ini ansible-aws-demo-setup.yml -e "target_hosts=splunk_workshop_servers"
+#
+# 3. With vault for sensitive data:
+#    ansible-playbook -i ~/ansible/inventory.ini ansible-aws-demo-setup.yml -e "target_hosts=demo_group" --ask-vault-pass
+#
+# 4. Test connectivity first:
+#    ansible -i /path/to/your/inventory.ini your_group_name -m ping
+#
+# VARIABLES TO CUSTOMIZE:
+# - Update vault_splunk_password and vault_google_api_key in the vars section below
+# - Or use --extra-vars to pass them at runtime:
+#   ansible-playbook ... -e "vault_splunk_password=your_password" -e "vault_google_api_key=your_key"
+#
+# ========================================
+
+- name: Setup AI Sidekick for Splunk Demo Environment on AWS EC2
+  hosts: "{{ target_hosts | default('all') }}"
+  become: yes
+  vars:
+    demo_user: ec2-user
+    demo_home: "/home/{{ demo_user }}"
+    dev1666_dir: "{{ demo_home }}/dev1666"
+    mcp_dir: "{{ dev1666_dir }}/mcp-for-splunk"
+    ai_sidekick_dir: "{{ dev1666_dir }}/ai-sidekick-for-splunk"
+
+    # ========================================
+    # CENTRALIZED CONFIGURATION VARIABLES
+    # ========================================
+    # Workshop Credentials - UPDATE THESE FOR .CONF WORKSHOP
+
+    # Splunk Connection Settings
+    splunk_host: "dev1666-i-035e95d7e4ea1c310.splunk.show"
+    splunk_port: "8089"
+    splunk_scheme: "https"
+    splunk_username: "admin"
+    splunk_password: "{{ vault_splunk_password | default('UPDATE-WITH-WORKSHOP-PASSWORD') }}"
+
+    # MCP Server Settings
+    mcp_server_host: "0.0.0.0"
+    mcp_server_port: "8003"
+    mcp_server_url: "http://localhost:8003/mcp/"
+
+    # AI Sidekick Settings
+    adk_host: "0.0.0.0"
+    adk_port: "8087"
+    base_model: "gemini-2.0-flash"
+    google_api_key: "{{ vault_google_api_key | default('UPDATE-WITH-WORKSHOP-API-KEY') }}"
+    google_genai_use_vertexai: "False"
+
+    # Environment Settings
+    environment: "production"
+    log_level: "INFO"
+    # ========================================
+
+  tasks:
+    # ========================================
+    # System Prerequisites and Dependencies
+    # ========================================
+    # Prerequisites are handled by the lab setup scripts
+
+    - name: Ensure Git is installed
+      yum:
+        name: git
+        state: present
+      when: ansible_os_family == "RedHat"
+      ignore_errors: yes
+
+    # ========================================
+    # Lab 1: Set up MCP Server for Splunk
+    # ========================================
+    - name: Create dev1666 directory
+      file:
+        path: "{{ dev1666_dir }}"
+        state: directory
+        owner: "{{ demo_user }}"
+        group: "{{ demo_user }}"
+        mode: '0755'
+
+    - name: Clone MCP for Splunk repository
+      git:
+        repo: https://github.com/deslicer/mcp-for-splunk.git
+        dest: "{{ mcp_dir }}"
+        version: dev1666
+        force: yes
+      become_user: "{{ demo_user }}"
+
+    - name: Create MCP .env file with all required variables
+      copy:
+        dest: "{{ mcp_dir }}/.env"
+        owner: "{{ demo_user }}"
+        group: "{{ demo_user }}"
+        mode: '0644'
+        content: |
+          # Splunk Connection Configuration
+          SPLUNK_HOST={{ splunk_host }}
+          SPLUNK_PORT={{ splunk_port }}
+          SPLUNK_SCHEME={{ splunk_scheme }}
+          SPLUNK_USERNAME={{ splunk_username }}
+          SPLUNK_PASSWORD={{ splunk_password }}
+          
+          # MCP Server Configuration
+          MCP_SERVER_HOST={{ mcp_server_host }}
+          MCP_SERVER_PORT={{ mcp_server_port }}
+          
+          # Environment
+          ENVIRONMENT={{ environment }}
+          LOG_LEVEL={{ log_level }}
+      become_user: "{{ demo_user }}"
+
+    - name: Install MCP server prerequisites using smart-install script (ignore exit code)
+      shell: |
+        cd {{ mcp_dir }}
+        chmod +x scripts/smart-install.sh
+        ./scripts/smart-install.sh || true
+      become_user: "{{ demo_user }}"
+      args:
+        executable: /bin/bash
+      register: smart_install_output
+
+    - name: Display smart-install.sh output
+      debug:
+        var: smart_install_output.stdout_lines
+
+    - name: Check if UV was newly installed (needs sourcing)
+      set_fact:
+        uv_needs_sourcing: "{{ 'installing to /home/' in smart_install_output.stdout and 'everything' in smart_install_output.stdout and 'installed!' in smart_install_output.stdout }}"
+
+    - name: Source UV environment if newly installed
+      shell: |
+        source $HOME/.local/bin/env
+        echo "UV sourced from $HOME/.local/bin/env"
+      become_user: "{{ demo_user }}"
+      args:
+        executable: /bin/bash
+      when: uv_needs_sourcing
+      register: uv_source_output
+
+    - name: Display UV sourcing result
+      debug:
+        var: uv_source_output.stdout_lines
+      when: uv_needs_sourcing
+
+    - name: Verify UV installation and get version
+      shell: |
+        source ~/.bashrc
+        export PATH="$HOME/.local/bin:$PATH"
+        # Always try sourcing UV env after installation
+        if [ -f "$HOME/.local/bin/env" ]; then
+          echo "Sourcing UV environment from $HOME/.local/bin/env"
+          source $HOME/.local/bin/env
+        fi
+        echo "Current PATH: $PATH"
+        echo "Checking UV installation:"
+        which uv || echo "UV not found in PATH"
+        if command -v uv >/dev/null 2>&1; then
+          echo "UV found! Version:"
+          uv --version
+        else
+          echo "UV not available, checking direct path:"
+          if [ -f "$HOME/.local/bin/uv" ]; then
+            echo "UV binary exists at $HOME/.local/bin/uv"
+            $HOME/.local/bin/uv --version
+          else
+            echo "UV binary not found at $HOME/.local/bin/uv"
+            exit 1
+          fi
+        fi
+      become_user: "{{ demo_user }}"
+      args:
+        executable: /bin/bash
+      register: uv_verification
+
+    - name: Display UV verification
+      debug:
+        var: uv_verification.stdout_lines
+
+    - name: Ensure UV path is permanently in bashrc
+      lineinfile:
+        path: "{{ demo_home }}/.bashrc"
+        line: 'export PATH="$HOME/.local/bin:$PATH"'
+        create: yes
+      become_user: "{{ demo_user }}"
+
+    - name: Create MCP server systemd service
+      copy:
+        dest: /etc/systemd/system/mcp-server.service
+        content: |
+          [Unit]
+          Description=MCP Server for Splunk
+          After=network.target
+
+          [Service]
+          User={{ demo_user }}
+          WorkingDirectory={{ mcp_dir }}
+          Environment=HOME={{ demo_home }}
+          Environment=PYTHONUNBUFFERED=1
+          Environment=PATH={{ demo_home }}/.local/bin:/usr/local/bin:/usr/bin
+
+          ExecStart=/bin/bash -lc ' \
+            [ -f "$HOME/.local/bin/env" ] && source "$HOME/.local/bin/env"; \
+            exec uv run mcp-server --local \
+          '
+          Restart=always
+          RestartSec=5
+
+          [Install]
+          WantedBy=multi-user.target
+        mode: '0644'
+
+    - name: Enable and start MCP server service
+      systemd:
+        name: mcp-server
+        enabled: yes
+        state: started
+        daemon_reload: yes
+
+    # ========================================
+    # Lab 3: Setup AI Sidekick
+    # ========================================
+    - name: Clone AI Sidekick for Splunk repository
+      git:
+        repo: https://github.com/deslicer/ai-sidekick-for-splunk.git
+        dest: "{{ ai_sidekick_dir }}"
+        version: dev1666
+        force: yes
+      become_user: "{{ demo_user }}"
+
+    - name: Install AI Sidekick prerequisites using smart-install script
+      shell: |
+        cd {{ ai_sidekick_dir }}
+        chmod +x scripts/smart-install.sh
+        ./scripts/smart-install.sh
+      become_user: "{{ demo_user }}"
+      args:
+        executable: /bin/bash
+      environment:
+        PATH: "{{ demo_home }}/.local/bin:{{ ansible_env.PATH }}"
+
+
+    - name: Create AI Sidekick .env file with all required variables
+      copy:
+        dest: "{{ ai_sidekick_dir }}/.env"
+        owner: "{{ demo_user }}"
+        group: "{{ demo_user }}"
+        mode: '0644'
+        content: |
+          # Google ADK Configuration (Required)
+          GOOGLE_GENAI_USE_VERTEXAI={{ google_genai_use_vertexai }}
+          GOOGLE_API_KEY={{ google_api_key }}
+
+          # MCP Server Configuration (Required)
+          SPLUNK_MCP_SERVER_URL={{ mcp_server_url }}
+
+          # Splunk Connection (Required for MCP server)
+          SPLUNK_HOST={{ splunk_host }}
+          SPLUNK_PORT={{ splunk_port }}
+          SPLUNK_SCHEME={{ splunk_scheme }}
+          SPLUNK_USERNAME={{ splunk_username }}
+          SPLUNK_PASSWORD={{ splunk_password }}
+
+          # Model Configuration
+          BASE_MODEL={{ base_model }}
+
+          # Server Configuration
+          HOST={{ adk_host }}
+          PORT={{ adk_port }}
+          
+          # Additional required variables to prevent prompts
+          ENVIRONMENT={{ environment }}
+          LOG_LEVEL={{ log_level }}
+      become_user: "{{ demo_user }}"
+
+    # ========================================
+    # Lab 4: Create AI Agent (Data Quality Check)
+    # ========================================
+    - name: Create data quality check flow agent
+      shell: |
+        source ~/.bashrc
+        cd {{ ai_sidekick_dir }}
+        source .venv/bin/activate
+        {{ demo_home }}/.local/bin/uv run ai-sidekick --create-flow-agent data_quality_check --template data_quality_check
+      become_user: "{{ demo_user }}"
+      args:
+        executable: /bin/bash
+      environment:
+        PATH: "{{ demo_home }}/.local/bin:{{ ansible_env.PATH }}"
+      ignore_errors: yes  # May already exist
+
+    # ========================================
+    # ADK Web Service Setup
+    # ========================================
+    - name: Create ADK Web systemd service
+      copy:
+        dest: /etc/systemd/system/adk-web.service
+        content: |
+          [Unit]
+          Description=ADK Web (FastAPI) for Splunk
+          After=network.target mcp-server.service
+
+          [Service]
+          User={{ demo_user }}
+          WorkingDirectory={{ ai_sidekick_dir }}/src/
+          ExecStart=/bin/bash -lc 'source ~/.bashrc && export PATH="$HOME/.local/bin:$PATH" && [ -f "$HOME/.local/bin/env" ] && source $HOME/.local/bin/env; uv run adk web --host 0.0.0.0 --port 8087'
+          Restart=always
+          RestartSec=5
+          Environment=PYTHONUNBUFFERED=1
+          Environment=HOME={{ demo_home }}
+
+          [Install]
+          WantedBy=multi-user.target
+        mode: '0644'
+
+    - name: Enable and start ADK Web service
+      systemd:
+        name: adk-web
+        enabled: yes
+        state: started
+        daemon_reload: yes
+
+
+    # ========================================
+    # Verification and Health Checks
+    # ========================================
+    - name: Wait for MCP server to be ready
+      uri:
+        url: http://localhost:8003/health
+        method: GET
+      register: mcp_health
+      until: mcp_health.status == 200
+      retries: 30
+      delay: 10
+      become_user: "{{ demo_user }}"
+
+    - name: Test MCP server functionality and Splunk connection
+      shell: |
+        source ~/.bashrc
+        export PATH="$HOME/.local/bin:$PATH"
+        # Try sourcing UV env if it exists
+        if [ -f "$HOME/.local/bin/env" ]; then
+          source $HOME/.local/bin/env
+        fi
+        cd {{ mcp_dir }}
+        echo "=== Testing MCP Server and Splunk Connection ==="
+        uv run mcp-server --test
+      become_user: "{{ demo_user }}"
+      register: mcp_test_result
+      args:
+        executable: /bin/bash
+
+    - name: Display MCP test results
+      debug:
+        msg: |
+          MCP Server Test Results:
+          {{ mcp_test_result.stdout_lines | join('\n') }}
+        
+    - name: Check if MCP server test passed
+      fail:
+        msg: "MCP server test failed - check Splunk connection and configuration"
+      when: "'Connected ✅' not in mcp_test_result.stdout"
+
+    - name: Wait for ADK Web service to be ready
+      uri:
+        url: http://localhost:8087
+        method: GET
+      register: adk_health
+      until: adk_health.status == 200
+      retries: 30
+      delay: 10
+      become_user: "{{ demo_user }}"
+
+    # ========================================
+    # Final Setup and Information
+    # ========================================
+    - name: Create demo information file
+      copy:
+        dest: "{{ demo_home }}/DEMO_INFO.txt"
+        owner: "{{ demo_user }}"
+        group: "{{ demo_user }}"
+        mode: '0644'
+        content: |
+          ========================================
+          AI Sidekick for Splunk Demo Environment
+          ========================================
+          
+          🚀 Services Status:
+          - MCP Server: http://{{ ansible_default_ipv4.address }}:8003
+          - AI Sidekick Web: http://{{ ansible_default_ipv4.address }}:8087
+          
+          📁 Directory Structure:
+          - MCP Server: {{ mcp_dir }}
+          - AI Sidekick: {{ ai_sidekick_dir }}
+          
+          🔧 Service Management:
+          - Check MCP status: sudo systemctl status mcp-server
+          - Check ADK status: sudo systemctl status adk-web
+          - Restart services: sudo systemctl restart mcp-server adk-web
+          
+          📋 Lab Completion:
+          ✅ Lab 1: MCP Server for Splunk - COMPLETED
+          ✅ Lab 3: AI Sidekick Setup - COMPLETED  
+          ✅ Lab 4: Data Quality Check Agent - COMPLETED
+          
+          🌐 Access Instructions:
+          1. Open browser to: http://{{ ansible_default_ipv4.address }}:8087
+          2. Select "AI Sidekick for Splunk" from dropdown
+          3. Try: "Run a system health check"
+          4. Try: "List all available indexes"
+          5. Try: "Use Data Quality Check workflow to analyze my Splunk data"
+          
+          🔑 Credentials:
+          - Splunk Host: dev1666-i-035e95d7e4ea1c310.splunk.show
+          - Splunk Username: admin
+          - Splunk Password: {{ splunk_password }}
+          
+          📚 Workshop Labs:
+          - Lab 1: Set up MCP Server ✅
+          - Lab 2: Create custom MCP tool (manual)
+          - Lab 3: Setup AI Sidekick ✅
+          - Lab 4: Create AI Agent ✅
+
+    - name: Display completion message
+      debug:
+        msg: |
+          ========================================
+          🎉 AI Sidekick Demo Environment Ready!
+          ========================================
+          
+          🌐 Access your AI Sidekick at:
+          http://{{ ansible_default_ipv4.address }}:8087
+          
+          📋 Services running:
+          - MCP Server: Port 8003
+          - AI Sidekick Web: Port 8087
+          
+          📁 Check {{ demo_home }}/DEMO_INFO.txt for complete details
+          
+          🚀 Ready for workshop participants!
+
+# ========================================
+# Handlers
+# ========================================
+  handlers:
+    - name: restart mcp-server
+      systemd:
+        name: mcp-server
+        state: restarted
+
+    - name: restart adk-web
+      systemd:
+        name: adk-web
+        state: restarted
