@@ -2,25 +2,25 @@
   <img src="./media/deslicer_white.svg" alt="Deslicer" width="200"/>
 </div>
 
-# DEV1666 - AI Sidekick for Splunk Lab Exercises
+# DEV1666 - AI Sidekick for Splunk Lab Exersices
 
 ## Table of Contents
 
-1. [Overview](#overview)
-2. [Prerequisites](#prerequisites)
-3. [Lab Connection Info](#lab-connection-info)
-4. [Lab Exercises](#lab-exercises)
-   - [Lab Exercise 1: Set up your MCP server for Splunk](#lab-exercise-1---set-up-your-mcp-server-for-splunk)
-   - [Lab Exercise 2: Create your custom MCP tool](#lab-exercise-2---create-your-custom-mcp-tool)
-   - [Lab Exercise 3: Set up your personal AI Sidekick](#lab-exercise-3---set-up-your-personal-ai-sidekick)
-   - [Lab Exercise 4: Create your AI agent](#lab-exercise-4---create-your-ai-agent)
-5. [Summary](#summary)
+- [Lab Environment Information](#lab-environment-information)
+- [Lab Exercises](#lab-exercises)
+  - [Lab 1: Set up MCP Server](#lab-1-set-up-mcp-server-for-data-analytics)
+  - [Lab 2: Set up AI Sidekick](#lab-2-set-up-your-personal-ai-sidekick)
+  - [Lab 3: Create AI Agent](#lab-3-create-your-ai-agent)
+- [Summary](#summary)
+- [Resources](#resources)
 
-## Overview
+## Lab Environment Information
 
-This workshop is designed to help you understand how to connect AI with your Splunk Enterprise environment. You'll learn to build AI agents using the Model Context Protocol (MCP) and create intelligent sidekicks that can interact with your Splunk data.
+### Lab Environment Overview
 
-## Prerequisites
+Throughout this workshop, you will work with AI agents and the Model Context Protocol (MCP) to create intelligent sidekicks that can interact with your data analytics environment. You'll learn to build AI agents that can understand, analyze, and provide insights from your data.
+
+### Prerequisites
 
 Before starting the workshop, ensure you have:
 
@@ -36,80 +36,313 @@ Before starting the workshop, ensure you have:
 
 - **🧠 Knowledge Requirements:**
   - Basic familiarity with command line/terminal
-  - Basic understanding of Splunk concepts (indexes, searches)
+  - Basic understanding of data analytics concepts (indexes, searches)
   - No programming experience required (we'll guide you through everything!)
 
 - **🔧 Software (will be installed during labs):**
   - Python 3.11+
   - Git
   - Node.js (optional, for MCP Inspector)
+  - uv (fast Python package manager)
 
-## Lab Connection Info
+### Lab Connection Information
 
-You will be receiving instructions from Splunk about Splunk Show environment details. If you do not receive these details, please let one of the instructors know and we will fix it. Alternatively, we provide instructions to run Splunk in your local Docker environment for those who prefer a local setup.
+You will be receiving instructions about your splunk environment details. If you do not receive these details by email, please let one of the speakers know and we will fix it. Alternatively, we provide links to use a Deslicer Show Instance.
 
 ## Lab Exercises
 
-### Lab Exercise 1 - Set up your MCP server for Splunk
 
-**Description:**
-In this lab you will set up your own MCP (Model Context Protocol) server for Splunk, which serves as the bridge between AI agents and your Splunk environment.
-
-**Steps:**
-Follow the instructions provided in [set-up-your-mcp-server-for-splunk.md](./set-up-your-mcp-server-for-splunk.md)
+This comprehensive guide walks you through each lab with detailed instructions, troubleshooting tips, and verification steps to ensure successful completion.
 
 ---
 
-### Lab Exercise 2 - Create your custom MCP tool
+### Lab 1: Set up MCP Server for Data Analytics
 
 **Description:**
-In this lab you will create your own custom MCP tool, deploy it in your local environment, and test it using MCP Inspector to ensure proper functionality.
+In this lab you will set up your own MCP (Model Context Protocol) server for data analytics, which serves as the bridge between AI agents and your data analytics environment.
+
+**Key Learning Objectives:**
+- Understand MCP architecture and its role in AI-data integration
+- Configure and deploy MCP server for data analytics
+- Verify connectivity and test server functionality
 
 **Steps:**
-Follow the detailed lab instructions provided in [create-your-custom-mcp-tool.md](./create-your-custom-mcp-tool.md)
+1. **Clone the repository and prepare environment:**
+
+   **macOS/Linux:**
+   ```bash
+   mkdir -p ~/dev1666
+   cd ~/dev1666
+   git clone https://github.com/deslicer/mcp-for-splunk.git
+   cd mcp-for-splunk
+   git checkout dev1666
+   ```
+
+   **Windows:**
+   ```powershell
+   mkdir $HOME\dev1666
+   cd $HOME\dev1666
+   git clone https://github.com/deslicer/mcp-for-splunk.git
+   cd mcp-for-splunk
+   git checkout dev1666
+   ```
+
+2. **Copy the lab environment configuration:**
+
+   **macOS/Linux:**
+   ```bash
+   cp env.lab .env
+   ```
+
+   **Windows:**
+   ```powershell
+   Copy-Item env.lab .env -Force
+   ```
+
+3. **Install prerequisites using the smart install script:**
+
+   **macOS/Linux:**
+   ```bash
+   ./scripts/smart-install.sh
+   ```
+
+   **Windows:**
+   ```powershell
+   pwsh -File scripts\smart-install.ps1
+   ```
+
+   After completing the smart-install you need to provide splunk connection details. You should have received an email with details to a Splunk Show instance. Ensure you have access to the Splunk host, port, username and password before continuing to the next step. If you are lacking that information, reach out to one of the speakers.
+   ```
+   Host:
+   Port:
+   Username:
+   Password: (No echo prompt)
+   ```
+
+4. **Start the MCP server and verify it's running:**
+   ```bash
+   uv run mcp-server --local -d
+   ```
+
+5. **Test the MCP server and data analytics connection:**
+   ```bash
+   uv run mcp-server --test
+   ```
+
+**Expected Output:**
+```
+== MCP Server Check ==
+URL: http://0.0.0.0:8003/mcp/
+• MCP Server: OK ✅
+• Tools: 39 | Resources: 17
+
+-- Data Analytics Health --
+• Status: Connected ✅
+• Server: splunk-server-name
+• Version: 9.3.2411.113
+• Source: server_config
+```
+
+**Lab completion verification:**
+- If the script returns "MCP Server: OK ✅" and "Data Analytics Health Status: Connected ✅", you have successfully completed the setup lab.
 
 ---
 
-### Lab Exercise 3 - Set up your personal AI Sidekick
+### Lab 2: Set up Your Personal AI Sidekick
 
-**Description:**  
-In this lab, you will set up and configure your personal AI Sidekick for Splunk. You'll explore the multi-agent system architecture and learn how to assign tasks to different specialized agents.
+**Description:**
+In this lab, you will set up and configure your personal AI Sidekick for data analytics. You'll explore the multi-agent system architecture and learn how to assign tasks to different specialized agents.
 
-**Steps:**  
-Choose the setup guide that matches your operating system:
+**Key Learning Objectives:**
+- Deploy the AI Sidekick multi-agent framework
+- Understand specialized agent roles and capabilities
+- Experience automated workflow execution
 
-- **🚀 Quick Start (All Platforms):** [Beginners Setup Guide](./docs/ai_sidekick/BEGINNERS_SETUP.md)
-- **🪟 Windows Users:** [Windows Setup Guide](./docs/ai_sidekick/WINDOWS_GUIDE.md)
-- **🍎 macOS Users:** [macOS Setup Guide](./docs/ai_sidekick/MACOS_GUIDE.md)
-- **🐧 Linux Users:** [Linux Setup Guide](./docs/ai_sidekick/LINUX_GUIDE.md)
-- **📖 Detailed Guide:** [Complete Setup Instructions](./setup-your-personal-ai-sidekick.md)
+**Steps:**
+
+6. **Clone and setup AI Sidekick repository:**
+
+   **macOS/Linux:**
+   ```bash
+   mkdir -p ~/dev1666
+   cd ~/dev1666
+   git clone https://github.com/deslicer/ai-sidekick-for-splunk.git
+   cd ai-sidekick-for-splunk
+   git checkout dev1666
+   unset UV_PROJECT_ENVIRONMENT
+   ```
+
+   **Windows:**
+   ```powershell
+   mkdir $HOME\dev1666
+   cd $HOME\dev1666
+   git clone https://github.com/deslicer/ai-sidekick-for-splunk.git
+   cd ai-sidekick-for-splunk
+   git checkout dev1666
+   ```
+
+7. **Run the smart-install script:**
+
+   **macOS/Linux:**
+   ```bash
+   unset UV_PROJECT_ENVIRONMENT
+   ./scripts/smart-install.sh
+   ```
+
+   **Windows:**
+   ```powershell
+   .\scripts\smart-install.ps1
+   ```
+
+8. **AI Sidekick:**
+
+   After completing the smart-install you need to provide splunk connection details. You should have received an email with details to a Splunk Show instance. Ensure you have access to the Splunk host, port, username and password before continuing to the next step. If you are lacking that information, reach out to one of the speakers.
+   ```
+   Host:
+   Username:
+   Password: (No echo prompt)
+   ```
+
+   **macOS/Linux:**
+   ```bash
+   uv run ai-sidekick --start
+   ```
+
+   **Windows:**
+   ```powershell
+   uv run ai-sidekick --start
+   ```
+
+9. **Open your web browser to http://localhost:8087 and verify the web interface loads successfully**
+
+10. **Test your AI Sidekick with these queries:**
+   - "Run a system health check"
+   - "List all available data sources"
+   - "Use index analysis flow to analyze data and provide actionable insights"
+
+**Detailed Instructions:**
+Follow the complete guide: [setup-your-personal-ai-sidekick.md](./setup-your-personal-ai-sidekick.md)
 
 ---
 
-### Lab Exercise 4 - Create your AI agent
+### Lab 3: Create Your AI Agent
 
 **Description:**
-In this lab, you will create your own custom AI agent from scratch, learning the fundamentals of agent development and integration with the AI Sidekick framework.
+In this lab, you will create your own custom AI agent, learning the fundamentals of agent development and integration with the AI Sidekick framework.
+
+**Key Learning Objectives:**
+- Create FlowPilot workflow agents using template-driven architecture
+- Understand auto-discovery and agent registration
+- Test custom agents in the web interface
+- Experience rapid development and deployment patterns
 
 **Steps:**
-Follow the detailed instructions provided in [create-your-ai-agent.md](./create-your-ai-agent.md)
+
+11. **Create a new workflow agent with a single command:**
+Open a new terminal window
+
+**macOS/Linux:**
+   ```bash
+   cd ~/dev1666/ai-sidekick-for-splunk
+   unset UV_PROJECT_ENVIRONMENT
+   uv run ai-sidekick --create-flow-agent workshop_demo
+   ```
+**Windows:**
+   ```powershell
+   cd $HOME\dev1666\ai-sidekick-for-splunk
+   uv run ai-sidekick --create-flow-agent workshop_demo
+   ```
+
+12. **Stop and restart AI Sidekick to discover new workflows:**
+   ```bash
+   uv run ai-sidekick --stop
+   uv run ai-sidekick --start
+   ```
+
+13. **Open your browser to http://localhost:8087 and select "AI Sidekick for Data Analytics" from the dropdown**
+
+14. **Test your workflow agent with these queries:**
+   - "Use Workshop Demo workflow to check my data analytics environment"
+   - "Run the workshop demo health check"
+   - "Execute workshop demo workflow and explain the results for beginners"
+
+15. **Create additional workflow agents (optional):**
+   ```bash
+   # Security Analysis Workflow
+   uv run ai-sidekick --create-flow-agent security_audit
+
+   # Performance Monitoring Workflow
+   uv run ai-sidekick --create-flow-agent performance_monitor
+
+   # Data Quality Assessment Workflow
+   uv run ai-sidekick --create-flow-agent data_quality
+   ```
+
+**Detailed Instructions:**
+Follow the complete guide: [create-your-ai-agent.md](./create-your-ai-agent.md)
 
 ---
 
 ## Summary
 
-In this workshop, we explored AI agents and the Model Context Protocol (MCP), discovering how to connect AI with your Splunk data. These exercises mirror real-world activities that customers conduct in their environments, empowering you to integrate and automate actions in Splunk Enterprise with an intelligent AI sidekick.
+### What You've Accomplished
 
-The skills you've learned enable you to:
-- ✅ Set up MCP servers for Splunk integration
-- ✅ Create custom MCP tools for specific use cases
-- ✅ Deploy and configure AI Sidekick agents
-- ✅ Build your own specialized AI agents
-- ✅ Integrate AI capabilities with Splunk Enterprise workflows
+In this workshop, you've successfully:
+
+- ✅ **Set up MCP Server** - Established the bridge between AI agents and your data analytics environment
+- ✅ **Deployed AI Sidekick** - Created a modular multi-agent framework with specialized capabilities
+- ✅ **Built Custom Agents** - Developed your own FlowPilot workflow agents using template-driven architecture
+- ✅ **Experienced Auto-Discovery** - Saw automatic system integration and agent registration
+- ✅ **Tested Real Functionality** - Executed multi-phase workflows via web interface
+
+### Key Learning Points
+
+**🚀 Rapid Development:**
+- Single command creates complete workflow agents
+- No coding required - just JSON configuration
+- Immediate integration and availability
+
+**📋 Template-Driven Architecture:**
+- JSON templates define agent behavior
+- Pydantic validation ensures correctness
+- Automatic tool coordination and result synthesis
+
+**🔧 Production-Ready System:**
+- Auto-discovery enables unlimited agents
+- Community contributions without code changes
+- Enterprise scalability with open-source flexibility
+
+### Next Steps
+
+**🌟 Contribute to Open Source:**
+- Share your workflow templates with the community
+- Create specialized agents for your industry/use case
+- Help expand the FlowPilot ecosystem
+
+**🚀 Deploy in Production:**
+- Use this pattern for enterprise workflow automation
+- Create organization-specific workflow libraries
+- Scale to hundreds of specialized agents
+
+**🔧 Advanced Development:**
+- Explore custom tool integration
+- Build complex multi-agent workflows
+- Contribute to the core FlowPilot engine
 
 ## Resources
 
-- **🐙 GitHub Repository:** https://github.com/desclier/ai-sidekick-for-splunk
+- **🐙 GitHub Repository:** https://github.com/deslicer/ai-sidekick-for-splunk
+- **🐙 GitHub Repository:** https://github.com/deslicer/mcp-for-splunk
 - **📧 Support:** opensource@deslicer.com
+- **📖 Documentation:** Complete guides in the repositories
+- **🐛 Issues/Support:** https://github.com/deslicer/ai-sidekick-for-splunk/issues
+- **🐛 Issues/Support:** https://github.com/deslicer/mcp-for-splunk/issues
 
-**Happy Splunking!** 🚀
+
+---
+
+**Your journey from zero to AI agent creator is complete! 🚀**
+
+*The FlowPilot system you've experienced represents the future of scalable, template-driven AI agent development. You've not just used the system - you've extended it!*
+
+**Happy Data Analytics!** 🚀
