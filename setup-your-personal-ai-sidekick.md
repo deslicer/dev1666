@@ -307,20 +307,26 @@ The AI Sidekick will:
 
 **Sample Output:**
 ```
-✅ System Health Check Complete
+Here are the results of the System Health Check Flow:
 
-📊 System Overview:
-- Splunk Version: 9.4.0 (Build: abc123)
-- System Status: Healthy
-- Data Flow: Active (1.2M events/24h)
+Phase 1: Rapid Health Assessment
 
-🎯 Health Assessment:
-- ✅ Splunk services running normally
-- ✅ Data ingestion active
-- ⚠️  Consider index optimization for better performance
+• Indexer Health Check: No indexer peers were found.
+• Search Head Health Check: The search head 'show-demo-i-030177b79939df4c' is healthy with CPU usage at 13.96% and memory usage at 0.19%.
+• License Usage Check: No license usage data was available for the last hour.
+• Data Ingestion Health: Data ingestion for index 's4c_www' is healthy with a count of 906 and an ingestion rate of 60.40.
+• Forwarder Connectivity: No data was found, which indicates either no active universal forwarders sending data or improper indexing.
+• Search Performance Check: User admin had one slow search with an average runtime of 6.14 seconds, a max runtime of 6.14 seconds, and a performance status of good.
+• Skipped Searches Check: No skipped searches were found in the last hour, indicating no scheduler pressure.
+• SHC Status Check: The search returned no results. This could indicate that a search head cluster is not configured in this environment, or that there was an issue retrieving the cluster status.
 
-📚 Educational Insights:
-This health check verified your Splunk environment is ready for workshop activities.
+Phase 2: Health Status Synthesis
+
+• Overall health assessment was completed successfully.
+
+It appears there might be issues with indexer peers, license usage data, forwarder connectivity, and SHC status. Further investigation may be required for these items.
+
+Would you like me to investigate any of these issues further?
 ```
 </details>
 
@@ -342,18 +348,9 @@ The SplunkShow agent will:
 
 **Sample Output:**
 ```
-📋 Available Splunk Indexes:
+The indexes available are: history, main, s4c_phyphox, s4c_stocks, s4c_tutorial, s4c_weather, s4c_www, splunklogger, and summary. A total of 9 indexes are available to you, and there are 18 total indexes including internal indexes.
 
-🔍 Core Indexes:
-- main (2.1GB, last event: 2 minutes ago)
-- _internal (890MB, last event: 30 seconds ago)
-- _audit (45MB, last event: 1 minute ago)
-
-🏢 Workshop Indexes:
-- pas (1.5GB, last event: 5 minutes ago)
-- security (780MB, last event: 3 minutes ago)
-
-💡 Recommendation: Use 'pas' index for analysis exercises - it has rich sample data perfect for learning.
+Would you like to explore any of these indexes further? For example, I can list the sourcetypes for a specific index.
 ```
 </details>
 
@@ -377,35 +374,28 @@ The **Index Analysis Flow** (FlowPilot workflow) will execute a comprehensive an
 
 **Sample Output:**
 ```
-🔬 Index Analysis Complete: s4c_www
+The IndexAnalysis Flow has completed for index=s4c_www.
+Here's a summary of the analysis:
 
-📊 Analysis Summary:
-- Total Events: 2,456,789 events
-- Time Range: 30 days
-- Primary Sourcetypes: access_combined (60%), error_log (25%), ssl_access (15%)
-- Peak Activity: Business hours (9 AM - 6 PM) with weekend traffic
+• Intelligent Data Discovery: Simulated data discovery to outline the index structure.
+• Adaptive Data Sampling:
+  ○ Volume sampling identified consistent hourly event volumes for the access_combined sourcetype, with a slight dip on '2025-09-01T03:00:00.000+00:00'.
+  ○ Field sampling revealed key fields like JSESSIONID, action, bytes, clientip, product_id, status, and uri with their respective counts and distinct values.
+• Intelligent Pattern Analysis:
+  ○ Identified a high percentage of 503 (Service Unavailable) and 404 (Not Found) errors, particularly affecting the /product.screen endpoint.
+  ○ Anomaly detection found anomalies on '2025-09-01T03:00:00.000+00:00' and '2025-09-08T14:00:00.000+00:00'.
+  ○ Correlation analysis showed a strong relationship between the access_combined sourcetype and the field webgurke.
+  ○ Temporal analysis indicated that access_combined is the most common sourcetype, with higher counts on Mondays between 06:00 and 13:00.
+• Contextual Result Synthesis: Phase-level synthesis handled result aggregation.
 
-🎯 Actionable Insights:
+Key recommendations:
 
-🔒 Security Analyst:
-- Monitor 404 error patterns (detected unusual spikes)
-- Set up alerts for suspicious user agents and bot traffic
-- Dashboard: | search index=s4c_www status=404 | stats count by clientip
+• Investigate the root cause of 503 errors.
+• Examine product links and IDs for correctness to address 404 errors.
+• Check for unusual traffic patterns that might indicate bot activity.
+• Further investigate anomalies detected on '2025-09-01T03:00:00.000+00:00' and '2025-09-08T14:00:00.000+00:00'.
 
-⚙️ DevOps Engineer:
-- SSL certificate errors increasing (5% of traffic)
-- High response times during peak hours (>2s average)
-- Monitor: | search index=s4c_www ssl_error | timechart span=1h count
-
-📈 Business Analyst:
-- Mobile traffic growing 25% month-over-month
-- Popular content pages driving 70% of engagement
-- Track: | search index=s4c_www | stats count by uri_path | sort -count
-
-🚀 Next Steps:
-1. Implement recommended dashboards
-2. Set up automated monitoring alerts
-3. Schedule regular index health checks
+Would you like me to investigate any of these recommendations further? For example, I could investigate the root cause of the 503 errors.
 ```
 </details>
 
