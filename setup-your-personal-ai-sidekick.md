@@ -145,18 +145,18 @@ Choose your operating system and run the appropriate prerequisite script:
 
 ### 🍎 macOS / 🐧 Linux
 ```bash
-./scripts/lab/check-prerequisites.sh
+./scripts/smart-install.sh
 ```
 
 ### 🪟 Windows
 ```powershell
-.\scripts\lab\check-prerequisites.ps1
+.\scripts\smart-install.ps1
 ```
 
 ### 🐍 Cross-Platform (Python)
-Alternative Python-based script(If you already have python installed):
+Alternative Python-based script (if you already have Python installed):
    ```bash
-python scripts/check-prerequisites.py
+python scripts/smart-install.py
 ```
 
 <details>
@@ -176,12 +176,10 @@ The scripts will:
 ✅ Virtual environment created and dependencies installed
 ✅ Git version control available
 
-🚀 Ready to Start:
-1. Activate the virtual environment: source .venv/bin/activate
-2. Start AI Sidekick: uv run ai-sidekick --start
-3. Access web interface: http://localhost:8087
+🚀 Next Steps:
+Continue with the lab guide to start your AI Sidekick
 
-Virtual environment and dependencies are ready!
+Installation complete! Your environment is ready.
 ```
 </details>
 
@@ -213,18 +211,6 @@ uv sync
 
 > **💡 Great news!** The prerequisite scripts have already created your virtual environment and installed all dependencies. You can start immediately!
 
-### Activate the Python environment:
-
-### 🍎 macOS / 🐧 Linux
-```bash
-source .venv/bin/activate
-```
-
-### 🪟 Windows
-```powershell
-.venv\Scripts\activate
-```
-
 ### Start the AI Sidekick:
 ```bash
 uv run ai-sidekick --start
@@ -237,7 +223,7 @@ On your first run, the system will automatically prompt you to configure your Sp
 
 - **Google AI Studio API key** - Required for AI agent functionality
 - **Splunk MCP server URL** - URL to your MCP server (e.g., http://localhost:8003)
-- **Splunk host** - Your Splunk management host and port (e.g., localhost:8089)
+- **Splunk host** - Your Splunk hostname (e.g., localhost)
 - **Splunk username** - Username for Splunk authentication
 - **Splunk password** - Password for authentication (will be masked in display)
 
