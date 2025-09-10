@@ -127,6 +127,7 @@ cd ~/dev1666
 git clone https://github.com/deslicer/ai-sidekick-for-splunk.git
 cd ai-sidekick-for-splunk
 git checkout dev1666
+unset UV_PROJECT_ENVIRONMENT
 ```
 
 ### 🪟 Windows
