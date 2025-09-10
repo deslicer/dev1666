@@ -111,7 +111,7 @@ In this lab you will set up your own MCP (Model Context Protocol) server for dat
    pwsh -File scripts\smart-install.ps1
    ```
 
-   After completing the smart-install you need to provide splunk connection details. You should have received an email with details to a Splunk Show instance. Ensure you have access to the Splunk host, port, username and password before continuing to the next step. If you are lacking that information, reach out to one of the speakers.
+⚠️ After completing the smart-install you need to provide splunk connection details. You should have received an email with details to a Splunk Show instance. Ensure you have access to the Splunk host, port, username and password before continuing to the next step. If you are lacking that information, reach out to one of the speakers.
    ```
    Host:
    Port:
@@ -196,7 +196,7 @@ In this lab, you will set up and configure your personal AI Sidekick for data an
 
 8. **AI Sidekick:**
 
-   After completing the smart-install you need to provide splunk connection details. You should have received an email with details to a Splunk Show instance. Ensure you have access to the Splunk host, port, username and password before continuing to the next step. If you are lacking that information, reach out to one of the speakers.
+⚠️ After completing the smart-install you need to provide splunk connection details. You should have received an email with details to a Splunk Show instance. Ensure you have access to the Splunk host, port, username and password before continuing to the next step. If you are lacking that information, reach out to one of the speakers.
    ```
    Host:
    Username:
