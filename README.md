@@ -216,10 +216,11 @@ In this lab, you will set up and configure your personal AI Sidekick for data an
 
 9. **Open your web browser to http://localhost:8087 and verify the web interface loads successfully**
 
-10. **Test your AI Sidekick with these queries:**
+10. **Test your AI Sidekick with these queries:**(If you could run any workflow, continue with next lab)
+   - "Hey Sidekick, What tools and workflows are available?"
    - "Run a system health check"
-   - "List all available data sources"
-   - "Use index analysis flow to analyze data and provide actionable insights"
+   - "List all available indexes"
+   - "Use index analysis flow to analyze data in index=s4c_www and provide actionable insights"
 
 **Detailed Instructions:**
 Follow the complete guide: [setup-your-personal-ai-sidekick.md](./setup-your-personal-ai-sidekick.md)
@@ -239,19 +240,19 @@ In this lab, you will create your own custom AI agent, learning the fundamentals
 
 **Steps:**
 
-11. **Create a new workflow agent with a single command:**
+11. **Create Your FlowPilot Workflow Agent with a single command:**
 Open a new terminal window
 
 **macOS/Linux:**
    ```bash
    cd ~/dev1666/ai-sidekick-for-splunk
    unset UV_PROJECT_ENVIRONMENT
-   uv run ai-sidekick --create-flow-agent workshop_demo
+   uv run ai-sidekick --create-flow-agent data_quality_check --template data_quality_check
    ```
 **Windows:**
    ```powershell
    cd $HOME\dev1666\ai-sidekick-for-splunk
-   uv run ai-sidekick --create-flow-agent workshop_demo
+   uv run ai-sidekick --create-flow-agent data_quality_check --template data_quality_check
    ```
 
 12. **Stop and restart AI Sidekick to discover new workflows:**
@@ -260,20 +261,15 @@ Open a new terminal window
    uv run ai-sidekick --start
    ```
 
-13. **Open your browser to http://localhost:8087 and select "AI Sidekick for Data Analytics" from the dropdown**
+13. **Open your browser to http://localhost:8087 and select "AI Sidekick for Splunk" from the dropdown**
 
-14. **Test your workflow agent with these queries:**
-   - "Use Workshop Demo workflow to check my data analytics environment"
-   - "Run the workshop demo health check"
-   - "Execute workshop demo workflow and explain the results for beginners"
+14. **Discover your agent with this queries:**
+   - "Execute data quality check workflow and provide recommendations"
 
 15. **Create additional workflow agents (optional):**
    ```bash
    # Security Analysis Workflow
    uv run ai-sidekick --create-flow-agent security_audit
-
-   # Performance Monitoring Workflow
-   uv run ai-sidekick --create-flow-agent performance_monitor
 
    # Data Quality Assessment Workflow
    uv run ai-sidekick --create-flow-agent data_quality
