@@ -264,7 +264,9 @@ Open a new terminal window
 13. **Open your browser to http://localhost:8087 and select "AI Sidekick for Splunk" from the dropdown**
 
 14. **Discover your agent with this queries:**
-   - "Execute data quality check workflow and provide recommendations"
+   ```bash
+   Execute data quality check workflow and provide recommendations
+   ```
 
 15. **Create additional workflow agents (optional):**
    ```bash
