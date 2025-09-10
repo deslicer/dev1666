@@ -76,6 +76,7 @@ In this lab you will set up your own MCP (Model Context Protocol) server for dat
    git clone https://github.com/deslicer/mcp-for-splunk.git
    cd mcp-for-splunk
    git checkout dev1666
+   unset UV_PROJECT_ENVIRONMENT
    ```
 
    **Windows:**
