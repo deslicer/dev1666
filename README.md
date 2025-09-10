@@ -47,7 +47,12 @@ Before starting the workshop, ensure you have:
 
 ### Lab Connection Information
 
-You will be receiving instructions about your splunk environment details. If you do not receive these details by email, please let one of the speakers know and we will fix it. Alternatively, we provide links to use a Deslicer Show Instance.
+Lab: https://splunk.show/dev1666
+
+Guide: https://splunk.show/dev1666-guide
+
+If you have any issues with the lab guide or show access, contact show staff in the room.
+Alternatively, we provide links to use a Deslicer Show Instance.
 
 ## Lab Exercises
 
@@ -112,7 +117,15 @@ In this lab you will set up your own MCP (Model Context Protocol) server for dat
    pwsh -File scripts\smart-install.ps1
    ```
 
-⚠️ After completing the smart-install you need to provide splunk connection details. You should have received an email with details to a Splunk Show instance. Ensure you have access to the Splunk host, port, username and password before continuing to the next step. If you are lacking that information, reach out to one of the speakers.
+⚠️ After completing the smart-install you need to provide splunk connection details. 
+
+Lab: https://splunk.show/dev1666
+
+Guide: https://splunk.show/dev1666-guide
+
+If you have any issues with the lab guide or show access, contact show staff in the room.
+Alternatively, we provide links to use a Deslicer Show Instance. Ensure you have access to the Splunk host, port, username and password before continuing to the next step. If you are lacking that information, reach out to one of the speakers.
+
    ```
    Host:
    Port:
@@ -197,7 +210,15 @@ In this lab, you will set up and configure your personal AI Sidekick for data an
 
 8. **AI Sidekick:**
 
-⚠️ After completing the smart-install you need to provide splunk connection details. You should have received an email with details to a Splunk Show instance. Ensure you have access to the Splunk host, port, username and password before continuing to the next step. If you are lacking that information, reach out to one of the speakers.
+⚠️ After completing the smart-install you need to provide splunk connection details. 
+
+Lab: https://splunk.show/dev1666
+
+Guide: https://splunk.show/dev1666-guide
+
+If you have any issues with the lab guide or show access, contact show staff in the room.
+Alternatively, we provide links to use a Deslicer Show Instance. Ensure you have access to the Splunk host, port, username and password before continuing to the next step. If you are lacking that information, reach out to one of the speakers.
+
    ```
    Host:
    Username:
